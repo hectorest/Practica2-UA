@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+body{
+	box-sizing: border-box;
+	min-width: 320px;
+    max-width: 1980px;
+	margin: 0 auto;
+	padding-left: 10%;
+	padding-right: 10%;
+	font-family: 'PT Sans', sans-serif;
+	background-image: url("./background-image/background-farm-school.jpg");
+	background-color: #A58F55; /*color por si la imagen no esta disponible*/
+	height: 100%;
+	background-position: initial;
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-size: 15px;
+	position: relative;
+}
+	
+	body>main{
+		background-color: #DEC78D;
+		border-left: 0.3em solid #8A6300;
+		border-right: 0.3em solid #8A6300;
+	}
+
+	body>main>header{
+		background-color: #B2913A;
+		padding: 1em;
+		border-top: 0.3em solid #8A6300;
+		border-bottom: 0.3em solid #8A6300;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		text-align: center;
+	}
+
+		body>main>header>h1{
+			color: #ffffff;
+			align-self: center;
+			margin-left: 1em;
+			font-size: 35px;
+		}
+
+		body>main>header>a{
+			overflow: hidden;
+			transition: all .35s ease-in-out;
+		}
+
+		body>main>header>a:hover{
+			filter: brightness(115%);
+			cursor: pointer;
+		}
+
+		body>main>header>a:focus{
+			filter: brightness(115%);
+		}
+
+			body>main>header>a>img{
+
+				margin-right: 1em; 
+				width: 350px;
+				height: 250px;
+
+			}
+
+	/*MENÚ*/
+
+	body>main>nav{
+		display: block;
+		text-align: center;
+		position: relative;
+		text-align: center;
+		top: 0px;
+		font-size: 30px;
+	}
+		body>main>nav>ul{
+			display: block;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			font-weight: bold;
+		}
+			body>main>nav>ul>li{
+				list-style: none;
+				display: block;
+			}
+				body>main>nav>ul>li>a{
+					display: block;
+					color: #000000;
+					padding: 0.7em;
+					text-decoration: none;
+				}
+
+				body>main>nav>ul>li>a:hover{
+					background-color: #896400;
+					color: #ffffff;
+					cursor: pointer;
+				}
+
+				body>main>nav>ul>li>a:focus{
+					background-color: #896400;
+					color: #000000;
+				}
+
+					body>main>nav>ul>li>a>span:first-of-type{
+						margin-right: 0.2em;
+					}
+
+				body>main>nav>input{
+					display: none;
+				}
+
+				body>main>nav>label{
+					display: none;
+					position: relative;
+					color: #ffffff;
+					padding: 0.7em;
+					text-decoration: none;
+				}
+				body>main>nav>label:hover{
+					background-color: #ffffff;
+					color: #000000;
+					cursor: pointer;
+					border-radius: 10px;
+				}
+
+					body>main>nav>label>span{
+						display: inline-block;
+					}
+
+	/*VÍDEO*/
+
+	body>main>h3{
+		text-align: center;
+		font-size: 30px;
+		position: relative;
+		display: block;
+		font-weight: bold;
+		margin-top: 2em;
+	}
+
+	body>main>video{
+		height: 50%;
+		width: 80%;
+		position: relative;
+		display: block;
+		margin: auto;
+		margin-bottom: 5em;
+	}
+
+	/*FOOTER*/
+
+	body>main>footer{
+		clear: both;
+		text-align: center;
+		background-color: #B2913A;
+		padding: 1em;
+		border-top: 0.3em solid #8A6300;
+		border-bottom: 0.3em solid #8A6300;
+	}
+
+		body>main>footer>p{
+
+			color: #000000;
+			margin: 0;
+
+		}
+
+		body>main>footer>p>strong>a{
+			text-decoration: none;
+			color: #000000;
+		}
+
+			body>main>footer>p>strong>a:hover{
+				color: #ffffff;
+				cursor: pointer;
+			}
+
+			body>main>footer>p>strong>a:focus{
+				color: #ffffff;
+			}
+
+
+	/*MEDIA QUERIES*/
+
+	@media all and (min-width: 320px) and (max-width: 1400px){
+		body>main>.formulario>fieldset>p{
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+		}
+			body>main>.formulario>fieldset>p>button{
+				margin: auto;
+			}
+		body>main>.formulario>fieldset>div{
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+		}
+			body>main>.formulario>fieldset>#contNumHijos>label{
+				margin-bottom: 1em;
+				align-self: center;
+			}
+		body>main>.formulario>fieldset>#loginGoogle{
+			flex-direction: row;
+			justify-content: space-between;
+			width: 60%;
+			margin-top: 3em;
+		}
+			body>main>.formulario>fieldset>#loginGoogle>div{
+				margin: 0;
+				padding: 0;
+				width: 8em;
+			}
+			body>main>.formulario>fieldset>div>div{
+				display: block;	
+			}
+			body>main>.formulario>fieldset>div>#radios{
+				margin: 0;
+				margin-bottom: 3em;
+			}
+	}
+
+	@media all and (min-width: 320px) and (max-width: 480px){
+		body>main>header>h1{
+			margin-left: 0;
+		}
+		.rangeslider--horizontal {
+			width: 100% !important; /*El !important es para poner este estilo predefinido en mi css, en lugar del que pone por defecto la clase del plugin de jquery del range-slider descargado*/
+		}
+		body>main>.formulario>fieldset>#loginGoogle{
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+		}
+			body>main>.formulario>fieldset>#loginGoogle>div{
+				margin-bottom: 1em;
+				align-self: center;
+			}
+			body>main>.formulario>fieldset>#loginGoogle>figure{
+				align-self: center;
+			}
+	}
+
+	@media all and (min-width: 480px) and (max-width: 800px){
+		body>main>header>h1{
+			margin-left: 0;
+		}
+		body>main>.formulario>fieldset>p>input{
+			width: 15em;
+		}
+		body>main>.formulario>fieldset>p>label{
+			width: 15em;
+		}
+			body>main>.formulario>fieldset>div>div>input{
+				width: 13em;
+			}
+		.rangeslider--horizontal {
+	      margin: auto;
+	      width: 15em !important;
+	    }
+	    body>main>.formulario>fieldset>#loginGoogle{
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+		}
+			body>main>.formulario>fieldset>#loginGoogle>div{
+				margin-bottom: 1em;
+				align-self: center;
+			}
+			body>main>.formulario>fieldset>#loginGoogle>figure{
+				align-self: center;
+			}
+	}
+
+	@media all and (min-width: 800px) and (max-width: 900px){
+		body>main>.formulario>fieldset>p>input{
+			width: 18em;
+		}
+		body>main>.formulario>fieldset>p>label{
+			width: 18em;
+		}
+			body>main>.formulario>fieldset>div>div>input{
+				width: 18em;
+			}
+		.rangeslider--horizontal {
+	      margin: auto;
+	      width: 18em;
+	    }
+	    body>main>.formulario>fieldset>#loginGoogle{
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+		}
+			body>main>.formulario>fieldset>#loginGoogle>div{
+				margin-bottom: 1em;
+				align-self: center;
+			}
+			body>main>.formulario>fieldset>#loginGoogle>figure{
+				align-self: center;
+			}
+	}
+
+	@media all and (min-width: 900px) and (max-width: 1000px){
+		body>main>.formulario>fieldset>p>input{
+			width: 20em;
+		}
+		body>main>.formulario>fieldset>p>label{
+			width: 20em;
+		}
+			body>main>.formulario>fieldset>div>div>input{
+				width: 20em;
+			}
+		.rangeslider--horizontal {
+	      margin: auto;
+	      width: 20em;
+	    }
+	    body>main>.formulario>fieldset>#loginGoogle{
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+		}
+			body>main>.formulario>fieldset>#loginGoogle>div{
+				margin-bottom: 1em;
+				align-self: center;
+			}
+			body>main>.formulario>fieldset>#loginGoogle>figure{
+				align-self: center;
+			}
+	}
+
+	@media all and (min-width: 1000px) and (max-width: 1100px){
+		body>main>.formulario>fieldset>p>input{
+			width: 25em;
+		}
+		body>main>.formulario>fieldset>p>label{
+			width: 25em;
+		}
+			body>main>.formulario>fieldset>div>div>input{
+				width: 25em;
+			}
+		.rangeslider--horizontal {
+	      margin: auto;
+	      width: 25em;
+	    }
+	    body>main>.formulario>fieldset>#loginGoogle{
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+		}
+			body>main>.formulario>fieldset>#loginGoogle>div{
+				margin-bottom: 1em;
+				align-self: center;
+			}
+			body>main>.formulario>fieldset>#loginGoogle>figure{
+				align-self: center;
+			}
+	}
+
+	@media all and (min-width: 1100px) and (max-width: 1400px){
+		body>main>.formulario>fieldset>p>input{
+			width: 25em;
+		}
+		body>main>.formulario>fieldset>p>label{
+			width: 25em;
+		}
+			body>main>.formulario>fieldset>div>div>input{
+				width: 25em;
+			}
+		.rangeslider--horizontal {
+	      margin: auto;
+	      width: 25em;
+	    }
+	}
