@@ -17,51 +17,133 @@ body{
 	font-size: 15px;
 	position: relative;
 }
-	
+
+	/***********************CLASES***********************/
+
+		.botones{
+			display: table;
+			text-decoration: none;
+			color: #ffffff;
+			border: 0.2em solid #8E7345;
+			border-radius: 1em;
+			cursor: pointer;
+			background-color: #C6943D;
+			height: 3em;
+			width: 7.5em;
+			text-align: center;
+			font-weight: bold;
+			margin: auto;
+		}
+
+		.botones:hover{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		.botones:focus{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+			.botones>span{
+				display: table-cell;
+				vertical-align: middle;
+			}
+
+		.preguntas{
+			font-size: 20px;
+			font-weight: bold;
+			margin-bottom: 2.5em;
+		}
+
+		.respuestas{
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.respuestas>p{
+			background-color: #CB8947;
+			border: 0.2em solid #784919;
+			padding: 1.5em;
+			font-size: 25px;
+			height: 1.5em;
+			color: #ffffff;
+		}
+
+			.respuestas>p:hover{
+				background-color: #ffffff;
+				color: #000000;
+			}
+
+			.respuestas>p:focus{
+				background-color: #ffffff;
+				color: #000000;
+			}
+
+
+	/****************************************************/
+
 	body>main{
 		background-color: #DEC78D;
 		border-left: 0.3em solid #8A6300;
 		border-right: 0.3em solid #8A6300;
 	}
 
-	body>main>header{
-		background-color: #B2913A;
-		padding: 1em;
-		border-top: 0.3em solid #8A6300;
-		border-bottom: 0.3em solid #8A6300;
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-		text-align: center;
-	}
-
-		body>main>header>h1{
-			color: #ffffff;
-			align-self: center;
-			margin-left: 1em;
-			font-size: 35px;
+		body>main>header{
+			background-color: #B2913A;
+			padding: 1em;
+			border-top: 0.3em solid #8A6300;
+			border-bottom: 0.3em solid #8A6300;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			text-align: center;
 		}
 
-		body>main>header>a{
-			overflow: hidden;
-			transition: all .35s ease-in-out;
+			body>main>header>h1{
+				color: #ffffff;
+				align-self: center;
+				margin-left: 1em;
+				font-size: 35px;
+			}
+
+			body>main>header>a{
+				overflow: hidden;
+				transition: all .35s ease-in-out;
+			}
+
+			body>main>header>a:hover{
+				filter: brightness(115%);
+				cursor: pointer;
+			}
+
+			body>main>header>a:focus{
+				filter: brightness(115%);
+			}
+
+				body>main>header>a>img{
+
+					margin-right: 1em; 
+					width: 350px;
+					height: 250px;
+
+				}
+
+		body>main>div{
+			display: table;
+			margin-top: 1em;
+			margin-bottom: 1em;
+			width: 100%;
 		}
 
-		body>main>header>a:hover{
-			filter: brightness(115%);
-			cursor: pointer;
-		}
-
-		body>main>header>a:focus{
-			filter: brightness(115%);
-		}
-
-			body>main>header>a>img{
-
-				margin-right: 1em; 
-				width: 350px;
-				height: 250px;
-
+			body>main>div>h2{
+				display: table-cell;
+				margin: 0;
+				text-align: center;
+				height: 2em;
+				margin: auto;
+				font-size: 30px;
+				vertical-align: middle;
 			}
 
 	/*MENÚ*/
@@ -74,6 +156,9 @@ body{
 		top: 0px;
 		font-size: 30px;
 	}
+		body>main>nav>h2{
+			margin-top: 1.5em;
+		}
 		body>main>nav>ul{
 			display: block;
 			margin: 0;
@@ -81,6 +166,9 @@ body{
 			height: 100%;
 			font-weight: bold;
 		}
+			body>main>nav>ul>li:last-of-type{
+				margin-bottom: 3.5em;
+			}
 			body>main>nav>ul>li{
 				list-style: none;
 				display: block;
@@ -148,6 +236,137 @@ body{
 		margin: auto;
 		margin-bottom: 5em;
 	}
+
+	/*JUEGOS*/
+
+	body>main>#contarCasas{
+		background-image: url("./imagenes/contar-casas/fondo-contar-casas.png");
+		background-color: #4DC1FF; /*para el color del cielo*/
+		height: 100%;
+		width: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		border-top: 0.3em solid #8A6300;
+		border-bottom: 0.3em solid #8A6300;
+		margin-bottom: 6em;
+	}
+
+		body>main>#contarCasas>div{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			margin-top: 3em;
+			margin-left: 3em;
+		}
+
+			body>main>#contarCasas>div>figure{
+				display: flex;
+				margin: 0;
+				width: 50%;
+			}
+
+				body>main>#contarCasas>div>figure:first-of-type{
+					border: 0.5em solid #DC2825;
+					border-radius: 1em;
+					width: 60%;
+				}
+
+				body>main>#contarCasas>div>figure:nth-child(even){
+					align-self: flex-end;
+				}
+
+				body>main>#contarCasas>div>figure:nth-child(odd){
+					align-self: flex-start;
+				}
+
+					body>main>#contarCasas>div>figure>a{
+						overflow: hidden;
+						transition: all .35s ease-in-out;
+						width: 100%;
+						height: 100%;
+					}
+
+					body>main>#contarCasas>div>figure>a:hover{
+						filter: brightness(115%);
+					}
+
+					body>main>#contarCasas>div>figure>a:focus{
+						filter: brightness(115%);
+					}
+
+						body>main>#contarCasas>div>figure>a>img{
+							width: 100%;
+							height: 100%;
+						}
+
+
+	body>main>#contarVerduras{
+		background-image: url("./imagenes/contar-verduras/huerto3-sin-hojas.png");
+		background-color: #4DC1FF; /*para el color del cielo*/
+		height: 100%;
+		width: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		border-top: 0.3em solid #8A6300;
+		border-bottom: 0.3em solid #8A6300;
+		margin-bottom: 6em;
+	}
+
+		body>main>#contarVerduras>div{
+			display: flex;
+			flex-wrap: wrap;
+			margin-top: 3em;
+			margin-left: 3em;
+		}
+
+			body>main>#contarVerduras>div>figure{
+				margin: 0;
+				width: 10%;
+				margin-right: 1.5em;
+				margin-bottom: 2.5em;
+			}
+
+			body>main>#contarVerduras>div>figure>img{
+				width: 100%;
+				height: 100%;
+			}
+
+
+		body>main>#contenedorResultados{
+			text-align: center;
+		}
+
+			body>main>#contenedorResultados>#ponerRespuestas{
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+
+				body>main>#contenedorResultados>#ponerRespuestas>div{
+					width: 47%;
+				}
+
+				body>main>#contenedorResultados>#ponerRespuestas>#respuestas{
+					display: flex;
+					justify-content: space-between;
+					margin-left: 1em;
+				}
+
+				body>main>#contenedorResultados>#ponerRespuestas>#colocarRespuesta{
+					background-color: #E8C19A;
+					border: 0.3em solid #885522;
+					margin-right: 1em;
+					height: 20em;
+				}
+
+
+		body>main>button{
+			margin-top: 3em !important;
+			margin-bottom: 2em !important;
+		}
+
 
 	/*FOOTER*/
 
