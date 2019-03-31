@@ -62,7 +62,7 @@ $(document).ready(function ()
 	/*****************************************************************************************************/
 
 
-	/*********************************SITUAR OVEJAS - JUEGO CONTAR FRUTAS*********************************/
+	/********************************SITUAR VERDURAS - JUEGO CONTAR VERDURAS******************************/
 
 		function crearEtiqImgFrutas(num, tipo){
 			
