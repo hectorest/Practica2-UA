@@ -14,10 +14,10 @@
 
 	/****************************CANCELAR REDIRECCION ENLACE CREDITOS DE IMAGEN***************************/
 
-		$('.eliminar-redireccion').click(function (event){
+		function eliminarRedireccion(event){
 			event.preventDefault();
-		});
-
+		}
+		
 	/*****************************************************************************************************/
 
 
@@ -34,7 +34,7 @@
 
 		function crearEtiquetasImagen(num){
 			var casas = [];
-			var img = "<figure><a href=https://es.pngtree.com class='eliminar-redireccion'><img src='./imagenes/contar-casas/casa.png'></a></figure>";
+			var img = "<figure><a href='https://es.pngtree.com' class='eliminar-redireccion' onclick='eliminarRedireccion(event);'><img src='./imagenes/contar-casas/casa.png'></a></figure>";
 			for(var i = 0; i < num; i++)
 			{
 				casas.push(img);
