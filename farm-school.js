@@ -1,11 +1,13 @@
-$(document).ready(function ()
-{
 
 	/***************************************VARIABLES GLOBALES********************************************/
 
+		var nombresVerduras = [];
 		var cuantasVerduras = [];
 		var queVerdura;
-		var respuestasContarVerduras = [];
+		var respuestasGenericas = [];
+		var respuestaEscogida;
+		var pRespEscog;
+		var fallosContarVerduras = 0;
 
 	/*****************************************************************************************************/
 
@@ -62,6 +64,85 @@ $(document).ready(function ()
 	/*****************************************************************************************************/
 
 
+	/******************************************DESORDENAR ARRAY*******************************************/
+
+		function desordenarArray(array){
+			array = array.sort(function() {return Math.random() - 0.5}); //desordeno el array
+		}
+
+	/*****************************************************************************************************/
+
+
+	/****************************************CARGAR RESPUESTAS********************************************/
+
+		function mostrarRespuestas(){
+			$.each(respuestasGenericas, function(index)
+			{
+				$('#respuestas').append('<p class="draggable" value="' + respuestasGenericas[index] + '">' + respuestasGenericas[index] + '</p>');
+			});
+		}
+
+		function generarRespuestas(){
+			var valoresAleatorios = [];
+
+			for (var i = 0; i < 10; i++){
+				valoresAleatorios.push(i);
+			}
+
+			for (var j = 0; j < 4; j++){
+				var indice = Math.floor(Math.random()*valoresAleatorios.length);
+				var numeroAleat = valoresAleatorios[indice];
+				valoresAleatorios.splice(indice, 1);
+				respuestasGenericas.push(numeroAleat);
+			}
+
+			insertarRespuestaCorrecta();
+			desordenarArray(respuestasGenericas); //desordeno el array
+		}
+
+		function insertar(respCorrecta){
+			var yaIncluida = false;
+			for (var k = 0; k < respuestasGenericas.length; k++){
+				if(respuestasGenericas[k] == respCorrecta){
+					yaIncluida = true;
+					break;
+				}
+			}
+			if(!yaIncluida){
+				var indexResp = Math.floor(Math.random()*respuestasGenericas.length);
+				respuestasGenericas[indexResp] = respCorrecta;
+			}
+		}
+
+		function insertarRespuestaCorrecta(){
+			var pag = extraerPagUrlActual();
+			switch (pag)
+			{
+				case ("contarCasas.html"):
+				{
+					break;
+				}
+				case ("contarVerduras.html"):
+				{
+					insertar(cuantasVerduras[queVerdura]);
+					break;
+				}
+			}
+		}
+
+		function cargarRespuestas(){
+
+			//genero las respuestas
+			generarRespuestas();
+
+			//muestro en la pagina las respuestas
+			mostrarRespuestas();
+
+		}
+
+	/*****************************************************************************************************/
+
+
 	/********************************SITUAR VERDURAS - JUEGO CONTAR VERDURAS******************************/
 
 		function crearEtiqImgFrutas(num, tipo){
@@ -74,30 +155,35 @@ $(document).ready(function ()
 				{
 					var img = "<figure><img src='./imagenes/contar-verduras/lechuga.png'></figure>";
 					cuantasVerduras.push(num);
+					nombresVerduras.push("lechugas");
 					break;
 				}
 				case (1):
 				{
 					var img = "<figure><img src='./imagenes/contar-verduras/maiz.png'></figure>";
 					cuantasVerduras.push(num);
+					nombresVerduras.push("maíces");
 					break;
 				}
 				case (2):
 				{
 					var img = "<figure><img src='./imagenes/contar-verduras/patata.png'></figure>";
 					cuantasVerduras.push(num);
+					nombresVerduras.push("patatas");
 					break;
 				}
 				case (3):
 				{
 					var img = "<figure><img src='./imagenes/contar-verduras/tomate.png'></figure>";
 					cuantasVerduras.push(num);
+					nombresVerduras.push("tomates");
 					break;
 				}
 				case (4):
 				{
 					var img = "<figure><img src='./imagenes/contar-verduras/zanahoria.png'></figure>";
 					cuantasVerduras.push(num);
+					nombresVerduras.push("zanahorias");
 					break;
 				}
 			}
@@ -110,7 +196,7 @@ $(document).ready(function ()
 			return verduras;
 		}
 
-		function colocarFrutas(verduras){
+		function colocarVerduras(verduras){
 			$.each(verduras, function(index)
 			{
 				$('#contarVerduras>div').append(verduras[index]);
@@ -139,7 +225,7 @@ $(document).ready(function ()
 				}
 				case (1):
 				{
-					preguntaVerdura = "¿Cuántos Maices hay?";
+					preguntaVerdura = "¿Cuántos Maíces hay?";
 					break;
 				}
 				case (2):
@@ -162,50 +248,6 @@ $(document).ready(function ()
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaVerdura + "</p>");
 		}
 
-		function mostrarRespuestas(){
-			$.each(respuestasContarVerduras, function(index)
-			{
-				$('#respuestas').append('<p>' + respuestasContarVerduras[index] + '</p>');
-			});
-		}
-
-		function cargarRespuestas(){
-
-			var valoresAleatorios = [];
-
-			var yaIncluida = false;
-
-			for (var i = 0; i < 10; i++){
-				valoresAleatorios.push(i);
-			}
-
-			for (var j = 0; j < 4; j++){
-				var indice = Math.floor(Math.random()*valoresAleatorios.length);
-				var numeroAleat = valoresAleatorios[indice];
-				valoresAleatorios.splice(indice, 1);
-				respuestasContarVerduras.push(numeroAleat);
-			}
-
-			for (var k = 0; k < respuestasContarVerduras.length; k++){
-				if(respuestasContarVerduras[k] == cuantasVerduras[queVerdura]){
-					yaIncluida = true;
-					break;
-				}
-			}
-
-			if(!yaIncluida){
-				var indexResp = Math.floor(Math.random()*respuestasContarVerduras.length);
-				respuestasContarVerduras[indexResp] = cuantasVerduras[queVerdura];
-			}
-
-			//desordeno el array
-			respuestasContarVerduras = respuestasContarVerduras.sort(function() {return Math.random() - 0.5});
-
-			//muestro en la pagina las respuestas
-			mostrarRespuestas();
-
-		}
-
 		$('#contarVerduras').ready(function(){
 
 			//con estos rangos es como he conseguido que se vea mejor
@@ -226,7 +268,7 @@ $(document).ready(function ()
 
 			verduras = verduras.sort(function() {return Math.random() - 0.5}); //desordeno el array de verduras
 
-			colocarFrutas(verduras);
+			colocarVerduras(verduras);
 
 			imprimirPorConsolaNumVerduras();
 
@@ -240,4 +282,160 @@ $(document).ready(function ()
 
 	/*****************************************************************************************************/
 
-});
+
+	/*********************************EVENTOS DRAGGABLE Y DROPPABLE***************************************/
+
+		$( function() {
+			$( ".draggable" ).draggable({
+				cursor: "pointer"
+			});
+			$( ".droppable" ).droppable({
+				classes:{
+        			"ui-droppable-hover": "drop-hover",
+				},
+				drop: function( event, ui ) {
+					pRespEscog = ui.draggable;
+					respuestaEscogida = ui.draggable.attr("value");
+					var acierto = comprobarRespuesta(respuestaEscogida);
+					mostrarMensajeIntento(acierto);
+					$( this )
+						.css("background-color", "#ffffff")
+						.css("color", "#000000")
+				},
+				out: function( event, ui ) { 
+			      $( this )
+					.css("background-color", "#AB7C4E")
+					.css("color", "#ffffff")
+			   	}
+			});
+		} );
+
+	/*****************************************************************************************************/
+
+
+	/************************************EXTRAER PAGINA URL ACTUAL****************************************/
+
+		function extraerPagUrlActual(){
+			var url = location.href;
+			var pag = url.split('/');
+			pag = pag [pag.length - 1];
+			if(pag.includes('#')){
+				pag = pag.split('#');
+				pag = pag[0];
+			}
+			return pag;
+		}
+
+	/*****************************************************************************************************/
+
+
+	/*****************************************COMPROBAR RESPUESTA*****************************************/
+
+		function comprobarRespuesta(resp){
+
+			var correcto = false;
+
+			//extraemos la pagina web de donde se esta preguntando para comprobar los arrays adecuados en cada caso
+			pag = extraerPagUrlActual();
+
+			switch (pag)
+			{
+				case ("contarCasas.html"):
+				{
+					break;
+				}
+				case ("contarVerduras.html"):
+				{
+					if(resp == cuantasVerduras[queVerdura]){
+						correcto = true;
+					}
+					else{
+						fallosContarVerduras++;
+					}
+					break;
+				}
+			}
+			
+			return correcto;
+		}
+
+
+	/*****************************************************************************************************/
+
+
+	/************************************MOSTRAR MENSAJE MODAL INTENTO************************************/
+
+		function crearMensajeModal(mensaje, intento){
+			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><button type="button" class="botones" id="botonModal" onclick="cerrarMensModal(this.parentNode.firstChild, this.parentNode.parentNode);">Cerrar</button></div></div>';
+			$('main').append(modal);
+		}
+
+		function mostrarMensajeIntento(intento){
+
+			var pag = extraerPagUrlActual();
+
+			switch (pag)
+			{
+				case ("contarCasas.html"):
+				{
+					break;
+				}
+				case ("contarVerduras.html"):
+				{
+					if(intento){
+						var mensModal = "¡MUY BIEN! ¡Hay " + cuantasVerduras[queVerdura] + " " + nombresVerduras[queVerdura] + "!";
+						console.log("NÚMERO DE FALLOS: " + fallosContarVerduras);
+						crearMensajeModal(mensModal, intento);
+					}
+					else{
+						var mensModal = "¡Sigue intentándolo!";
+						console.log(mensModal);
+						crearMensajeModal(mensModal, intento);
+
+					}
+					break;
+				}
+			}
+		}
+
+	/*****************************************************************************************************/
+
+
+	/******************************************CONSEGUIR URL**********************************************/
+
+		function conseguirUrl(){
+			var url = location.href;
+			url = url.split('/');
+			var urlAux;
+			for(var i = 0; i < url.length - 1; i++){
+				if(i == 0){
+					urlAux = url[i];
+				}
+				else{
+					urlAux = urlAux + "/" + url[i];
+				}
+			}
+			url = urlAux;
+			return url;
+		}
+
+	/****************************************************************************************************/
+
+
+	/***************************************CERRAR MENSAJE MODAL******************************************/
+
+			function cerrarMensModal(mensaje, mensModal){
+				var intento = mensaje.getAttribute("value");
+				if(intento == "true"){
+					mensModal.remove();
+					var url = conseguirUrl();
+					location.href = url + "/index.html";
+				}
+				else{
+					mensModal.remove();
+					pRespEscog.remove();
+				}
+			}
+
+	/*****************************************************************************************************/
+
