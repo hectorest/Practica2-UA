@@ -7,7 +7,7 @@
 		var respuestasGenericas = [];
 		var respuestaEscogida;
 		var pRespEscog;
-		var fallosContarVerduras = 0;
+		var numFallos = 0;
 		var tiempoInicio;
 		var tiempoFin;
 		var tiempoTranscurrido;
@@ -381,7 +381,7 @@
 						correcto = true;
 					}
 					else{
-						fallosContarVerduras++;
+						numFallos++;
 					}
 					break;
 				}
@@ -415,7 +415,7 @@
 				{
 					if(intento){
 						var mensModal = "¡MUY BIEN! ¡Hay " + cuantasVerduras[queVerdura] + " " + nombresVerduras[queVerdura] + "!";
-						console.log("NÚMERO DE FALLOS: " + fallosContarVerduras);
+						console.log("NÚMERO DE FALLOS: " + numFallos);
 						pararTemporizador();
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
