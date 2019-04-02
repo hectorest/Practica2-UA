@@ -59,40 +59,6 @@
 	/*****************************************************************************************************/
 
 
-	/**********************************SITUAR CASAS - JUEGO CONTAR CASAS**********************************/
-
-		function crearEtiquetasImagen(num){
-			var casas = [];
-			var img = "<figure><a href='https://es.pngtree.com' class='eliminar-redireccion' onclick='eliminarRedireccion(event);'><img src='./imagenes/contar-casas/casa.png'></a></figure>";
-			for(var i = 0; i < num; i++)
-			{
-				casas.push(img);
-			}
-			return casas;
-		}
-
-		function colocarCasas(casas){
-			$.each(casas, function(index)
-			{
-				$('#contarCasas>div').append(casas[index]);
-			});
-		}
-
-		$('#contarCasas').ready(function(){
-
-			//con estos rangos es como he conseguido que se vea mejor
-			var rangoMin = 3;
-			var rangoMax = 12;
-
-			var granjas = crearEtiquetasImagen(obtenerNumeroAleatorio(rangoMin, rangoMax));
-
-			colocarCasas(granjas);
-
-		});
-
-	/*****************************************************************************************************/
-
-
 	/******************************************DESORDENAR ARRAY*******************************************/
 
 		function desordenarArray(array){
@@ -168,6 +134,40 @@
 			mostrarRespuestas();
 
 		}
+
+	/*****************************************************************************************************/
+
+
+	/**********************************SITUAR CASAS - JUEGO CONTAR CASAS**********************************/
+
+		function crearEtiquetasImagen(num){
+			var casas = [];
+			var img = "<figure><a href='https://es.pngtree.com' class='eliminar-redireccion' onclick='eliminarRedireccion(event);'><img src='./imagenes/contar-casas/casa.png'></a></figure>";
+			for(var i = 0; i < num; i++)
+			{
+				casas.push(img);
+			}
+			return casas;
+		}
+
+		function colocarCasas(casas){
+			$.each(casas, function(index)
+			{
+				$('#contarCasas>div').append(casas[index]);
+			});
+		}
+
+		$('#contarCasas').ready(function(){
+
+			//con estos rangos es como he conseguido que se vea mejor
+			var rangoMin = 3;
+			var rangoMax = 12;
+
+			var granjas = crearEtiquetasImagen(obtenerNumeroAleatorio(rangoMin, rangoMax));
+
+			colocarCasas(granjas);
+
+		});
 
 	/*****************************************************************************************************/
 
@@ -316,7 +316,7 @@
 
 	/*********************************EVENTOS DRAGGABLE Y DROPPABLE***************************************/
 
-		$( function() {
+		$(function() {
 			$( ".draggable" ).draggable({
 				cursor: "pointer"
 			});
