@@ -8,6 +8,9 @@
 		var respuestaEscogida;
 		var pRespEscog;
 		var fallosContarVerduras = 0;
+		var tiempoInicio;
+		var tiempoFin;
+		var tiempoTranscurrido;
 
 	/*****************************************************************************************************/
 
@@ -25,6 +28,32 @@
 
 		function obtenerNumeroAleatorio(rangoMin, rangoMax) {
 			return Math.floor(Math.random() * (rangoMax - rangoMin)) + rangoMin;
+		}
+
+	/*****************************************************************************************************/
+
+
+	/******************************************CONTADOR DE TIEMPO*****************************************/
+
+		function iniciarTemporizador(){
+			tiempoInicio = new Date();
+		}
+
+		function pararTemporizador(){
+			tiempoFin = new Date();
+			tiempoTranscurrido = tiempoFin - tiempoInicio; //obtengo diferencia de tiempo en milisegundos
+		}
+
+		function cambiarFormato(tiempoMs){
+			var difSeg = Math.floor(tiempoMs / 1000); //me quedo con la parte entera del resultado (convierto de milisegundos a segundos)
+			
+			var seg = difSeg % 60;
+			var min = Math.floor(seg / 60);
+			var hr  = Math.floor(seg / 3600);
+
+			var tiempoTrans = hr + 'h ' + min + 'm ' + seg + 's';
+
+			return tiempoTrans;
 		}
 
 	/*****************************************************************************************************/
@@ -278,6 +307,8 @@
 
 			cargarRespuestas();
 
+			iniciarTemporizador();
+
 		});
 
 	/*****************************************************************************************************/
@@ -385,6 +416,9 @@
 					if(intento){
 						var mensModal = "¡MUY BIEN! ¡Hay " + cuantasVerduras[queVerdura] + " " + nombresVerduras[queVerdura] + "!";
 						console.log("NÚMERO DE FALLOS: " + fallosContarVerduras);
+						pararTemporizador();
+						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
+						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
 					}
 					else{
