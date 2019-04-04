@@ -318,7 +318,8 @@
 
 		$(function() {
 			$( ".draggable" ).draggable({
-				cursor: "pointer"
+				cursor: "pointer",
+				containment: $('#ponerRespuestas')
 			});
 			$( ".droppable" ).droppable({
 				classes:{
