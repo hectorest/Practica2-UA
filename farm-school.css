@@ -11,7 +11,8 @@ body{
 	background-image: url("./background-image/background-farm-school.jpg");
 	background-color: #A58F55; /*color por si la imagen no esta disponible*/
 	height: 100%;
-	background-position: initial;
+	width: 100%;
+	background-origin: border-box;
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-size: 15px;
@@ -374,6 +375,7 @@ body{
 		body>main>#contenedorResultados{
 			text-align: center;
 			height: 100%;
+			border-bottom: 0.3em solid #8A6300;
 		}
 
 			body>main>#contenedorResultados>#ponerRespuestas{
@@ -396,8 +398,13 @@ body{
 				body>main>#contenedorResultados>#ponerRespuestas>#colocarRespuesta{
 					background-color: #AB7C4E;
 					border: 0.3em solid #885522;
-					height: 150%;
+					padding-top: 15%;
+					padding-bottom: 15%;
 				}
+
+					body>main>#contenedorResultados>#ponerRespuestas>#colocarRespuesta>p{
+						margin: 0;
+					}
 
 
 		body>main>button{
@@ -443,8 +450,6 @@ body{
 
 		@media only screen and (orientation:portrait){
 			html{
-				width: 100%;
-				height: 100%;
 				-webkit-transform: rotate(90deg);
 				-moz-transform: rotate(90deg);
 				-o-transform: rotate(90deg);

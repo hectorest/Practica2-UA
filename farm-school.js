@@ -11,9 +11,32 @@
 		var tiempoInicio;
 		var tiempoFin;
 		var tiempoTranscurrido;
+		var altoPantalla = window.innerHeight;
+		var anchoPantalla = window.innerWidth;
 
 	/*****************************************************************************************************/
 
+	/*document).ready(function(){
+		function reorient(e) {
+			console.log("hola");
+			console.log(window.orientation);
+			console.log(window.innerHeight);
+			console.log(window.innerWidth);
+			console.log(altoPantalla);
+			console.log(anchoPantalla);
+			window.innerHeight = altoPantalla;
+			window.innerWidth = anchoPantalla;
+			console.log(window.innerHeight);
+			console.log(window.innerWidth);
+			if(window.orientation == 0){
+
+				$("html").css("width", altoPantalla);
+				$("html").css("height", anchoPantalla);
+			}
+		}
+		window.onorientationchange = reorient;
+		window.setTimeout(reorient, 0);
+	});*/
 
 	/****************************CANCELAR REDIRECCION ENLACE CREDITOS DE IMAGEN***************************/
 
