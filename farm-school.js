@@ -1,42 +1,60 @@
 
 	/***************************************VARIABLES GLOBALES********************************************/
 
-		var nombresVerduras = [];
-		var cuantasVerduras = [];
-		var queVerdura;
-		var respuestasGenericas = [];
-		var respuestaEscogida;
-		var pRespEscog;
-		var numFallos = 0;
-		var tiempoInicio;
-		var tiempoFin;
-		var tiempoTranscurrido;
-		var altoPantalla = window.innerHeight;
-		var anchoPantalla = window.innerWidth;
+		/********JUEGO VERDURAS********/
+
+			var nombresVerduras = [];
+			var cuantasVerduras = [];
+			var queVerdura;
+
+		/******************************/
+
+		/********JUEGO ANIMALES********/
+
+			var nombreAnimal = "";
+			var cuantosAnimales;
+			var cuantosAnimalesFuera;
+			var animalesAMeter;
+			var contadorAnimalesAMeter;
+			var resultadoSuma;
+			var queAnimal;
+
+		/******************************/
+
+		/**********GENERICAS***********/
+
+			var respuestasGenericas = [];
+			var respuestaEscogida;
+			var pRespEscog;
+			var numFallos = 0;
+			var tiempoInicio;
+			var tiempoFin;
+			var tiempoTranscurrido;
+			
+		/******************************/
 
 	/*****************************************************************************************************/
 
-	/*document).ready(function(){
-		function reorient(e) {
-			console.log("hola");
-			console.log(window.orientation);
-			console.log(window.innerHeight);
-			console.log(window.innerWidth);
-			console.log(altoPantalla);
-			console.log(anchoPantalla);
-			window.innerHeight = altoPantalla;
-			window.innerWidth = anchoPantalla;
-			console.log(window.innerHeight);
-			console.log(window.innerWidth);
-			if(window.orientation == 0){
 
-				$("html").css("width", altoPantalla);
-				$("html").css("height", anchoPantalla);
+	/*****************************BLOQUEAR ORIENTACION PANTALLA - HORIZONTAL******************************/
+
+		$(document).ready(function(){
+			function reorient(e) {
+				var portrait = (window.orientation % 180 == 0); //orientacion vertical
+				if(portrait)
+				{
+					$("body>main").css("-webkit-transform", "rotate(90deg)");
+				}
+				else{
+					$("body>main").css("-webkit-transform", "");
+				}
 			}
-		}
-		window.onorientationchange = reorient;
-		window.setTimeout(reorient, 0);
-	});*/
+			window.onorientationchange = reorient;
+			window.setTimeout(reorient, 0);
+		});
+
+	/*****************************************************************************************************/
+
 
 	/****************************CANCELAR REDIRECCION ENLACE CREDITOS DE IMAGEN***************************/
 
@@ -100,10 +118,10 @@
 			});
 		}
 
-		function generarRespuestas(){
+		function generarRespuestas(rango){
 			var valoresAleatorios = [];
 
-			for (var i = 0; i < 10; i++){
+			for (var i = 0; i < rango; i++){
 				valoresAleatorios.push(i);
 			}
 
@@ -145,13 +163,23 @@
 					insertar(cuantasVerduras[queVerdura]);
 					break;
 				}
+				case("sumar.html"):
+				{
+					insertar(resultadoSuma);
+					break;
+				}
 			}
 		}
 
-		function cargarRespuestas(){
+		function cargarColocarRespuesta(){
+			var colocarRespuesta = "<div id='colocarRespuesta' class='droppable'><p class='preguntas'>Coloca aquí la respuesta</p></div>";
+			$("#ponerRespuestas").append(colocarRespuesta);
+		}
+
+		function cargarRespuestas(rangoRespuestas){
 
 			//genero las respuestas
-			generarRespuestas();
+			generarRespuestas(rangoRespuestas);
 
 			//muestro en la pagina las respuestas
 			mostrarRespuestas();
@@ -180,7 +208,7 @@
 			});
 		}
 
-		$('#contarCasas').ready(function(){
+		function prepararJuegoCasas(){
 
 			//con estos rangos es como he conseguido que se vea mejor
 			var rangoMin = 3;
@@ -190,7 +218,7 @@
 
 			colocarCasas(granjas);
 
-		});
+		}
 
 	/*****************************************************************************************************/
 
@@ -272,27 +300,27 @@
 			{
 				case (0):
 				{
-					preguntaVerdura = "¿Cuántas Lechugas hay?";
+					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/lechuga.png'><span>hay?</span>";
 					break;
 				}
 				case (1):
 				{
-					preguntaVerdura = "¿Cuántos Maíces hay?";
+					preguntaVerdura = "<span>¿Cuántos</span><img src='./imagenes/contar-verduras/maiz.png'><span>hay?</span>";
 					break;
 				}
 				case (2):
 				{
-					preguntaVerdura = "¿Cuántas Patatas hay?";
+					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/patata.png'><span>hay?</span>";
 					break;
 				}
 				case (3):
 				{
-					preguntaVerdura = "¿Cuántos Tomates hay?";
+					preguntaVerdura = "<span>¿Cuántos</span><img src='./imagenes/contar-verduras/tomate.png'><span>hay?</span>";
 					break;
 				}
 				case (4):
 				{
-					preguntaVerdura = "¿Cuántas Zanahorias hay?";
+					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/zanahoria.png'><span>hay?</span>";
 					break;
 				}
 			}
@@ -300,11 +328,13 @@
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaVerdura + "</p>");
 		}
 
-		$('#contarVerduras').ready(function(){
+		function prepararJuegoVerduras(){
 
 			//con estos rangos es como he conseguido que se vea mejor
 			var rangoMin = 2;
 			var rangoMax = 5;
+
+			var rango = 10;
 
 			var verduras = [];
 			var verdurasAux = [];
@@ -328,9 +358,294 @@
 
 			preguntarCuantasVerdurasXHay(queVerdura);
 
-			cargarRespuestas();
+			cargarRespuestas(rango);
+
+			activarDragAndDrop();
 
 			iniciarTemporizador();
+
+		}
+
+	/*****************************************************************************************************/
+
+
+	/********************************SITUAR ANIMALES - JUEGO SUMAR ANIMALES*******************************/
+
+		function crearEtiqImgAnimales(num, tipo, dentroOFuera){
+			
+			var animales = [];
+
+			switch (tipo)
+			{
+				case (0):
+				{
+					var img;
+					if(dentroOFuera){
+						img = "<figure>";
+						cuantosAnimales = num;
+					}
+					else{
+						img = "<figure class='imagen-draggable'>";
+						cuantosAnimalesFuera = num;
+					}
+					img = img + "<img src='./imagenes/sumar/caballo.png'></figure>";
+					nombreAnimal = "caballos";
+					break;
+				}
+				case (1):
+				{
+					var img;
+					if(dentroOFuera){
+						img = "<figure>";
+						cuantosAnimales = num;
+					}
+					else{
+						img = "<figure class='imagen-draggable'>";
+						cuantosAnimalesFuera = num;
+					}
+					img = img + "<img src='./imagenes/sumar/cerdo.png'></figure>";
+					nombreAnimal = "cerdos";
+					break;
+				}
+				case (2):
+				{
+					var img;
+					if(dentroOFuera){
+						img = "<figure>";
+						cuantosAnimales = num;
+					}
+					else{
+						img = "<figure class='imagen-draggable'>";
+						cuantosAnimalesFuera = num;
+					}
+					img = img + "<img src='./imagenes/sumar/gallina.png'></figure>";
+					nombreAnimal = "gallinas";
+					break;
+				}
+				case (3):
+				{
+					var img;
+					if(dentroOFuera){
+						img = "<figure>";
+						cuantosAnimales = num;
+					}
+					else{
+						img = "<figure class='imagen-draggable'>";
+						cuantosAnimalesFuera = num;
+					}
+					img = img + "<img src='./imagenes/sumar/oveja.png'></figure>";
+					nombreAnimal = "ovejas";
+					break;
+				}
+				case (4):
+				{
+					var img;
+					if(dentroOFuera){
+						img = "<figure>";
+						cuantosAnimales = num;
+					}
+					else{
+						img = "<figure class='imagen-draggable'>";
+						cuantosAnimalesFuera = num;
+					}
+					img = img + "<img src='./imagenes/sumar/vaca.png'></figure>";
+					nombreAnimal = "vacas";
+					break;
+				}
+			}
+
+			for(var i = 0; i < num; i++)
+			{
+				animales.push(img);
+			}
+
+			return animales;
+		}
+
+		function colocarAnimales(animales, dentroOFuera){
+			if(dentroOFuera){
+				$.each(animales, function(index)
+				{
+					$('#animalesDentro').append(animales[index]);
+				});
+			}
+			else{
+				$.each(animales, function(index)
+				{
+					$('#animalesFuera').append(animales[index]);
+				});
+			}
+		}
+
+		function imprimirPorConsolaNumAnimales(){
+			console.log("ANIMALES DENTRO:");
+			console.log(nombreAnimal + ": " + cuantosAnimales);
+			console.log("");
+			console.log("ANIMALES FUERA:");
+			console.log(nombreAnimal + ": " + cuantosAnimalesFuera);
+		}
+
+		function preguntarcuantosAnimalesXHay(queAnimal){
+
+			var preguntaAnimal;
+
+			switch (queAnimal)
+			{
+				case (0):
+				{
+					preguntaAnimal = "<span>¿Cuántos</span><img src='./imagenes/sumar/caballo.png'><span>hay ahora en total?</span>";
+					break;
+				}
+				case (1):
+				{
+					preguntaAnimal = "<span>¿Cuántos</span><img src='./imagenes/sumar/cerdo.png'><span>hay ahora en total?</span>";
+					break;
+				}
+				case (2):
+				{
+					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/gallina.png'><span>hay ahora en total?</span>";
+					break;
+				}
+				case (3):
+				{
+					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/oveja.png'><span>hay ahora en total?</span>";
+					break;
+				}
+				case (4):
+				{
+					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/vaca.png'><span>hay ahora en total?</span>";
+					break;
+				}
+			}
+
+			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaAnimal + "</p>");
+		}
+
+		function decirAnimalesAMeter(animalesAMeter){
+			var meterAnimales;
+			var animalesQueSeTienen;
+			meterAnimales = "<span>Mete en el corral " + animalesAMeter + "</span>";
+			switch (queAnimal)
+			{
+				case (0):
+				{
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/caballo.png'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/caballo.png'>";
+					break;
+				}
+				case (1):
+				{
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/cerdo.png'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/cerdo.png'>";
+					break;
+				}
+				case (2):
+				{
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/gallina.png'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/gallina.png'>";
+					break;
+				}
+				case (3):
+				{
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/oveja.png'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/oveja.png'>";
+					break;
+				}
+				case (4):
+				{
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/vaca.png'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/vaca.png'>";
+					break;
+				}
+			}
+
+			$('#contenedorResultados').prepend("<p class='preguntas' id='decirMeterAnimales'>" + animalesQueSeTienen + meterAnimales + "</p>");
+		}
+
+		function prepararJuegoAnimales(){
+
+			var rangoMin = 0;
+			var rangoMax = 4;
+
+			queAnimal = obtenerNumeroAleatorio(rangoMin, rangoMax);
+			console.log(queAnimal);
+
+			var animalesDentro = [];
+
+			var establecerRangoMin = obtenerNumeroAleatorio(7, 10);
+
+			var establecerRangoMax = obtenerNumeroAleatorio(7, 10);
+
+			animalesDentro = crearEtiqImgAnimales(obtenerNumeroAleatorio(establecerRangoMin, establecerRangoMax), queAnimal, true);
+
+			var animalesFuera = [];
+
+			animalesFuera = crearEtiqImgAnimales(obtenerNumeroAleatorio(establecerRangoMin, establecerRangoMax), queAnimal, false);
+
+			colocarAnimales(animalesDentro, true);
+
+			colocarAnimales(animalesFuera, false);
+
+			animalesAMeter = obtenerNumeroAleatorio(1, cuantosAnimalesFuera);
+
+			contadorAnimalesAMeter = animalesAMeter;
+
+			resultadoSuma = cuantosAnimales + animalesAMeter;
+
+			imprimirPorConsolaNumAnimales();
+
+			decirAnimalesAMeter(animalesAMeter);
+
+			activarDragAndDropImagenes();
+
+			iniciarTemporizador();
+
+		}
+
+		function prepararContinuacionJuegoAnimales(){
+
+			$(".imagen-draggable").draggable("destroy"); //elimino todos los elementos drag de las imagenes
+
+			$("#decirMeterAnimales").remove();
+
+			var rango = 20;
+
+			preguntarcuantosAnimalesXHay(queAnimal);
+
+			cargarRespuestas(rango);
+
+			cargarColocarRespuesta();
+
+			activarDragAndDrop();
+		}
+
+	/*****************************************************************************************************/
+
+
+	/********************************************CARGAR JUEGO*********************************************/
+
+		$(document).ready(function(){
+
+			var nombreUrl = extraerPagUrlActual();
+
+			switch (nombreUrl)
+			{
+				case("contarCasas.html"):
+				{
+					prepararJuegoCasas();
+					break;
+				}
+				case("contarVerduras.html"):
+				{
+					prepararJuegoVerduras();
+					break;
+				}
+				case("sumar.html"):
+				{
+					prepararJuegoAnimales();
+					break;
+				}
+			}
 
 		});
 
@@ -339,7 +654,7 @@
 
 	/*********************************EVENTOS DRAGGABLE Y DROPPABLE***************************************/
 
-		$(function() {
+		function activarDragAndDrop(){
 			$( ".draggable" ).draggable({
 				cursor: "pointer",
 				containment: $('#ponerRespuestas')
@@ -363,7 +678,38 @@
 					.css("color", "#ffffff")
 			   	}
 			});
-		} );
+		}
+
+		function activarDragAndDropImagenes(){
+			$( ".imagen-draggable" ).draggable({
+				cursor: "pointer",
+				opacity: 0.50,
+				containment: $('.contenedorDragAndDrop')
+			});
+			$( ".imagen-droppable" ).droppable({
+				classes:{
+        			"ui-droppable-hover": "drop-hover-image",
+				},
+				drop: function( event, ui ) {
+					contadorAnimalesAMeter--;
+					if(contadorAnimalesAMeter == 0){
+						$( ".imagen-droppable" ).droppable('destroy');
+						$(this).css("background-image", "url('./imagenes/sumar/corral-propio-cuadrado-r.png')");
+						prepararContinuacionJuegoAnimales();
+					}
+					else{
+						var elem = ui.draggable[0];
+						$(elem).attr('class','imagen-draggable').draggable('disable'); //desactivo el elemento para que no cambie la cuenta de los que hay que poner de manera erronea
+					}
+					$( this )
+						.css("filter", "brightness(100%)")
+				},
+				out: function( event, ui ) { 
+			      $( this )
+					.css("filter", "brightness(100%)")
+			   	}
+			});
+		}
 
 	/*****************************************************************************************************/
 
@@ -409,6 +755,15 @@
 					}
 					break;
 				}
+				case ("sumar.html"):
+				{
+					if(resp == resultadoSuma){
+						correcto = true;
+					}
+					else{
+						numFallos++;
+					}
+				}
 			}
 			
 			return correcto;
@@ -421,7 +776,7 @@
 	/************************************MOSTRAR MENSAJE MODAL INTENTO************************************/
 
 		function crearMensajeModal(mensaje, intento){
-			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><button type="button" class="botones" id="botonModal" onclick="cerrarMensModal(this.parentNode.firstChild, this.parentNode.parentNode);">Cerrar</button></div></div>';
+			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><button type="button" class="botones botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.firstChild, this.parentNode.parentNode);">Cerrar</button></div></div>';
 			$('main').append(modal);
 		}
 
@@ -452,6 +807,22 @@
 
 					}
 					break;
+				}
+				case ("sumar.html"):
+				{
+					if(intento){
+						var mensModal = "¡MUY BIEN! ¡" + cuantosAnimales + " " + nombreAnimal + " + " + animalesAMeter + " " + nombreAnimal + " = " + resultadoSuma + " " + nombreAnimal + "!";
+						console.log("NÚMERO DE FALLOS: " + numFallos);
+						pararTemporizador();
+						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
+						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
+						crearMensajeModal(mensModal, intento);
+					}
+					else{
+						var mensModal = "¡Sigue intentándolo!";
+						console.log(mensModal);
+						crearMensajeModal(mensModal, intento);
+					}
 				}
 			}
 		}
