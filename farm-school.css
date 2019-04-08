@@ -146,6 +146,17 @@ body{
 				font-size: 25px;
 			}
 
+	.mano-tutorial{
+		position: absolute;
+		width: 30px;
+		height: 70px;
+		transform: rotate(50deg);
+	}
+
+	.contenedor-mano-tutorial{
+		position: relative;
+	}
+
 
 	/****************************************************/
 
@@ -453,19 +464,25 @@ body{
 		}
 
 		#sumarAnimales>#animalesDentro{
-			background-image: url("./imagenes/sumar/corral-propio-cuadrado-abierto-r.png");
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
 			margin: 0 auto;
 			height: 100%;
+			position: relative;
+			overflow: hidden;
 		}
+
+			#sumarAnimales>#animalesDentro>img{
+				height: 100%;
+				width: 115%;
+				position: absolute;
+				left: -12%;
+			}
 
 			#sumarAnimales>div>figure{
 				width: 10%;
 				height: 10%;
 				margin: 0;
 				margin: 10%;
+				z-index: 5;
 			}
 
 				#sumarAnimales>div>figure>img{

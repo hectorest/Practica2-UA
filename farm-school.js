@@ -56,6 +56,31 @@
 	/*****************************************************************************************************/
 
 
+	/******************************************CARGAR TUTORIAL********************************************/
+
+		/*function obtenerPosicionesIniciales(elem){
+			var posElem = elem.offset();
+			var posElemRight = ($(window).width() - (posElem.left + elem.outerWidth()));
+			var posElemBottom = ($(window).height() - (posElem.top + elem.outerHeight()));
+			return [posElem, posElemRight, posElemBottom];
+		}
+
+		function colocarMano(){
+			console.log($("body>main>nav>ul>li:first-of-type"));
+			console.log($(".mano-tutorial"));
+			var elementoReferencia = $("body>main>nav>ul>li:first-of-type");
+			[posRef, posRefRight, posRefBottom] = obtenerPosicionesIniciales(elementoReferencia);
+			var mano = $(".mano-tutorial");
+			[posMano, posManoRight, posManoBottom] = obtenerPosicionesIniciales(mano);
+			console.log("LEFT REFERENCIA: " + posRef.left + " RIGHT REFERENCIA: " + posRefRight + " TOP REFERENCIA: " + posRef.top + " BOTTOM REFERENCIA: " + posRefBottom);
+			console.log("LEFT MANO: " + posMano.left + " RIGHT MANO: " + posManoRight + " TOP MANO: " + posMano.top + " BOTTOM MANO: " + posManoBottom);
+		}
+
+		window.setTimeout(colocarMano, 1);*/
+
+	/*****************************************************************************************************/
+
+
 	/****************************CANCELAR REDIRECCION ENLACE CREDITOS DE IMAGEN***************************/
 
 		function eliminarRedireccion(event){
@@ -565,7 +590,7 @@
 		function prepararJuegoAnimales(){
 
 			var rangoMin = 0;
-			var rangoMax = 4;
+			var rangoMax = 5;
 
 			queAnimal = obtenerNumeroAleatorio(rangoMin, rangoMax);
 			console.log(queAnimal);
@@ -694,7 +719,7 @@
 					contadorAnimalesAMeter--;
 					if(contadorAnimalesAMeter == 0){
 						$( ".imagen-droppable" ).droppable('destroy');
-						$(this).css("background-image", "url('./imagenes/sumar/corral-propio-cuadrado-r.png')");
+						$("#animalesDentro>img").attr("src", './imagenes/sumar/corral-propio-cuadrado-r.png');
 						prepararContinuacionJuegoAnimales();
 					}
 					else{
@@ -811,7 +836,7 @@
 				case ("sumar.html"):
 				{
 					if(intento){
-						var mensModal = "¡MUY BIEN! ¡" + cuantosAnimales + " " + nombreAnimal + " + " + animalesAMeter + " " + nombreAnimal + " = " + resultadoSuma + " " + nombreAnimal + "!";
+						var mensModal = "¡MUY BIEN! ¡" + cuantosAnimales + " + " + animalesAMeter + " = " + resultadoSuma + "!";
 						console.log("NÚMERO DE FALLOS: " + numFallos);
 						pararTemporizador();
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
