@@ -60,23 +60,24 @@
 
 		/*function obtenerPosicionesIniciales(elem){
 			var posElem = elem.offset();
-			var posElemRight = ($(window).width() - (posElem.left + elem.outerWidth()));
-			var posElemBottom = ($(window).height() - (posElem.top + elem.outerHeight()));
-			return [posElem, posElemRight, posElemBottom];
+			return posElem;
 		}
 
 		function colocarMano(){
-			console.log($("body>main>nav>ul>li:first-of-type"));
-			console.log($(".mano-tutorial"));
 			var elementoReferencia = $("body>main>nav>ul>li:first-of-type");
-			[posRef, posRefRight, posRefBottom] = obtenerPosicionesIniciales(elementoReferencia);
+			var numHijos = elementoReferencia.parent().children().length - 1;
+			console.log(elementoReferencia);
+			posRef = obtenerPosicionesIniciales(elementoReferencia);
 			var mano = $(".mano-tutorial");
-			[posMano, posManoRight, posManoBottom] = obtenerPosicionesIniciales(mano);
-			console.log("LEFT REFERENCIA: " + posRef.left + " RIGHT REFERENCIA: " + posRefRight + " TOP REFERENCIA: " + posRef.top + " BOTTOM REFERENCIA: " + posRefBottom);
-			console.log("LEFT MANO: " + posMano.left + " RIGHT MANO: " + posManoRight + " TOP MANO: " + posMano.top + " BOTTOM MANO: " + posManoBottom);
+			posMano = obtenerPosicionesIniciales(mano);
+			console.log(posicionAnchura);
+			mano.css({
+				"top": 0,
+				"left": posicionAnchura
+			});
 		}
 
-		window.setTimeout(colocarMano, 1);*/
+		window.setTimeout(colocarMano(), 1);*/
 
 	/*****************************************************************************************************/
 
