@@ -802,7 +802,7 @@
 	/************************************MOSTRAR MENSAJE MODAL INTENTO************************************/
 
 		function crearMensajeModal(mensaje, intento){
-			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><button type="button" class="botones botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.firstChild, this.parentNode.parentNode);">Cerrar</button></div></div>';
+			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial"></div><button type="button" class="botones botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode);">Cerrar</button></div></div></div>';
 			$('main').append(modal);
 		}
 

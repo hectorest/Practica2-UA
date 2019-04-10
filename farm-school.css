@@ -146,15 +146,21 @@ body{
 				font-size: 25px;
 			}
 
+		.contenedor-cerrar-modal{
+			display: flex;
+			flex-direction: column;
+			height: 50%;
+		}
+
 	@keyframes mano{
 		from{
-				top: 30px;
+				top: 8%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 55px;
+				top: 20%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
