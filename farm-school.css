@@ -158,13 +158,28 @@ body{
 
 	@keyframes mano{
 		from{
-				top: 8%;
+				top: 10%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
 				top: 20%;
+				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+	}
+
+	@keyframes mano-respuestas{
+		from{
+				top: -100%;
+				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		to{
+				top: 0%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -178,8 +193,21 @@ body{
 		transform: rotate(70deg);
 		z-index: 10;
 		left: 55%;
-		top: 35px;
+		top: 10%;
 		animation-name: mano;
+		animation-duration: 1.5s;
+		animation-iteration-count: infinite;
+	}
+
+	.mano-tutorial-respuestas{
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		transform: rotate(70deg);
+		z-index: 10;
+		left: 55%;
+		top: -100%;
+		animation-name: mano-respuestas;
 		animation-duration: 1.5s;
 		animation-iteration-count: infinite;
 	}
