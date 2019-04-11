@@ -15,6 +15,7 @@
 			var cuantosAnimales;
 			var cuantosAnimalesFuera;
 			var animalesAMeter;
+			var animalesMetidos = 0;
 			var contadorAnimalesAMeter;
 			var resultadoSuma;
 			var queAnimal;
@@ -25,7 +26,7 @@
 
 			var respuestasGenericas = [];
 			var respuestaEscogida;
-			var pRespEscog;
+			var buttonRespEscog;
 			var numFallos = 0;
 			var tiempoInicio;
 			var tiempoFin;
@@ -140,7 +141,7 @@
 		function mostrarRespuestas(){
 			$.each(respuestasGenericas, function(index)
 			{
-				$('#respuestas').append('<p class="draggable" value="' + respuestasGenericas[index] + '">' + respuestasGenericas[index] + '</p>');
+				$('#respuestas').append('<button value="' + respuestasGenericas[index] + '" onclick="mostrarMensajeIntento(comprobarRespuesta(this));">' + respuestasGenericas[index] + '</button>');
 			});
 		}
 
@@ -195,11 +196,6 @@
 					break;
 				}
 			}
-		}
-
-		function cargarColocarRespuesta(){
-			var colocarRespuesta = "<div id='colocarRespuesta' class='droppable'><p class='preguntas'>Coloca aquí la respuesta</p></div>";
-			$("#ponerRespuestas").append(colocarRespuesta);
 		}
 
 		function cargarRespuestas(rangoRespuestas){
@@ -407,7 +403,7 @@
 				{
 					var img;
 					if(dentroOFuera){
-						img = "<figure>";
+						img = "<figure class='imagenes-corral'>";
 						cuantosAnimales = num;
 					}
 					else{
@@ -422,7 +418,7 @@
 				{
 					var img;
 					if(dentroOFuera){
-						img = "<figure>";
+						img = "<figure class='imagenes-corral'>";
 						cuantosAnimales = num;
 					}
 					else{
@@ -437,7 +433,7 @@
 				{
 					var img;
 					if(dentroOFuera){
-						img = "<figure>";
+						img = "<figure class='imagenes-corral'>";
 						cuantosAnimales = num;
 					}
 					else{
@@ -452,7 +448,7 @@
 				{
 					var img;
 					if(dentroOFuera){
-						img = "<figure>";
+						img = "<figure class='imagenes-corral'>";
 						cuantosAnimales = num;
 					}
 					else{
@@ -467,7 +463,7 @@
 				{
 					var img;
 					if(dentroOFuera){
-						img = "<figure>";
+						img = "<figure class='imagenes-corral'>";
 						cuantosAnimales = num;
 					}
 					else{
@@ -585,7 +581,47 @@
 				}
 			}
 
-			$('#contenedorResultados').prepend("<p class='preguntas' id='decirMeterAnimales'>" + animalesQueSeTienen + meterAnimales + "</p>");
+			$('#contenedorResultados').prepend("<p class='preguntas' id='decirMeterAnimales'>" + animalesQueSeTienen + meterAnimales + "<span>.</span>" + "</p>");
+		}
+
+		function actualizarAnimalesMetidos(){
+			document.getElementById("animalesMetidos").innerHTML = animalesMetidos;
+		}
+
+		function decirCuantosHaMetido(){
+
+			var animalesEnCorral = "<span>Has metido: <span id='animalesMetidos'>" + animalesMetidos + "</span> </span>";
+
+			switch (queAnimal)
+			{
+				case (0):
+				{
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/caballo.png'>";
+					break;
+				}
+				case (1):
+				{
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/cerdo.png'>";
+					break;
+				}
+				case (2):
+				{
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/gallina.png'>";
+					break;
+				}
+				case (3):
+				{
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/oveja.png'>";
+					break;
+				}
+				case (4):
+				{
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/vaca.png'>";
+					break;
+				}
+			}
+
+			$('#decirMeterAnimales').append(animalesEnCorral);
 		}
 
 		function prepararJuegoAnimales(){
@@ -622,7 +658,9 @@
 
 			decirAnimalesAMeter(animalesAMeter);
 
-			activarDragAndDropImagenes();
+			decirCuantosHaMetido();
+
+			activarDragAndDrop();
 
 			iniciarTemporizador();
 
@@ -640,9 +678,6 @@
 
 			cargarRespuestas(rango);
 
-			cargarColocarRespuesta();
-
-			activarDragAndDrop();
 		}
 
 	/*****************************************************************************************************/
@@ -681,32 +716,6 @@
 	/*********************************EVENTOS DRAGGABLE Y DROPPABLE***************************************/
 
 		function activarDragAndDrop(){
-			$( ".draggable" ).draggable({
-				cursor: "pointer",
-				containment: $('#ponerRespuestas')
-			});
-			$( ".droppable" ).droppable({
-				classes:{
-        			"ui-droppable-hover": "drop-hover",
-				},
-				drop: function( event, ui ) {
-					pRespEscog = ui.draggable;
-					respuestaEscogida = ui.draggable.attr("value");
-					var acierto = comprobarRespuesta(respuestaEscogida);
-					mostrarMensajeIntento(acierto);
-					$( this )
-						.css("background-color", "#ffffff")
-						.css("color", "#000000")
-				},
-				out: function( event, ui ) { 
-			      $( this )
-					.css("background-color", "#AB7C4E")
-					.css("color", "#ffffff")
-			   	}
-			});
-		}
-
-		function activarDragAndDropImagenes(){
 			$( ".imagen-draggable" ).draggable({
 				cursor: "pointer",
 				opacity: 0.50,
@@ -717,6 +726,8 @@
         			"ui-droppable-hover": "drop-hover-image",
 				},
 				drop: function( event, ui ) {
+					animalesMetidos++;
+					actualizarAnimalesMetidos();
 					contadorAnimalesAMeter--;
 					if(contadorAnimalesAMeter == 0){
 						$( ".imagen-droppable" ).droppable('destroy');
@@ -758,12 +769,16 @@
 
 	/*****************************************COMPROBAR RESPUESTA*****************************************/
 
-		function comprobarRespuesta(resp){
+		function comprobarRespuesta(botonRespuesta){
 
 			var correcto = false;
 
 			//extraemos la pagina web de donde se esta preguntando para comprobar los arrays adecuados en cada caso
 			pag = extraerPagUrlActual();
+
+			buttonRespEscog = botonRespuesta;
+
+			var resp = botonRespuesta.value;
 
 			switch (pag)
 			{
@@ -802,7 +817,7 @@
 	/************************************MOSTRAR MENSAJE MODAL INTENTO************************************/
 
 		function crearMensajeModal(mensaje, intento){
-			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial"></div><button type="button" class="botones botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode);">Cerrar</button></div></div></div>';
+			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial"></div><button type="button" class="botones botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
 			$('main').append(modal);
 		}
 
@@ -888,7 +903,7 @@
 				}
 				else{
 					mensModal.remove();
-					pRespEscog.remove();
+					buttonRespEscog.remove();
 				}
 			}
 

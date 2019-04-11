@@ -1,0 +1,27 @@
+
+
+	function activarDragAndDrop(){
+			$( ".draggable" ).draggable({
+				cursor: "pointer",
+				containment: $('#ponerRespuestas')
+			});
+			$( ".droppable" ).droppable({
+				classes:{
+        			"ui-droppable-hover": "drop-hover",
+				},
+				drop: function( event, ui ) {
+					pRespEscog = ui.draggable;
+					respuestaEscogida = ui.draggable.attr("value");
+					var acierto = comprobarRespuesta(respuestaEscogida);
+					mostrarMensajeIntento(acierto);
+					$( this )
+						.css("background-color", "#ffffff")
+						.css("color", "#000000")
+				},
+				out: function( event, ui ) { 
+			      $( this )
+					.css("background-color", "#AB7C4E")
+					.css("color", "#ffffff")
+			   	}
+			});
+		}
