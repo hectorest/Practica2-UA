@@ -223,6 +223,7 @@ body{
 		background-color: #DEC78D;
 		border-left: 0.3em solid #8A6300;
 		border-right: 0.3em solid #8A6300;
+		position: relative;
 	}
 
 		body>main>header{
