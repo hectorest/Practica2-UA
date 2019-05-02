@@ -482,6 +482,7 @@
 			}
 
 			return animales;
+			
 		}
 
 		function colocarAnimales(animales, dentroOFuera){
