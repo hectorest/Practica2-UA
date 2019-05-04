@@ -22,6 +22,19 @@
 
 		/******************************/
 
+		/********JUEGO CASAS********/
+
+			var ultimoNumero;
+			var arrayPosiciones;
+
+		/******************************/
+
+		/********JUEGO MONEDAS********/
+
+			var importe, resta, resultadoResta;
+
+		/******************************/
+
 		/**********GENERICAS***********/
 
 			var respuestasGenericas = [];
@@ -183,6 +196,7 @@
 			{
 				case ("contarCasas.html"):
 				{
+					insertar(ultimoNumero);
 					break;
 				}
 				case ("contarVerduras.html"):
@@ -193,6 +207,11 @@
 				case("sumar.html"):
 				{
 					insertar(resultadoSuma);
+					break;
+				}
+				case("restar.html"):
+				{
+					insertar(resultadoResta);
 					break;
 				}
 			}
@@ -213,36 +232,358 @@
 
 	/**********************************SITUAR CASAS - JUEGO CONTAR CASAS**********************************/
 
-		function crearEtiquetasImagen(num){
-			var casas = [];
-			var img = "<figure><a href='https://es.pngtree.com' class='eliminar-redireccion' onclick='eliminarRedireccion(event);'><img src='./imagenes/contar-casas/casa.png'></a></figure>";
-			for(var i = 0; i < num; i++)
-			{
-				casas.push(img);
-			}
-			return casas;
-		}
-
 		function colocarCasas(casas){
-			$.each(casas, function(index)
-			{
-				$('#contarCasas>div').append(casas[index]);
-			});
+
+			let cv = document.getElementById('cv01'),
+				ctx = cv.getContext('2d');
+
+			let anchoImg = 125;
+				sepImgFilas=40,
+				altoImg = 655/(casas+2),
+				sepImgColumnas=0;
+
+			var arrayCasas = new Array(casas);
+				arrayPosiciones = new Array(casas);
+
+				for(let i = 0; i<casas; i++){
+					arrayPosiciones[i] = new Array(2);
+				}
+
+
+			let derecha = true,
+				x = 0-anchoImg,
+				y0 = 655-altoImg,
+				y = y0;
+
+			var currentIndex = 0;
+
+			var loadImages = function(){
+				if(casas==currentIndex) return false;
+
+				arrayCasas[currentIndex]  = new Image();
+				if(currentIndex<casas-1){
+					arrayCasas[currentIndex].src = "./imagenes/contar-casas/casa"+currentIndex+".png";
+				}else{
+					arrayCasas[currentIndex].src = "./imagenes/contar-casas/establoNaN.png";
+				}
+
+				arrayCasas[currentIndex].onload = function(e){
+
+
+					if(derecha && x+125>492){
+						derecha = false;
+					}
+
+					if(!derecha && x-125<0){
+						derecha = true;
+					}
+
+					if(derecha){
+						x = x+125;
+					}else{
+						x = x-125;
+					}
+
+					y = y0-(currentIndex+1)*altoImg;
+
+					if(currentIndex<casas-1){
+						arrayPosiciones[currentIndex][0] = x+25;
+						arrayPosiciones[currentIndex][1] = y;
+						ctx.drawImage(arrayCasas[currentIndex],x+25,y, 95, 95);
+						ctx.stroke();
+					}else{
+						arrayPosiciones[currentIndex][0] = x+25;
+						arrayPosiciones[currentIndex][1] = y;
+						ctx.drawImage(arrayCasas[currentIndex],x+25,y, 120, 120);
+						ctx.stroke();
+					}
+					loadImages(currentIndex++);
+				}
+			}
+
+			loadImages(currentIndex);
 		}
 
 		function prepararJuegoCasas(){
 
 			//con estos rangos es como he conseguido que se vea mejor
-			var rangoMin = 3;
-			var rangoMax = 12;
+			var rangoMin = 4;
+			var rangoMax = 11;
 
-			var granjas = crearEtiquetasImagen(obtenerNumeroAleatorio(rangoMin, rangoMax));
+			var numCasas = obtenerNumeroAleatorio(rangoMin, rangoMax);
 
-			colocarCasas(granjas);
+			ultimoNumero = numCasas-1;
+
+			let cv = document.getElementById('cv01'),
+				ctx = cv.getContext('2d');
+
+			var background  = new Image();
+			background.src = "./imagenes/contar-casas/fondo-contar-casas.png"; 
+
+			background.onload = function(){
+				ctx.drawImage(background,0,0, cv.height, cv.height);
+				colocarCasas(numCasas);
+			}
+
+			iniciarTemporizador();
+
+			var clicks = 0;
+			var lastClick = [0, 0, 0, 0];
+
+			cv.onmousemove = function(evt){
+				/*console.log(evt.offsetX + ',' + evt.offsetY;*/
+				let x = evt.offsetX,
+					y = evt.offsetY;
+
+				if(clicks == 0){
+					lastClick[0] = x;
+					lastClick[1] = y;
+					if(x>arrayPosiciones[clicks][0] && x<arrayPosiciones[clicks][0]+95 && y>arrayPosiciones[clicks][1] && y<arrayPosiciones[clicks][1]+95){
+						console.log("CORRECTO");
+						ctx.beginPath();
+						ctx.moveTo(lastClick[0], lastClick[1]);
+						clicks++;
+					}else{
+						console.log("incorrecto");
+					}
+				}else if(clicks > 0 && clicks<numCasas){
+					lastClick[2] = x;
+					lastClick[3] = y;
+
+					ctx.lineWidth = 10;
+					ctx.strokeStyle = '#a00';
+
+					if(x>arrayPosiciones[clicks][0] && x<arrayPosiciones[clicks][0]+95 && y>arrayPosiciones[clicks][1] && y<arrayPosiciones[clicks][1]+95){
+			    		console.log("CORRECTO");
+			    		ctx.lineTo(lastClick[2], lastClick[3]);
+						ctx.stroke();
+						clicks++;
+						/*if(clicks<numCasas-1){
+							clicks++;
+						}*/
+					}else{
+						console.log("incorrecto");
+					}
+
+					if (clicks == numCasas) {
+						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png'>");
+						cargarRespuestas(rangoMax);
+					}
+				}
+
+			}
 
 		}
 
 	/*****************************************************************************************************/
+
+
+	/**********************************SITUAR MONEDAS - JUEGO RESTAR MONEDAS**********************************/
+
+		function colocarMonedas(cambio, mod){
+
+			let cv = document.getElementById('cv02'),
+				ctx = cv.getContext('2d');
+
+			var total = cambio[0] + cambio[1] + cambio[2] + cambio[3];
+
+			var arrayMonedas = new Array(total),
+				arrayValMonedas = new Array(total);
+
+			let llevo=0,
+				cont=0,
+				x0=40.5, y0=125, x1=470.5, y1=125;;
+
+			for(let i=0; i<cambio.length; i++){
+				for(let j=llevo; j<llevo+cambio[i]; j++){
+					switch (i){
+						case 0: arrayValMonedas[cont] = 10;
+							break;
+						case 1: arrayValMonedas[cont] = 5;
+							break;
+						case 2: arrayValMonedas[cont] = 2;
+							break;
+						case 3: arrayValMonedas[cont] = 1;
+							break;
+					}
+					cont++;
+				}
+				llevo+=cambio[i];
+			}
+			for(let i=0; i<total; i++){
+				console.log(arrayValMonedas[i]);
+			}
+
+			var currentIndex = 0;
+
+			var loadImages = function(){
+				if(total==currentIndex) return false;
+
+				arrayMonedas[currentIndex]  = new Image();
+
+				switch (arrayValMonedas[currentIndex]){
+						case 10: console.log("hola desde 10");
+							arrayMonedas[currentIndex].src = "./imagenes/restar/cent10.png";
+							break;
+						case 5: console.log("hola desde 5");
+							arrayMonedas[currentIndex].src = "./imagenes/restar/cent5.png";
+							break;
+						case 2: console.log("hola desde 2");
+							arrayMonedas[currentIndex].src = "./imagenes/restar/cent2.png";
+							break;
+						case 1: console.log("hola desde 1");
+							arrayMonedas[currentIndex].src = "./imagenes/restar/cent1.png";
+							break;
+					}
+
+
+				arrayMonedas[currentIndex].onload = function(e){
+
+					if(mod==0){
+						if(x0+25 > (20.5+25+305-90)){
+							console.log("he entrado");
+							x0=40.5;
+							y0+=110;
+						}
+
+						if(currentIndex<total){
+							ctx.drawImage(arrayMonedas[currentIndex],x0,y0, 80, 80);
+							ctx.stroke();
+							x0+=25;
+						}
+
+						x0+=90.5;
+					}else if(mod==1){
+						if(x1+25 > (450.5+25+305-90)){
+							console.log("he entrado");
+							x1=470.5;
+							y1+=110;
+						}
+
+						if(currentIndex<total){
+							ctx.drawImage(arrayMonedas[currentIndex],x1,y1, 80, 80);
+							ctx.stroke();
+							x1+=25;
+						}
+
+						x1+=90.5;
+					}
+						
+					loadImages(currentIndex++);
+				
+				}
+
+			}
+
+			loadImages(currentIndex);
+		}
+
+		function prepararJuegoMonedas(){
+ 			
+			var rangoMin = 5;
+			var rangoMax = 20;
+
+			let cv = document.getElementById('cv02'),
+				ctx = cv.getContext('2d');
+
+			var imp = obtenerNumeroAleatorio(rangoMin, rangoMax),
+				rest = obtenerNumeroAleatorio(1, imp);
+
+				importe = imp;
+				resta = rest;
+				resultadoResta = importe-resta;
+			 
+			console.log("El cambio de la cantidad "+imp);
+			 
+			// indicamos todas las monedas posibles
+			var monedas=Array(10, 5, 2, 1);
+			 
+			// creamos un array con la misma cantidad de monedas
+			// Este array contendra las monedas a devolver
+			var cambio=Array(0,0,0,0);
+				cambioResta=Array(0,0,0,0);
+			 
+			// Recorremos todas las monedas
+			for(var i=0; i<monedas.length; i++)
+			{
+			 
+			    // Si el importe actual, es superior a la moneda
+			    if(imp>=monedas[i])
+			    {
+			 
+			        // obtenemos cantidad de monedas
+			        cambio[i]=parseInt(imp/monedas[i]);
+			 
+			        // actualizamos el valor del importe que nos queda por didivir
+			        imp=imp-(cambio[i]*monedas[i]);
+			    }
+			}
+			 
+			// Bucle para mostrar el resultado
+			for(i=0; i<monedas.length; i++)
+			{
+			    if(cambioResta[i]>0)
+			    {
+			       console.log("Hay: "+cambioResta[i]+" monedas de: "+monedas[i]+"€");
+			    }
+			}
+
+			for(var i=0; i<monedas.length; i++)
+			{
+			 
+			    // Si el importe actual, es superior a la moneda
+			    if(rest>=monedas[i])
+			    {
+			 
+			        // obtenemos cantidad de monedas
+			        cambioResta[i]=parseInt(rest/monedas[i]);
+			 
+			        // actualizamos el valor del importe que nos queda por didivir
+			        rest=rest-(cambioResta[i]*monedas[i]);
+			    }
+			}
+			 
+			// Bucle para mostrar el resultado
+			for(i=0; i<monedas.length; i++)
+			{
+			    if(cambioResta[i]>0)
+			    {
+			       console.log("Hay: "+cambioResta[i]+" monedas de: "+monedas[i]+"€");
+			    }
+			}
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#8A6300';
+			ctx.lineWidth = 4;
+			ctx.strokeRect(20.5, 105.5,305,305);
+			ctx.strokeRect(455.5, 105.5,305,305);
+
+			ctx.beginPath();
+			ctx.lineWidth = 20;
+			ctx.moveTo(360, 245.5);
+			ctx.lineTo(420, 245.5);
+			/*ctx.lineTo(400, 225.5);
+			ctx.lineTo(400, 265.5);
+			ctx.lineTo(435, 245.5);*/
+
+			ctx.stroke();
+
+			ctx.font = "22px sans-serif"
+
+			var texto = "Tenemos " + importe +" céntimos y nos gastamos " + resta + " céntimos en compras"
+
+			ctx.fillText(texto, 70, 60.5);
+
+			colocarMonedas(cambio, 0);
+			colocarMonedas(cambioResta, 1);
+
+			$('#contenedorResultados').prepend("<p class='preguntas'><span>¿Cuánto dinero tendremos después de ralizar la compra?</span></p>");
+			cargarRespuestas(rangoMax);
+			iniciarTemporizador();
+		}
+
+	/*****************************************************************************************************/
+
 
 
 	/********************************SITUAR VERDURAS - JUEGO CONTAR VERDURAS******************************/
@@ -706,6 +1047,11 @@
 					prepararJuegoAnimales();
 					break;
 				}
+				case("restar.html"):
+				{
+					prepararJuegoMonedas();
+					break;
+				}
 			}
 
 		});
@@ -783,11 +1129,17 @@
 			switch (pag)
 			{
 				case ("contarCasas.html"):
-				{
+				
+					if(resp == ultimoNumero){
+						correcto = true;
+					}
+					else{
+						numFallos++;
+					}
 					break;
-				}
+				
 				case ("contarVerduras.html"):
-				{
+				
 					if(resp == cuantasVerduras[queVerdura]){
 						correcto = true;
 					}
@@ -795,16 +1147,26 @@
 						numFallos++;
 					}
 					break;
-				}
+				
 				case ("sumar.html"):
-				{
+				
 					if(resp == resultadoSuma){
 						correcto = true;
 					}
 					else{
 						numFallos++;
 					}
-				}
+					break;
+				case ("restar.html"):
+				
+					if(resp == resultadoResta){
+						correcto = true;
+					}
+					else{
+						numFallos++;
+					}
+					break;
+				
 			}
 			
 			return correcto;
@@ -829,6 +1191,20 @@
 			{
 				case ("contarCasas.html"):
 				{
+					if(intento){
+						var mensModal = "¡MUY BIEN! ¡El siguiente número era el " + ultimoNumero +"!";
+						console.log("NÚMERO DE FALLOS: " + numFallos);
+						pararTemporizador();
+						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
+						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
+						crearMensajeModal(mensModal, intento);
+					}
+					else{
+						var mensModal = "¡Sigue intentándolo!";
+						console.log(mensModal);
+						crearMensajeModal(mensModal, intento);
+
+					}
 					break;
 				}
 				case ("contarVerduras.html"):
@@ -864,6 +1240,24 @@
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
 					}
+					break;
+				}
+				case ("restar.html"):
+				{
+					if(intento){
+						var mensModal = "¡MUY BIEN! ¡" + importe + " - " + resta + " = " + resultadoResta + "!";
+						console.log("NÚMERO DE FALLOS: " + numFallos);
+						pararTemporizador();
+						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
+						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
+						crearMensajeModal(mensModal, intento);
+					}
+					else{
+						var mensModal = "¡Sigue intentándolo!";
+						console.log(mensModal);
+						crearMensajeModal(mensModal, intento);
+					}
+					break;
 				}
 			}
 		}

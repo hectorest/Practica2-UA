@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Farm School</title>
+	<title>FFarm School/Restar</title>
 	<meta name="author" content="Héctor Esteve Yagüe y Francisco Javier García Fernández" /> 
 	<meta name="keywords" content="HTML5, web, UA, práctica 2, usabilidad, accesibilidad, niños, aprender, granja"/> 
 	<meta name="description" content="Formulario de la práctica 1 de UA" />
@@ -16,12 +16,27 @@
 </head>
 <body>
 	<main>
-		<header>
-			<a href="index.html" title="Ir al menú principal"><img src="./logotipo-e-icono/logotipo/logotipo-farm-school.png"></a>
-		</header>
-		<footer>
-			<p><strong><a href="#" title="Créditos">&copy;Héctor Esteve Yagüe y Francisco Javier García Fernández</a></strong></p>
-		</footer>
+		<div class="tituloJuego">
+			<h2>Contar Casas</h2>
+			<a href="index.html" class="botones"><span>Volver al menú principal</span></a>
+		</div>
+		<section id="restar">
+			<canvas id="cv02" width = "786" height="436">
+			
+			</canvas>
+			<div id="contenedorResultados">
+			<div id="ponerRespuestas" class="contenedor-mano-tutorial">
+				<div id="respuestas" class="respuestas">
+					<div class="mano-tutorial-respuestas"></div>
+
+				</div>
+			</div>
+		</div>
+		</section>
+
+		
+
 	</main>
+	<script type="text/javascript" src="./farm-school.js"></script>
 </body>
 </html>

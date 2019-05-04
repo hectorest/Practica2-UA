@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
 
+*{
+	box-sizing: border-box;
+}
+
 html{
 	min-width: 768px;
     max-width: 2048px;
@@ -19,7 +23,7 @@ body{
 	background-origin: border-box;
 	background-repeat: no-repeat;
 	background-size: cover;
-	font-size: 15px;
+	font-size: 22px;
 	position: relative;
 }
 
@@ -371,66 +375,52 @@ body{
 	/*Este lo tienes que retocar tu Hector para que quepa en pantalla de tablet, el minimo que he visto es de 768 y 1024 px, he hecho que el html ocupe eso por narices por lo que, en ordenador se ve mal pero como esta orientado a tablets pues supongo que ira bien la cosa*/
 	
 	body>main>#contarCasas{
-		background-image: url("./imagenes/contar-casas/fondo-contar-casas.png");
-		background-color: #4DC1FF; /*para el color del cielo*/
+		display: flex;		
 		height: 100%;
 		width: 100%;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
 		border-top: 0.3em solid #8A6300;
 		border-bottom: 0.3em solid #8A6300;
 		margin-bottom: 2%;
+
 	}
 
-		body>main>#contarCasas>div{
-			display: flex;
-			flex-direction: column;
-			justify-content: space-around;
-			margin-top: 3em;
-			margin-left: 3em;
+		body>main>#contarCasas>#cv01{
+			background-color: #4DC1FF; /*para el color del cielo*/
+			margin: .5em;
+			border: .3em solid #8A6300;
 		}
 
-			body>main>#contarCasas>div>figure{
-				display: flex;
-				margin: 0;
-				width: 20%;
+		body>main>#restar>#cv02{
+			margin: .5em;
+			border: .3em solid #8A6300;
+		}
+
+		#contenedorResultadosDerecha{
+			width: 100%;
+			margin: 0;
+			text-align: center;
+			margin: auto;
+		}
+
+			#contenedorResultadosDerecha>img{
+				width: 50%;
 			}
 
-				body>main>#contarCasas>div>figure:first-of-type{
-					border: 0.5em solid #DC2825;
-					border-radius: 1em;
+			#contenedorResultadosDerecha>#ponerRespuestas{
+				
+			}
+
+				#contenedorResultadosDerecha>#ponerRespuestas>#respuestas{
+					display: flex;
+					flex-direction: row;
+					flex-wrap: wrap;
+					margin: 1em;
+				}
+
+				#contenedorResultadosDerecha>#ponerRespuestas>#respuestas>button{
 					width: 25%;
+					margin: 2em;
 				}
-
-				body>main>#contarCasas>div>figure:nth-child(even){
-					align-self: flex-end;
-				}
-
-				body>main>#contarCasas>div>figure:nth-child(odd){
-					align-self: flex-start;
-				}
-
-					body>main>#contarCasas>div>figure>a{
-						overflow: hidden;
-						transition: all .35s ease-in-out;
-						width: 100%;
-						height: 100%;
-					}
-
-					body>main>#contarCasas>div>figure>a:hover{
-						filter: brightness(115%);
-					}
-
-					body>main>#contarCasas>div>figure>a:focus{
-						filter: brightness(115%);
-					}
-
-						body>main>#contarCasas>div>figure>a>img{
-							width: 100%;
-							height: 100%;
-						}
-
 
 	/*Este es el mio y es el que he retocao yo, a tamaño de tablet siempre se ve bien, he hecho porcentajes y tal para que funcione*/
 
