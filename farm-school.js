@@ -327,10 +327,14 @@
 
 			iniciarTemporizador();
 
+			var texto_final = "Vamos a contar. Nos encontramos en la casa número 0 y debemos llegar al establo, pero antes tenemos que pasar por todas las casas. Sigue el orden de las casas hasta llegar al establo";			
+
+			responsiveVoice.speak(texto_final, "Spanish Female");
+
 			var clicks = 0;
 			var lastClick = [0, 0, 0, 0];
 
-			cv.onmousemove = function(evt){
+			cv.onmousedown = function(evt){
 				/*console.log(evt.offsetX + ',' + evt.offsetY;*/
 				let x = evt.offsetX,
 					y = evt.offsetY;
@@ -345,6 +349,10 @@
 						clicks++;
 					}else{
 						console.log("incorrecto");
+
+						var texto_final = "Ese no es el número correcto";
+					
+						responsiveVoice.speak(texto_final, "Spanish Female");
 					}
 				}else if(clicks > 0 && clicks<numCasas){
 					lastClick[2] = x;
@@ -363,11 +371,18 @@
 						}*/
 					}else{
 						console.log("incorrecto");
+
+						var texto_final = "Ese no es el número correcto";
+					
+						responsiveVoice.speak(texto_final, "Spanish Female");
 					}
 
 					if (clicks == numCasas) {
 						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png'>");
 						cargarRespuestas(rangoMax);
+						var texto_final1 = "¿Qué número va en la siguiente figura?";			
+
+						responsiveVoice.speak(texto_final1, "Spanish Female");
 					}
 				}
 
@@ -410,9 +425,6 @@
 				}
 				llevo+=cambio[i];
 			}
-			for(let i=0; i<total; i++){
-				console.log(arrayValMonedas[i]);
-			}
 
 			var currentIndex = 0;
 
@@ -422,16 +434,16 @@
 				arrayMonedas[currentIndex]  = new Image();
 
 				switch (arrayValMonedas[currentIndex]){
-						case 10: console.log("hola desde 10");
+						case 10:
 							arrayMonedas[currentIndex].src = "./imagenes/restar/cent10.png";
 							break;
-						case 5: console.log("hola desde 5");
+						case 5:
 							arrayMonedas[currentIndex].src = "./imagenes/restar/cent5.png";
 							break;
-						case 2: console.log("hola desde 2");
+						case 2:
 							arrayMonedas[currentIndex].src = "./imagenes/restar/cent2.png";
 							break;
-						case 1: console.log("hola desde 1");
+						case 1:
 							arrayMonedas[currentIndex].src = "./imagenes/restar/cent1.png";
 							break;
 					}
@@ -441,7 +453,6 @@
 
 					if(mod==0){
 						if(x0+25 > (20.5+25+305-90)){
-							console.log("he entrado");
 							x0=40.5;
 							y0+=110;
 						}
@@ -455,7 +466,6 @@
 						x0+=90.5;
 					}else if(mod==1){
 						if(x1+25 > (450.5+25+305-90)){
-							console.log("he entrado");
 							x1=470.5;
 							y1+=110;
 						}
@@ -580,6 +590,10 @@
 			$('#contenedorResultados').prepend("<p class='preguntas'><span>¿Cuánto dinero tendremos después de realizar la compra?</span></p>");
 			cargarRespuestas(rangoMax);
 			iniciarTemporizador();
+
+			var texto_final = "Vamos a restar. Hemos venido a comprar comida para los animales de la granja. "+texto+"¿Cuánto dinero tendremos después de ralizar la compra?";			
+
+			responsiveVoice.speak(texto_final, "Spanish Female");
 		}
 
 	/*****************************************************************************************************/
@@ -726,6 +740,23 @@
 			activarDragAndDrop();
 
 			iniciarTemporizador();
+
+			var texto_final
+
+			switch(queVerdura){
+				case 0: texto_final = "Cuántas lechugas hay?";
+					break;
+				case 1: texto_final = "Cuántos maíces hay?";
+					break;
+				case 2: texto_final = "Cuántas patatas hay?";
+					break;
+				case 3: texto_final = "Cuántos tomates hay?";
+					break;
+				case 4: texto_final = "Cuántas zanahorias hay?";
+					break;
+			}		
+
+			responsiveVoice.speak(texto_final, "Spanish Female");
 
 		}
 
@@ -1006,6 +1037,10 @@
 
 			iniciarTemporizador();
 
+			var texto_final = "En el corral hay "+cuantosAnimales+". Mete "+animalesAMeter+".";			
+
+			responsiveVoice.speak(texto_final, "Spanish Female");
+
 		}
 
 		function prepararContinuacionJuegoAnimales(){
@@ -1019,6 +1054,10 @@
 			preguntarcuantosAnimalesXHay(queAnimal);
 
 			cargarRespuestas(rango);
+
+			var texto_final = "¿Cuántos hay en total en el corral?";			
+
+			responsiveVoice.speak(texto_final, "Spanish Female");
 
 		}
 
@@ -1169,8 +1208,19 @@
 					break;
 				
 			}
+
+			var texto_final
+
+			if(correcto){
+				texto_final = "Muy bien. Has hacertado";
+			}else{
+				texto_final = "Sigue intentándolo";
+			}		
+
+			responsiveVoice.speak(texto_final, "Spanish Female");
 			
 			return correcto;
+
 		}
 
 
@@ -1303,4 +1353,3 @@
 			}
 
 	/*****************************************************************************************************/
-
