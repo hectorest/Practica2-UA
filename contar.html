@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<title>Farm School/Contar</title>
 	<meta name="author" content="Héctor Esteve Yagüe y Francisco Javier García Fernández" /> 
@@ -22,12 +22,12 @@
 		<nav>
 			<h2>Menú de juego:</h2>
 			<ul>
-				<div class="mano-tutorial"></div>
+				<div class="mano-tutorial-contar"></div>
 				<li class="contenedor-mano-tutorial">
-					<a href="contarCasas.html">Contar Casas</a>
+					<a href="contarCasas.html">Contar Casas <span><img src="./imagenes/contar/contarCasas.png"></span></a>
 				</li>
 				<li>
-					<a href="contarVerduras.html">Contar Verduras</a>
+					<a href="contarVerduras.html">Contar Verduras <span><img src="./imagenes/contar/contarVerduras.png"></span></a>
 				</li>
 			</ul>
 		</nav>
@@ -39,5 +39,10 @@
 		</footer>
 	</main>
 </body>
+<script src="http://code.responsivevoice.org/responsivevoice.js?key=T2TUoqOh"></script>
+<script>
+	var texto_final = "¿Quieres contar casas o verduras?";	
+	responsiveVoice.speak(texto_final, "Spanish Female");
+</script>
 <script type="text/javascript" src="./farm-school.js"></script>
 </html>

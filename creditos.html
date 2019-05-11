@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<title>Farm School</title>
+	<title>Farm School/Creditos</title>
 	<meta name="author" content="Héctor Esteve Yagüe y Francisco Javier García Fernández" /> 
 	<meta name="keywords" content="HTML5, web, UA, práctica 2, usabilidad, accesibilidad, niños, aprender, granja"/> 
 	<meta name="description" content="Formulario de la práctica 1 de UA" />
@@ -18,11 +18,38 @@
 	<main>
 		<header>
 			<a href="index.html" title="Ir al menú principal"><img src="./logotipo-e-icono/logotipo/logotipo-farm-school.png"></a>
-			<h1>¡Aprende jugando en nuestra granja! ¡Disfruta y Diviértete!</h1>
 		</header>
+		<section>
+			<h3>Datos de los creadores:</h3>
+			<div id="contTablasCred">
+				<table class="tabla" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+					<caption>Creador 1:</caption>
+					<tr><td>Nombre: </td><td>Franscisco Javier</td></tr>
+					<tr><td>Apellidos: </td><td>García Fernández</td></tr>
+					<tr><td>DNI: </td><td>74527615W</td></tr>
+				</table>
+				<table class="tabla" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+					<caption>Creador 2:</caption>
+					<tr><td>Nombre: </td><td>Héctor</td></tr>
+					<tr><td>Apellidos: </td><td>Esteve Yagüe</td></tr>
+					<tr><td>DNI: </td><td>20054848K</td></tr>
+				</table>
+			</div>
+			<h3>Descripción:</h3>
+			<p>Este juego de aprendizaje orientado a niños de primer curso de primaria, para las plataformas ipad y tablets, es un trabajo realizado para la asignatura Usabilidad y Accesibilidad (UA), del grado en Ingeniería Multimedia impartido en la Universidad de Alicante.</p>
+			<div class="mano-tutorial-creditos"></div>
+			<div class="contenedor-mano-tutorial">
+				<a href="index.html" class="botones"><span>Volver al menú principal</span></a>
+			</div>
+		</section>
 		<footer>
 			<p><strong><a href="#" title="Créditos">&copy;Héctor Esteve Yagüe y Francisco Javier García Fernández</a></strong></p>
 		</footer>
 	</main>
 </body>
+<script src="http://code.responsivevoice.org/responsivevoice.js?key=T2TUoqOh"></script>
+<script>
+	var texto_final = "Estos son los créditos del juego. Si quieres practicar, pulsa sobre el botón volver al menú principal o sobre la imagen con el nombre Farm School.";	
+	responsiveVoice.speak(texto_final, "Spanish Female");
+</script>
 </html>

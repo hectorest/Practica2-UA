@@ -239,7 +239,7 @@
 
 			let anchoImg = 125;
 				sepImgFilas=40,
-				altoImg = 655/(casas+2),
+				altoImg = 610/(casas+2),
 				sepImgColumnas=0;
 
 			var arrayCasas = new Array(casas);
@@ -252,7 +252,7 @@
 
 			let derecha = true,
 				x = 0-anchoImg,
-				y0 = 655-altoImg,
+				y0 = 610-altoImg,
 				y = y0;
 
 			var currentIndex = 0;
@@ -380,6 +380,8 @@
 					if (clicks == numCasas) {
 						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png'>");
 						cargarRespuestas(rangoMax);
+						$(".mano-tutorial-click").remove();
+						$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
 						var texto_final1 = "¿Qué número va en la siguiente figura?";			
 
 						responsiveVoice.speak(texto_final1, "Spanish Female");
@@ -1037,7 +1039,7 @@
 
 			iniciarTemporizador();
 
-			var texto_final = "En el corral hay "+cuantosAnimales+". Mete "+animalesAMeter+".";			
+			var texto_final = "En el corral hay " + cuantosAnimales + " " + nombreAnimal + ". Mete " + animalesAMeter + ".";			
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
 
@@ -1049,13 +1051,19 @@
 
 			$("#decirMeterAnimales").remove();
 
+			$(".mano-tutorial-drag").remove();
+
+			$("#respuestas").append("<div class='mano-tutorial-respuestas'></div>");
+
 			var rango = 20;
 
 			preguntarcuantosAnimalesXHay(queAnimal);
 
 			cargarRespuestas(rango);
 
-			var texto_final = "¿Cuántos hay en total en el corral?";			
+			var texto_final = "¿Cuánt" + nombreAnimal[nombreAnimal.length - 2] + "s" + " " + nombreAnimal + " " + "hay ahora en total?";	
+
+			responsiveVoice.speak(texto_final, "Spanish Female");
 
 		}
 
@@ -1218,7 +1226,19 @@
 	/************************************MOSTRAR MENSAJE MODAL INTENTO************************************/
 
 		function crearMensajeModal(mensaje, intento){
-			var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial"></div><button type="button" class="botones botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
+			if(!intento){
+				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
+			}
+			else{
+				var tiempoTrans = cambiarFormato(tiempoTranscurrido);
+				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div id="estadisticas"><p>Estadísticas:</p><p>Has tardado: ' + tiempoTrans + '.</p><p>Has tenido: ' + numFallos + ' fallos.</p></div><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
+			}
+			if(extraerPagUrlActual() == "contarCasas.html"){
+				$(".mano-tutorial-respuestas-contar-casas").remove();
+			}
+			else{
+				$(".mano-tutorial-respuestas").remove();
+			}
 			$('main').append(modal);
 		}
 
@@ -1289,12 +1309,13 @@
 				{
 					if(intento){
 						var mensModal = "¡MUY BIEN! ¡" + importe + " - " + resta + " = " + resultadoResta + "!";
+						var mensModalAudio = "¡MUY BIEN! ¡" + importe + " menos " + resta + " = " + resultadoResta + "!";
 						console.log("NÚMERO DE FALLOS: " + numFallos);
 						pararTemporizador();
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
+						responsiveVoice.speak(mensModalAudio, "Spanish Female");
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
@@ -1342,6 +1363,12 @@
 				}
 				else{
 					mensModal.remove();
+					if(extraerPagUrlActual() == "contarCasas.html"){
+						$("#respuestas").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
+					}
+					else{
+						$("#respuestas").append("<div class='mano-tutorial-respuestas'></div>");
+					}		
 					buttonRespEscog.remove();
 				}
 			}
