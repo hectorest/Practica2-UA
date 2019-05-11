@@ -577,7 +577,7 @@
 			colocarMonedas(cambio, 0);
 			colocarMonedas(cambioResta, 1);
 
-			$('#contenedorResultados').prepend("<p class='preguntas'><span>¿Cuánto dinero tendremos después de ralizar la compra?</span></p>");
+			$('#contenedorResultados').prepend("<p class='preguntas'><span>¿Cuánto dinero tendremos después de realizar la compra?</span></p>");
 			cargarRespuestas(rangoMax);
 			iniciarTemporizador();
 		}
@@ -1193,7 +1193,7 @@
 				case ("contarCasas.html"):
 				{
 					if(intento){
-						var mensModal = "¡MUY BIEN! ¡El siguiente número era el " + ultimoNumero +"!";
+						var mensModal = "¡MUY BIEN! ¡El siguiente número es el " + ultimoNumero +"!";
 						console.log("NÚMERO DE FALLOS: " + numFallos);
 						pararTemporizador();
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
