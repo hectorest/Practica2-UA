@@ -745,18 +745,18 @@
 
 			var texto_final
 
-			texto_final = "Vamos a contar. Tenemos que averiguar el número total de una de las verduras que hay en nuestro huerto.";
+			texto_final = "Vamos a contar. Tenemos que averiguar el número total de una de las verduras que hay en nuestro huerto, para poder recogerlas y cocinarlas para la comida.";
 
 			switch(queVerdura){
-				case 0: texto_final += "¿Cuántas lechugas hay?";
+				case 0: texto_final += ".¿Cuántas lechugas hay?";
 					break;
-				case 1: texto_final += "¿Cuántos maíces hay?";
+				case 1: texto_final += ".¿Cuántos maíces hay?";
 					break;
-				case 2: texto_final += "¿Cuántas patatas hay?";
+				case 2: texto_final += ".¿Cuántas patatas hay?";
 					break;
-				case 3: texto_final += "¿Cuántos tomates hay?";
+				case 3: texto_final += ".¿Cuántos tomates hay?";
 					break;
-				case 4: texto_final += "¿Cuántas zanahorias hay?";
+				case 4: texto_final += ".¿Cuántas zanahorias hay?";
 					break;
 			}		
 
@@ -1041,7 +1041,7 @@
 
 			iniciarTemporizador();
 
-			var texto_final = "Vamos a sumar. En el corral hay " + cuantosAnimales + " " + nombreAnimal + ". Mete " + animalesAMeter + ".";
+			var texto_final = "Vamos a sumar. Se hace de noche y tenemos que meter a algunos animales en el corral para que puedan dormir. En el corral hay " + cuantosAnimales + " " + nombreAnimal + ". Mete " + animalesAMeter + ".";
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
 
