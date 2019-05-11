@@ -1041,7 +1041,7 @@
 
 			iniciarTemporizador();
 
-			var texto_final = "En el corral hay " + cuantosAnimales + " " + nombreAnimal + ". Mete " + animalesAMeter + ".";			
+			var texto_final = "Vamos a sumar. En el corral hay " + cuantosAnimales + " " + nombreAnimal + ". Mete " + animalesAMeter + ".";
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
 
