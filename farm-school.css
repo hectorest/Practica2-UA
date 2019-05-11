@@ -688,9 +688,15 @@ body{
 			border: .3em solid #8A6300;
 		}
 
+		body>main>#restar{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
 		body>main>#restar>#cv02{
-			margin: .15em;
 			border: .3em solid #8A6300;
+			align-self: center;
 		}
 
 		#contenedorResultadosDerecha{
