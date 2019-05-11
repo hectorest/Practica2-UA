@@ -1057,8 +1057,6 @@
 
 			var texto_final = "¿Cuántos hay en total en el corral?";			
 
-			responsiveVoice.speak(texto_final, "Spanish Female");
-
 		}
 
 	/*****************************************************************************************************/
@@ -1208,16 +1206,6 @@
 					break;
 				
 			}
-
-			var texto_final
-
-			if(correcto){
-				texto_final = "Muy bien. Has hacertado";
-			}else{
-				texto_final = "Sigue intentándolo";
-			}		
-
-			responsiveVoice.speak(texto_final, "Spanish Female");
 			
 			return correcto;
 
@@ -1249,12 +1237,13 @@
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
-
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					break;
 				}
@@ -1267,12 +1256,13 @@
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
-
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					break;
 				}
@@ -1285,11 +1275,13 @@
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					break;
 				}
@@ -1302,11 +1294,13 @@
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
+						responsiveVoice.speak(mensModal, "Spanish Female");
 					}
 					break;
 				}
