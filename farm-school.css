@@ -356,14 +356,14 @@ body{
 	@keyframes mano-respuestas-contar-casas{
 		from{
 				top: -30%;
-				left: 70%;
+				left: 65%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 0%;
-				left: 70%;
+				top: 10%;
+				left: 65%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
