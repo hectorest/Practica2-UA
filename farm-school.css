@@ -300,17 +300,37 @@ body{
 	}
 
 	@keyframes mano-click{
-		from{
+		0%{
 				top: 85%;
 				left: 15%;
-				background-image: url("./imagenes/tutorial/animaciones/arrastrar/tutorial-mano-arrastrar-rellena.png");
+				width: 60px;
+				height: 60px;
+				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
-		to{
+		50%{
+				top: 85%;
+				left: 15%;
+				width: 60px;
+				height: 60px;
+				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		70%{
 				top: 75%;
 				left: 25%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+				width: 60px;
+				height: 60px;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		100%{
+				top: 75%;
+				left: 25%;
+				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				width: 60px;
 				height: 60px;
 				background-repeat: no-repeat;
