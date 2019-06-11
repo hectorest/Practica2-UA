@@ -26,6 +26,7 @@
 
 			var ultimoNumero;
 			var arrayPosiciones;
+			var arrayMovs;
 
 		/******************************/
 
@@ -244,6 +245,7 @@
 
 			var arrayCasas = new Array(casas);
 				arrayPosiciones = new Array(casas);
+				arrayMovs = new Array(casas);
 
 				for(let i = 0; i<casas; i++){
 					arrayPosiciones[i] = new Array(2);
@@ -280,8 +282,10 @@
 
 					if(derecha){
 						x = x+125;
+						arrayMovs[currentIndex]=0;
 					}else{
 						x = x-125;
+						arrayMovs[currentIndex]=1;
 					}
 
 					y = y0-(currentIndex+1)*altoImg;
@@ -378,7 +382,7 @@
 					}
 
 					if (clicks == numCasas) {
-						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png'>");
+						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
 						cargarRespuestas(rangoMax);
 						$(".mano-tutorial-click").remove();
 						$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
@@ -391,6 +395,15 @@
 			}
 
 		}
+
+			function teclaPulsada(evt)
+			{
+				console.log(evt);
+				if(evt.keyCode == 13){
+					console.log("hola");
+				}
+			}
+
 
 	/*****************************************************************************************************/
 
@@ -612,35 +625,35 @@
 			{
 				case (0):
 				{
-					var img = "<figure><img src='./imagenes/contar-verduras/lechuga.png'></figure>";
+					var img = "<figure><img src='./imagenes/contar-verduras/lechuga.png' alt='lechuga'></figure>";
 					cuantasVerduras.push(num);
 					nombresVerduras.push("lechugas");
 					break;
 				}
 				case (1):
 				{
-					var img = "<figure><img src='./imagenes/contar-verduras/maiz.png'></figure>";
+					var img = "<figure><img src='./imagenes/contar-verduras/maiz.png' alt='maíz'></figure>";
 					cuantasVerduras.push(num);
 					nombresVerduras.push("maíces");
 					break;
 				}
 				case (2):
 				{
-					var img = "<figure><img src='./imagenes/contar-verduras/patata.png'></figure>";
+					var img = "<figure><img src='./imagenes/contar-verduras/patata.png' alt='patata'></figure>";
 					cuantasVerduras.push(num);
 					nombresVerduras.push("patatas");
 					break;
 				}
 				case (3):
 				{
-					var img = "<figure><img src='./imagenes/contar-verduras/tomate.png'></figure>";
+					var img = "<figure><img src='./imagenes/contar-verduras/tomate.png' alt='tomate'></figure>";
 					cuantasVerduras.push(num);
 					nombresVerduras.push("tomates");
 					break;
 				}
 				case (4):
 				{
-					var img = "<figure><img src='./imagenes/contar-verduras/zanahoria.png'></figure>";
+					var img = "<figure><img src='./imagenes/contar-verduras/zanahoria.png' alt='zanahoria'></figure>";
 					cuantasVerduras.push(num);
 					nombresVerduras.push("zanahorias");
 					break;
@@ -679,27 +692,27 @@
 			{
 				case (0):
 				{
-					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/lechuga.png'><span>hay?</span>";
+					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/lechuga.png' alt='lechuga'><span>hay?</span>";
 					break;
 				}
 				case (1):
 				{
-					preguntaVerdura = "<span>¿Cuántos</span><img src='./imagenes/contar-verduras/maiz.png'><span>hay?</span>";
+					preguntaVerdura = "<span>¿Cuántos</span><img src='./imagenes/contar-verduras/maiz.png' alt='maiz'><span>hay?</span>";
 					break;
 				}
 				case (2):
 				{
-					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/patata.png'><span>hay?</span>";
+					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/patata.png alt='patata''><span>hay?</span>";
 					break;
 				}
 				case (3):
 				{
-					preguntaVerdura = "<span>¿Cuántos</span><img src='./imagenes/contar-verduras/tomate.png'><span>hay?</span>";
+					preguntaVerdura = "<span>¿Cuántos</span><img src='./imagenes/contar-verduras/tomate.png' alt='tomate'><span>hay?</span>";
 					break;
 				}
 				case (4):
 				{
-					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/zanahoria.png'><span>hay?</span>";
+					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/zanahoria.png' alt='zanahoria'><span>hay?</span>";
 					break;
 				}
 			}
@@ -786,7 +799,7 @@
 						img = "<figure class='imagen-draggable'>";
 						cuantosAnimalesFuera = num;
 					}
-					img = img + "<img src='./imagenes/sumar/caballo.png'></figure>";
+					img = img + "<img src='./imagenes/sumar/caballo.png' alt='caballo'></figure>";
 					nombreAnimal = "caballos";
 					break;
 				}
@@ -801,7 +814,7 @@
 						img = "<figure class='imagen-draggable'>";
 						cuantosAnimalesFuera = num;
 					}
-					img = img + "<img src='./imagenes/sumar/cerdo.png'></figure>";
+					img = img + "<img src='./imagenes/sumar/cerdo.png' alt='cerdo'></figure>";
 					nombreAnimal = "cerdos";
 					break;
 				}
@@ -816,7 +829,7 @@
 						img = "<figure class='imagen-draggable'>";
 						cuantosAnimalesFuera = num;
 					}
-					img = img + "<img src='./imagenes/sumar/gallina.png'></figure>";
+					img = img + "<img src='./imagenes/sumar/gallina.png' alt='gallina'></figure>";
 					nombreAnimal = "gallinas";
 					break;
 				}
@@ -831,7 +844,7 @@
 						img = "<figure class='imagen-draggable'>";
 						cuantosAnimalesFuera = num;
 					}
-					img = img + "<img src='./imagenes/sumar/oveja.png'></figure>";
+					img = img + "<img src='./imagenes/sumar/oveja.png' alt='oveja'></figure>";
 					nombreAnimal = "ovejas";
 					break;
 				}
@@ -846,7 +859,7 @@
 						img = "<figure class='imagen-draggable'>";
 						cuantosAnimalesFuera = num;
 					}
-					img = img + "<img src='./imagenes/sumar/vaca.png'></figure>";
+					img = img + "<img src='./imagenes/sumar/vaca.png' alt='vaca'></figure>";
 					nombreAnimal = "vacas";
 					break;
 				}
@@ -892,27 +905,27 @@
 			{
 				case (0):
 				{
-					preguntaAnimal = "<span>¿Cuántos</span><img src='./imagenes/sumar/caballo.png'><span>hay ahora en total?</span>";
+					preguntaAnimal = "<span>¿Cuántos</span><img src='./imagenes/sumar/caballo.png' alt='caballo'><span>hay ahora en total?</span>";
 					break;
 				}
 				case (1):
 				{
-					preguntaAnimal = "<span>¿Cuántos</span><img src='./imagenes/sumar/cerdo.png'><span>hay ahora en total?</span>";
+					preguntaAnimal = "<span>¿Cuántos</span><img src='./imagenes/sumar/cerdo.png' alt='cerdo'><span>hay ahora en total?</span>";
 					break;
 				}
 				case (2):
 				{
-					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/gallina.png'><span>hay ahora en total?</span>";
+					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/gallina.png'alt='gallina'><span>hay ahora en total?</span>";
 					break;
 				}
 				case (3):
 				{
-					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/oveja.png'><span>hay ahora en total?</span>";
+					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/oveja.png'alt='oveja'><span>hay ahora en total?</span>";
 					break;
 				}
 				case (4):
 				{
-					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/vaca.png'><span>hay ahora en total?</span>";
+					preguntaAnimal = "<span>¿Cuántas</span><img src='./imagenes/sumar/vaca.png'alt='vaca'><span>hay ahora en total?</span>";
 					break;
 				}
 			}
@@ -928,32 +941,32 @@
 			{
 				case (0):
 				{
-					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/caballo.png'>" + "<span>.</span>";
-					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/caballo.png'>";
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/caballo.png' alt='caballo'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/caballo.png' alt='caballo'>";
 					break;
 				}
 				case (1):
 				{
-					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/cerdo.png'>" + "<span>.</span>";
-					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/cerdo.png'>";
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/cerdo.png' alt='cerdo'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/cerdo.png'alt='cerdo'>";
 					break;
 				}
 				case (2):
 				{
-					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/gallina.png'>" + "<span>.</span>";
-					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/gallina.png'>";
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/gallina.png' alt='gallina'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/gallina.png' alt='gallina'>";
 					break;
 				}
 				case (3):
 				{
-					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/oveja.png'>" + "<span>.</span>";
-					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/oveja.png'>";
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/oveja.png' alt='oveja'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/oveja.png' alt='oveja'>";
 					break;
 				}
 				case (4):
 				{
-					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/vaca.png'>" + "<span>.</span>";
-					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/vaca.png'>";
+					var animalesQueSeTienen = "<span>En el corral hay: " + cuantosAnimales + "</span>" + "<img src='./imagenes/sumar/vaca.png' alt='vaca'>" + "<span>.</span>";
+					meterAnimales = meterAnimales + "<img src='./imagenes/sumar/vaca.png' alt='vaca'>";
 					break;
 				}
 			}
@@ -973,27 +986,27 @@
 			{
 				case (0):
 				{
-					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/caballo.png'>";
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/caballo.png' alt='caballo'>";
 					break;
 				}
 				case (1):
 				{
-					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/cerdo.png'>";
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/cerdo.png' alt='cerdo'>";
 					break;
 				}
 				case (2):
 				{
-					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/gallina.png'>";
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/gallina.png' alt='gallina'>";
 					break;
 				}
 				case (3):
 				{
-					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/oveja.png'>";
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/oveja.png' alt='oveja'>";
 					break;
 				}
 				case (4):
 				{
-					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/vaca.png'>";
+					animalesEnCorral = animalesEnCorral + "<img src='./imagenes/sumar/vaca.png' alt='vaca'>";
 					break;
 				}
 			}
