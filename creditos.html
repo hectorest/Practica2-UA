@@ -54,4 +54,12 @@
 	var texto_final = "Estos son los créditos del juego. Si quieres practicar, pulsa sobre el botón volver al menú principal o sobre la imagen con el nombre Farm School.";	
 	responsiveVoice.speak(texto_final, "Spanish Female");
 </script>
+<script>
+	document.addEventListener("keydown", function teclaPulsada(evt)
+	{
+		if(evt.keyCode == 27){
+			window.location="index.html";
+		}
+	}, false);
+</script>
 </html>

@@ -254,7 +254,7 @@
 		function mostrarRespuestas(){
 			$.each(respuestasGenericas, function(index)
 			{
-				$('#respuestas').append('<button value="' + respuestasGenericas[index] + '" onclick="mostrarMensajeIntento(comprobarRespuesta(this));">' + respuestasGenericas[index] + '</button>');
+				$('#respuestas').append('<button id = "resp'+ (index) +'" value="' + respuestasGenericas[index] + '" onclick="mostrarMensajeIntento(comprobarRespuesta(this));">' + respuestasGenericas[index] + '</button>');
 			});
 		}
 
@@ -505,7 +505,7 @@
 						clicks++;
 					}
 				}
-				if(clicks > 0){
+				if(clicks > 0 && clicks<arrayPosiciones.length){
 					if(evt.keyCode == 37){
 						console.log("izquierda");
 						if(arrayPosiciones[clicks][0]<arrayPosiciones[clicks-1][0]){
@@ -752,13 +752,14 @@
 
 			$('#contenedorResultados').prepend("<p class='preguntas'><span>¿Cuánto dinero tendremos después de realizar la compra?</span></p>");
 			cargarRespuestas(rangoMax);
+			procesar();
 			iniciarTemporizador();
 
 			var texto_final = "Vamos a restar. Hemos venido a comprar comida para los animales de la granja. "+texto+"¿Cuánto dinero tendremos después de ralizar la compra?";			
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
 
-			procesar();
+			
 
 		}
 
@@ -1395,11 +1396,11 @@
 
 		function crearMensajeModal(mensaje, intento){
 			if(!intento){
-				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); procesar();">Cerrar</button></div></div></div>';
+				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); procesar();">Cerrar</button></div></div></div>';
 			}
 			else{
 				var tiempoTrans = cambiarFormato(tiempoTranscurrido);
-				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div id="estadisticas"><p>Estadísticas:</p><p>Has tardado: ' + tiempoTrans + '.</p><p>Has tenido: ' + numFallos + ' fallos.</p></div><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
+				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div id="estadisticas"><p>Estadísticas:</p><p>Has tardado: ' + tiempoTrans + '.</p><p>Has tenido: ' + numFallos + ' fallos.</p></div><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
 			}
 			if(extraerPagUrlActual() == "contarCasas.html"){
 				$(".mano-tutorial-respuestas-contar-casas").remove();

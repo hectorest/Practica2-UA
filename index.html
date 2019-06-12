@@ -25,16 +25,16 @@
 			<ul>
 				<div class="mano-tutorial"></div>
 				<li class="contenedor-mano-tutorial">
-					<a href="contar.html">Contar (1,2,3,...)</a>
+					<a id="btn-cont" href="contar.html">Contar (1,2,3,...)</a>
 				</li>
 				<li>
-					<a href="sumar.html">Sumar (+)</a>
+					<a id="btn-sumar" href="sumar.html">Sumar (+)</a>
 				</li>
 				<li>
-					<a href="restar.html">Restar (-)</a>
+					<a id="btn-restar" href="restar.html">Restar (-)</a>
 				</li>
 				<li>
-					<a href="creditos.html">Créditos (<span class="icon-address-book-o"></span>)</a>
+					<a id="btn-cred" href="creditos.html">Créditos (<span class="icon-address-book-o"></span>)</a>
 				</li>
 			</ul>
 		</nav>
@@ -47,6 +47,40 @@
 	<script>
 		var texto_final = "Bienvenido a Farm Escul. ¿Qué quieres practicar? ¿Quieres contar, sumar o restar?";		
 		responsiveVoice.speak(texto_final, "Spanish Female");
+		var pos = -1;
+
+		document.addEventListener("keydown", function teclaPulsada(evt)
+		{
+			if(evt.keyCode == 38){
+				pos--;
+				if(pos==0){
+					document.getElementById('btn-cont').focus();
+				}else if(pos==1){
+					document.getElementById('btn-sumar').focus();
+				}else if(pos==2){
+					document.getElementById('btn-restar').focus();
+				}else if(pos==3){
+					document.getElementById('btn-cred').focus();
+				}else if(pos<0){
+					document.getElementById('btn-cred').focus();
+					pos=3;
+				}
+			}else if(evt.keyCode == 40){
+				pos++;
+				if(pos==0){
+					document.getElementById('btn-cont').focus();
+				}else if(pos==1){
+					document.getElementById('btn-sumar').focus();
+				}else if(pos==2){
+					document.getElementById('btn-restar').focus();
+				}else if(pos==3){
+					document.getElementById('btn-cred').focus();
+				}else if(pos>3){
+					document.getElementById('btn-cont').focus();
+					pos=0;
+				}
+			}
+		}, false);
 	</script>
 </body>
 </html>

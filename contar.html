@@ -24,15 +24,15 @@
 			<ul>
 				<div class="mano-tutorial-contar"></div>
 				<li class="contenedor-mano-tutorial">
-					<a href="contarCasas.html">Contar Casas <span><img src="./imagenes/iconos-contar/contarCasas.png"></span></a>
+					<a id="btn-casas" href="contarCasas.html">Contar Casas <span><img src="./imagenes/iconos-contar/contarCasas.png"></span></a>
 				</li>
 				<li>
-					<a href="contarVerduras.html">Contar Verduras <span><img src="./imagenes/iconos-contar/contarVerduras.png"></span></a>
+					<a id="btn-verduras" href="contarVerduras.html">Contar Verduras <span><img src="./imagenes/iconos-contar/contarVerduras.png"></span></a>
 				</li>
 			</ul>
 		</nav>
 		<div>
-			<a href="index.html" class="botones"><span>Volver al menú principal</span></a>
+			<a id="btn-index" href="index.html" class="botones"><span>Volver al menú principal</span></a>
 		</div>
 		<footer>
 			<p><strong><a href="#" title="Créditos">&copy;Héctor Esteve Yagüe y Francisco Javier García Fernández</a></strong></p>
@@ -43,6 +43,39 @@
 <script>
 	var texto_final = "¿Quieres contar casas o verduras?";
 	responsiveVoice.speak(texto_final, "Spanish Female");
+	var pos = -1;
+
+		document.addEventListener("keydown", function teclaPulsada(evt)
+		{
+			if(evt.keyCode == 38){
+				pos--;
+				if(pos==0){
+					document.getElementById('btn-casas').focus();
+				}else if(pos==1){
+					document.getElementById('btn-verduras').focus();
+				}else if(pos==2){
+					document.getElementById('btn-index').focus();
+				}else if(pos<0){
+					document.getElementById('btn-index').focus();
+					pos=2;
+				}
+			}else if(evt.keyCode == 40){
+				pos++;
+				if(pos==0){
+					document.getElementById('btn-casas').focus();
+				}else if(pos==1){
+					document.getElementById('btn-verduras').focus();
+				}else if(pos==2){
+					document.getElementById('btn-index').focus();
+				}else if(pos>2){
+					document.getElementById('btn-casas').focus();
+					pos=0;
+				}
+			}
+			if(evt.keyCode == 27){
+				window.location="index.html";
+			}
+		}, false);
 </script>
 <script type="text/javascript" src="./farm-school.js"></script>
 </html>
