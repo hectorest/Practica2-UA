@@ -1,6 +1,46 @@
 
 	/***************************************VARIABLES GLOBALES********************************************/
 
+		/********RECONOCIMIENTO DE VOZ********/
+		var recognition;
+		var recognizing = false;
+		if (!('webkitSpeechRecognition' in window)) {
+			alert("¡API no soportada!");
+		} else {
+
+			recognition = new webkitSpeechRecognition();
+			recognition.lang = "es-VE";
+			recognition.continuous = true;
+			recognition.interimResults = true;
+
+			recognition.onstart = function() {
+				recognizing = true;
+				console.log("empezando a escuchar");
+			}
+			recognition.onresult = function(event) {
+
+			 for (var i = event.resultIndex; i < event.results.length; i++) {
+				if(event.results[i].isFinal){
+					var texto = event.results[i][0].transcript;
+					console.log(texto);
+					mostrarMensajeIntento(comprobarRespuesta(textoAboton(texto)));
+				}
+			
+			 }
+				
+				//texto
+			}
+		
+			recognition.onerror = function(event) {
+			}
+			recognition.onend = function() {
+				recognizing = false;
+				console.log("terminó de escuchar, llegó a su fin");
+
+			}
+
+		}
+
 		/********JUEGO VERDURAS********/
 
 			var nombresVerduras = [];
@@ -50,6 +90,65 @@
 
 	/*****************************************************************************************************/
 
+	function procesar() {
+
+		if (recognizing == false) {
+			recognition.start();
+			recognizing = true;
+		} else {
+			recognition.stop();
+			recognizing = false;
+		}
+	}
+
+	function textoAboton(texto){
+
+		var btn = document.createElement("BUTTON");
+
+		if(texto == 'uno' || texto == 1){
+			btn.value = 1;
+		}else if(texto == 'dos' || texto == 2){
+			btn.value = 2;
+		}else if(texto == 'tres' || texto == 3){
+			btn.value = 3;
+		}else if(texto == 'cuatro' || texto == 4){
+			btn.value = 4;
+		}else if(texto == 'cinco' || texto == 5){
+			btn.value = 5;
+		}else if(texto == 'seis' || texto == 6){
+			btn.value = 6;
+		}else if(texto == 'siete' || texto == 7){
+			btn.value = 7;
+		}else if(texto == 'ocho' || texto == 8){
+			btn.value = 8;
+		}else if(texto == 'nueve' || texto == 9){
+			btn.value = 9;
+		}else if(texto == 'diez' || texto == 10){
+			btn.value = 10;
+		}else if(texto == 'once' || texto == 11){
+			btn.value = 11;
+		}else if(texto == 'doce' || texto == 12){
+			btn.value = 12;
+		}else if(texto == 'trece' || texto == 13){
+			btn.value = 13;
+		}else if(texto == 'catorce' || texto == 14){
+			btn.value = 14;
+		}else if(texto == 'quince' || texto == 15){
+			btn.value = 15;
+		}else if(texto == 'dieciséis' || texto == 16){
+			btn.value = 16;
+		}else if(texto == 'diecisiete' || texto == 17){
+			btn.value = 17;
+		}else if(texto == 'dieciocho' || texto == 18){
+			btn.value = 18;
+		}else if(texto == 'diecinueve' || texto == 19){
+			btn.value = 19;
+		}else if(texto == 'veinte' || texto == 20){
+			btn.value = 20;
+		}
+
+		return btn;
+	}
 
 	/*****************************BLOQUEAR ORIENTACION PANTALLA - HORIZONTAL******************************/
 
@@ -331,7 +430,7 @@
 
 			iniciarTemporizador();
 
-			var texto_final = "Vamos a contar. Nos encontramos en la casa número 0 y debemos llegar al establo, pero antes tenemos que pasar por todas las casas. Sigue el orden de las casas hasta llegar al establo";			
+			var texto_final = "Vamos a contar. Nos encontramos en la casa número 0 y debemos llegar al establo, pero antes tenemos que pasar por todas las casas. Sigue el orden de las casas hasta llegar al establo. Si quieres utilizar el teclado pulsa espacio para controlar con las flechas";			
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
 
@@ -394,15 +493,64 @@
 
 			}
 
+			document.addEventListener("keydown", function teclaPulsada(evt)
+			{
+				ctx.lineWidth = 10;
+				ctx.strokeStyle = '#a00';
+				if(evt.keyCode == 32){
+					if(clicks == 0){
+						console.log("CORRECTO");
+						ctx.beginPath();
+						ctx.moveTo(arrayPosiciones[clicks][0]+47.5, arrayPosiciones[clicks][1]+65);
+						clicks++;
+					}
+				}
+				if(clicks > 0){
+					if(evt.keyCode == 37){
+						console.log("izquierda");
+						if(arrayPosiciones[clicks][0]<arrayPosiciones[clicks-1][0]){
+							console.log("correcto");
+							ctx.lineTo(arrayPosiciones[clicks][0]+47.5, arrayPosiciones[clicks][1]+65);
+							ctx.stroke();
+							clicks++;
+						}else{
+							console.log("incorrecto");
+							var texto_final = "Ese no es el camino correcto";
+					
+							responsiveVoice.speak(texto_final, "Spanish Female");
+						}
+					}else if(evt.keyCode == 39){
+						console.log("derecha");
+						if(arrayPosiciones[clicks][0]>arrayPosiciones[clicks-1][0]){
+							console.log("correcto");
+							ctx.lineTo(arrayPosiciones[clicks][0]+47.5, arrayPosiciones[clicks][1]+65);
+							ctx.stroke();
+							clicks++;
+						}else{
+							console.log("incorrecto");
+							var texto_final = "Ese no es el camino correcto";
+					
+							responsiveVoice.speak(texto_final, "Spanish Female");
+						}
+					}
+				}
+				if (clicks == numCasas) {
+					$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
+					cargarRespuestas(rangoMax);
+					$(".mano-tutorial-click").remove();
+					$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
+					var texto_final1 = "¿Qué número va en la siguiente figura?";			
+
+					responsiveVoice.speak(texto_final1, "Spanish Female");
+					clicks++;
+					procesar();
+				}
+				
+			}, false);
+
 		}
 
-			function teclaPulsada(evt)
-			{
-				console.log(evt);
-				if(evt.keyCode == 13){
-					console.log("hola");
-				}
-			}
+		
 
 
 	/*****************************************************************************************************/
@@ -609,6 +757,9 @@
 			var texto_final = "Vamos a restar. Hemos venido a comprar comida para los animales de la granja. "+texto+"¿Cuánto dinero tendremos después de ralizar la compra?";			
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
+
+			procesar();
+
 		}
 
 	/*****************************************************************************************************/
@@ -718,6 +869,7 @@
 			}
 
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaVerdura + "</p>");
+			procesar();
 		}
 
 		function prepararJuegoVerduras(){
@@ -931,6 +1083,7 @@
 			}
 
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaAnimal + "</p>");
+			procesar();
 		}
 
 		function decirAnimalesAMeter(animalesAMeter){
@@ -1273,6 +1426,7 @@
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
+						procesar();
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
@@ -1298,6 +1452,7 @@
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
+						procesar();
 					}
 					break;
 				}
@@ -1311,6 +1466,7 @@
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
+						procesar();
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
@@ -1337,6 +1493,7 @@
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
+						procesar();
 					}
 					break;
 				}
