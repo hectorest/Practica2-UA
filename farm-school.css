@@ -37,6 +37,7 @@ body{
 
 		.botonera{
 			text-align: center;
+			margin-bottom: 1.2em;
 		}
 
 		.botones{
@@ -134,7 +135,7 @@ body{
 		}
 
 		.respuestas>.gif-micro{
-			padding: 0;
+			padding: 0 !important; /*le pones esta regla para que no utilice la cascada y ponga este valor, si no se lo pones te toca poner la clase debajo de la instruccion que te lo esta cambiando, lo que te puede fastidiar la estructura ya que tenemos todas las clases lo mas juntas posibles para, dentro de todo lo que hay, que este lo mas organizado posible al menos con respecto a las clases a utilizar*/
 			border-radius: 50px;
 			height: 2.5em;
 			width: 2.5em;
@@ -247,6 +248,7 @@ body{
 			flex-direction: column;
 			height: 50%;
 		}
+
 		.contenedor-cerrar-modal-ayuda{
 			display: flex;
 			flex-direction: column;
@@ -275,13 +277,28 @@ body{
 
 	@keyframes mano-modal{
 		from{
-				top: 10%;
+				top: 0%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
 				top: 30%;
+				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+	}
+
+	@keyframes mano-ayuda{
+		from{
+				top: -60%;
+				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		to{
+				top: 0%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -427,9 +444,22 @@ body{
 		height: 60px;
 		transform: rotate(70deg);
 		z-index: 10;
-		left: 55%;
+		left: 50%;
 		top: 10%;
 		animation-name: mano-modal;
+		animation-duration: 1.5s;
+		animation-iteration-count: infinite;
+	}
+
+	.mano-tutorial-ayuda{
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		transform: rotate(70deg);
+		z-index: 10;
+		left: 50%;
+		top: 10%;
+		animation-name: mano-ayuda;
 		animation-duration: 1.5s;
 		animation-iteration-count: infinite;
 	}
@@ -466,7 +496,7 @@ body{
 		height: 60px;
 		transform: rotate(70deg);
 		z-index: 10;
-		left: 55%;
+		left: 60%;
 		top: -100%;
 		animation-name: mano-respuestas;
 		animation-duration: 1.5s;
