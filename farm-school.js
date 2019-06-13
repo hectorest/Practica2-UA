@@ -18,12 +18,42 @@
 				console.log("empezando a escuchar");
 			}
 			recognition.onresult = function(event) {
-
 			 for (var i = event.resultIndex; i < event.results.length; i++) {
 				if(event.results[i].isFinal){
 					var texto = event.results[i][0].transcript;
 					console.log(texto);
-					mostrarMensajeIntento(comprobarRespuesta(textoAboton(texto)));
+					var evento = new KeyboardEvent("keydown");
+					if(extraerPagUrlActual() == "index.html" && texto.indexOf("contar") > -1){
+						window.location="contar.html";
+					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("contar casas") > -1){
+						window.location="contarCasas.html";
+					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("contar verduras") > -1){
+						window.location="contarVerduras.html";
+					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("sumar") > -1){
+						window.location="sumar.html";
+					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("restar") > -1){
+						window.location="restar.html";
+					}else if(extraerPagUrlActual() == "contarCasas.html" && texto.indexOf("empezar") > -1){
+						Object.defineProperty(evento, "keyCode", {"value" : 32});
+						document.dispatchEvent(evento);
+					}else if(extraerPagUrlActual() == "contarCasas.html" && (textoAboton(texto).value == (numDeCasa+1))){
+						Object.defineProperty(evento, "keyCode", {"value" : 112});
+						evento.preventDefault();
+						document.dispatchEvent(evento);
+					}else if(texto.indexOf("menú") > -1){
+						window.location="index.html";
+					}else if(texto.indexOf("ayuda") > -1){
+						document.getElementById('btn-ayuda').click();
+					}else if(texto.indexOf("cerrar") > -1){
+						document.getElementById('botonModal').click();
+					}else if(extraerPagUrlActual() == "index.html" || extraerPagUrlActual() == "contar.html"){
+						console.log("ok");
+						var texto_final = texto + " no es una opción del menú";			
+						responsiveVoice.speak(texto_final, "Spanish Female");
+					}else{
+						mostrarMensajeIntento(comprobarRespuesta(textoAboton(texto)));
+					}
+
 				}
 			
 			 }
@@ -36,7 +66,7 @@
 			recognition.onend = function() {
 				recognizing = false;
 				console.log("terminó de escuchar, llegó a su fin");
-
+				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
 			}
 
 		}
@@ -68,6 +98,7 @@
 			var ultimoNumero;
 			var arrayPosiciones;
 			var arrayMovs;
+			var numDeCasa;
 
 		/******************************/
 
@@ -91,14 +122,16 @@
 
 	/*****************************************************************************************************/
 
-	function reconocerVoz() {
+	function reconocerVoz(){
 
 		if (recognizing == false) {
 			recognition.start();
 			recognizing = true;
+			$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro.gif">');
 		} else {
 			recognition.stop();
 			recognizing = false;
+			$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
 		}
 	}
 
@@ -106,45 +139,45 @@
 
 		var btn = document.createElement("BUTTON");
 
-		if(texto == 'uno' || texto == 1){
+		if(texto.indexOf('uno')>-1 || texto.indexOf(1)>-1){
 			btn.value = 1;
-		}else if(texto == 'dos' || texto == 2){
+		}else if(texto.indexOf('dos')>-1 || texto.indexOf(2)>-1){
 			btn.value = 2;
-		}else if(texto == 'tres' || texto == 3){
+		}else if(texto.indexOf('tres')>-1 || texto.indexOf(3)>-1){
 			btn.value = 3;
-		}else if(texto == 'cuatro' || texto == 4){
+		}else if(texto.indexOf('cuatro')>-1 || texto.indexOf(4)>-1){
 			btn.value = 4;
-		}else if(texto == 'cinco' || texto == 5){
+		}else if(texto.indexOf('cinco')>-1 || texto.indexOf(5)>-1){
 			btn.value = 5;
-		}else if(texto == 'seis' || texto == 6){
+		}else if(texto.indexOf('seis')>-1 || texto.indexOf(6)>-1){
 			btn.value = 6;
-		}else if(texto == 'siete' || texto == 7){
+		}else if(texto.indexOf('siete')>-1 || texto.indexOf(7)>-1){
 			btn.value = 7;
-		}else if(texto == 'ocho' || texto == 8){
+		}else if(texto.indexOf('ocho')>-1 || texto.indexOf(8)>-1){
 			btn.value = 8;
-		}else if(texto == 'nueve' || texto == 9){
+		}else if(texto.indexOf('nueve')>-1 || texto.indexOf(9)>-1){
 			btn.value = 9;
-		}else if(texto == 'diez' || texto == 10){
+		}else if(texto.indexOf('diez')>-1 || texto.indexOf(10)>-1){
 			btn.value = 10;
-		}else if(texto == 'once' || texto == 11){
+		}else if(texto.indexOf('once')>-1 || texto.indexOf(11)>-1){
 			btn.value = 11;
-		}else if(texto == 'doce' || texto == 12){
+		}else if(texto.indexOf('doce')>-1 || texto.indexOf(12)>-1){
 			btn.value = 12;
-		}else if(texto == 'trece' || texto == 13){
+		}else if(texto.indexOf('trece')>-1 || texto.indexOf(13)>-1){
 			btn.value = 13;
-		}else if(texto == 'catorce' || texto == 14){
+		}else if(texto.indexOf('catorce')>-1 || texto.indexOf(14)>-1){
 			btn.value = 14;
-		}else if(texto == 'quince' || texto == 15){
+		}else if(texto.indexOf('quince')>-1 || texto.indexOf(15)>-1){
 			btn.value = 15;
-		}else if(texto == 'dieciséis' || texto == 16){
+		}else if(texto.indexOf('dieciséis')>-1 || texto.indexOf(16)>-1){
 			btn.value = 16;
-		}else if(texto == 'diecisiete' || texto == 17){
+		}else if(texto.indexOf('diecisiete')>-1 || texto.indexOf(17)>-1){
 			btn.value = 17;
-		}else if(texto == 'dieciocho' || texto == 18){
+		}else if(texto.indexOf('dieciocho')>-1 || texto.indexOf(18)>-1){
 			btn.value = 18;
-		}else if(texto == 'diecinueve' || texto == 19){
+		}else if(texto.indexOf('diecinueve')>-1 || texto.indexOf(19)>-1){
 			btn.value = 19;
-		}else if(texto == 'veinte' || texto == 20){
+		}else if(texto.indexOf('veinte')>-1 || texto.indexOf(20)>-1){
 			btn.value = 20;
 		}
 
@@ -261,7 +294,7 @@
 			{
 				$('#respuestas').append('<button id = "resp'+ (index) +'" value="' + respuestasGenericas[index] + '" onclick="mostrarMensajeIntento(comprobarRespuesta(this));">' + respuestasGenericas[index] + '</button>');
 			});
-			$('#respuestas').append('<button class="gif-micro">' + '<img alt="micrófono escuchando" src="./imagenes/micro.gif">' + '</button>');
+			$('#respuestas').append('<button class="gif-micro" onclick="reconocerVoz();">' + '<img alt="micrófono escuchando" src="./imagenes/micro-off.png">' + '</button>');
 		}
 
 		function generarRespuestas(rango){
@@ -439,9 +472,9 @@
 
 			iniciarTemporizador();
 
-			var texto_final = "Vamos a contar. Nos encontramos en la casa número 0 y debemos llegar al establo, pero antes tenemos que pasar por todas las casas. Sigue el orden de las casas hasta llegar al establo. Si quieres utilizar el teclado pulsa espacio para controlar con las flechas";			
+			var texto_final = "Vamos a contar. Nos encontramos en la casa número 0 y debemos llegar al establo, pero antes tenemos que pasar por todas las casas. Sigue el orden de las casas hasta llegar al establo. Si quieres utilizar el teclado pulsa espacio para controlar con las flechas. También puedes dictar los números, diga empezar para comenzar";			
 
-			responsiveVoice.speak(texto_final, "Spanish Female");
+			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 
 			var clicks = 0;
 			var lastClick = [0, 0, 0, 0];
@@ -455,6 +488,7 @@
 					lastClick[0] = x;
 					lastClick[1] = y;
 					if(x>arrayPosiciones[clicks][0] && x<arrayPosiciones[clicks][0]+95 && y>arrayPosiciones[clicks][1] && y<arrayPosiciones[clicks][1]+95){
+						numDeCasa=0;
 						console.log("CORRECTO");
 						ctx.beginPath();
 						ctx.moveTo(lastClick[0], lastClick[1]);
@@ -464,7 +498,7 @@
 
 						var texto_final = "Ese no es el número correcto";
 					
-						responsiveVoice.speak(texto_final, "Spanish Female");
+						responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 				}else if(clicks > 0 && clicks<numCasas){
 					lastClick[2] = x;
@@ -478,6 +512,7 @@
 			    		ctx.lineTo(lastClick[2], lastClick[3]);
 						ctx.stroke();
 						clicks++;
+						numDeCasa++;
 						/*if(clicks<numCasas-1){
 							clicks++;
 						}*/
@@ -486,18 +521,20 @@
 
 						var texto_final = "Ese no es el número correcto";
 					
-						responsiveVoice.speak(texto_final, "Spanish Female");
+						responsiveVoice.speak(texto_final, "Spanish Female", {onend: function() {reconocerVoz();}});
 					}
 
 					if (clicks == numCasas) {
-						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
+						if(recognizing==true){
+							reconocerVoz();
+						}
+						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va a continuación?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
 						cargarRespuestas(rangoMax);
 						$(".mano-tutorial-click").remove();
 						$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
-						var texto_final1 = "¿Qué número va en la siguiente figura?";			
-
-						responsiveVoice.speak(texto_final1, "Spanish Female");
-						reconocerVoz();
+						var texto_final1 = "¿Qué número va a continuación?";
+						responsiveVoice.speak(texto_final1, "Spanish Female",{onend: function() {reconocerVoz();}});
+						clicks++;
 					}
 				}
 
@@ -513,6 +550,17 @@
 						ctx.beginPath();
 						ctx.moveTo(arrayPosiciones[clicks][0]+47.5, arrayPosiciones[clicks][1]+65);
 						clicks++;
+						numDeCasa=0;
+						if(recognizing==true){
+							reconocerVoz();
+						}
+						var texto_final1;
+						if(numDeCasa==(numCasas-1)){
+							texto_final1 = "Has llegado al establo";
+						}else{
+							texto_final1 = "Estás en la casa "+numDeCasa+" ¿cuál es la siguiente?";
+						}	
+						responsiveVoice.speak(texto_final1, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 				}
 				if(clicks > 0 && clicks<arrayPosiciones.length){
@@ -523,6 +571,18 @@
 							ctx.lineTo(arrayPosiciones[clicks][0]+47.5, arrayPosiciones[clicks][1]+65);
 							ctx.stroke();
 							clicks++;
+							numDeCasa++;
+							if(recognizing==true){
+								reconocerVoz();
+							}
+							var texto_final1;
+							if(numDeCasa==(numCasas-1)){
+								texto_final1 = "Has llegado al establo";
+							}else{
+								texto_final1 = "Estás en la casa "+numDeCasa+" ¿cuál es la siguiente?";
+							}	
+
+							responsiveVoice.speak(texto_final1, "Spanish Female",{onend: function() {reconocerVoz();}});
 						}else{
 							console.log("incorrecto");
 							var texto_final = "Ese no es el camino correcto";
@@ -536,24 +596,53 @@
 							ctx.lineTo(arrayPosiciones[clicks][0]+47.5, arrayPosiciones[clicks][1]+65);
 							ctx.stroke();
 							clicks++;
+							if(recognizing==true){
+								reconocerVoz();
+							}
+							var texto_final1;
+							if(numDeCasa==(numCasas-1)){
+								texto_final1 = "Has llegado al establo";
+							}else{
+								texto_final1 = "Estás en la casa "+numDeCasa+" ¿cuál es la siguiente?";
+							}		
+
+							responsiveVoice.speak(texto_final1, "Spanish Female",{onend: function() {reconocerVoz();}});
 						}else{
 							console.log("incorrecto");
 							var texto_final = "Ese no es el camino correcto";
 					
 							responsiveVoice.speak(texto_final, "Spanish Female");
 						}
+					}else if(evt.keyCode == 112){
+						evt.preventDefault();
+						ctx.lineTo(arrayPosiciones[clicks][0]+47.5, arrayPosiciones[clicks][1]+65);
+						ctx.stroke();
+						clicks++;
+						numDeCasa++;
+						if(recognizing==true){
+							reconocerVoz();
+						}
+						var texto_final1;
+						if(numDeCasa==(numCasas-1)){
+							texto_final1 = "Has llegado al establo";
+						}else{
+							texto_final1 = "Estás en la casa "+numDeCasa+" ¿cuál es la siguiente?";
+						}		
+
+						responsiveVoice.speak(texto_final1, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 				}
 				if (clicks == numCasas) {
-					$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en la siguiente figura?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
+					if(recognizing==true){
+						reconocerVoz();
+					}
+					$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va a continuación?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
 					cargarRespuestas(rangoMax);
 					$(".mano-tutorial-click").remove();
-					$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
-					var texto_final1 = "¿Qué número va en la siguiente figura?";			
-
-					responsiveVoice.speak(texto_final1, "Spanish Female");
+					$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");	
+					var texto_final1 = "¿Qué número va a continuación?";
+					responsiveVoice.speak(texto_final1, "Spanish Female",{onend: function() {reconocerVoz();}});
 					clicks++;
-					reconocerVoz();
 				}
 				
 			}, false);
@@ -762,12 +851,11 @@
 
 			$('#contenedorResultados').prepend("<p class='preguntas'><span>¿Cuánto dinero tendremos después de realizar la compra?</span></p>");
 			cargarRespuestas(rangoMax);
-			reconocerVoz();
 			iniciarTemporizador();
 
 			var texto_final = "Vamos a restar. Hemos venido a comprar comida para los animales de la granja. "+texto+"¿Cuánto dinero tendremos después de ralizar la compra?";			
 
-			responsiveVoice.speak(texto_final, "Spanish Female");
+			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 
 			
 
@@ -880,7 +968,6 @@
 			}
 
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaVerdura + "</p>");
-			reconocerVoz();
 		}
 
 		function prepararJuegoVerduras(){
@@ -914,6 +1001,7 @@
 			preguntarCuantasVerdurasXHay(queVerdura);
 
 			cargarRespuestas(rango);
+			reconocerVoz();
 
 			activarDragAndDrop();
 
@@ -936,7 +1024,7 @@
 					break;
 			}		
 
-			responsiveVoice.speak(texto_final, "Spanish Female");
+			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 
 		}
 
@@ -1094,7 +1182,6 @@
 			}
 
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaAnimal + "</p>");
-			reconocerVoz();
 		}
 
 		function decirAnimalesAMeter(animalesAMeter){
@@ -1222,7 +1309,7 @@
 
 			var texto_final = "Vamos a sumar. Se hace de noche y tenemos que meter a algunos animales en el corral para que puedan dormir. En el corral hay " + cuantosAnimales + " " + nombreAnimal + ". Mete " + animalesAMeter + ".";
 
-			responsiveVoice.speak(texto_final, "Spanish Female");
+			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 
 		}
 
@@ -1246,7 +1333,7 @@
 
 			var texto_final = "¿Cuánt" + nombreAnimal[nombreAnimal.length - 2] + "s" + " " + nombreAnimal + " " + "hay ahora en total?";	
 
-			responsiveVoice.speak(texto_final, "Spanish Female");
+			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 
 		}
 
@@ -1486,13 +1573,13 @@
 
 		function crearMensajeModal(mensaje, intento){
 			if(!intento){
-				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); reconocerVoz();">Cerrar</button></div></div></div>';
+				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode);">Cerrar</button></div></div></div>';
 			}
 			else if(intento == true){
 				var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div id="estadisticas"><p>Estadísticas:</p><p>Has tardado: ' + tiempoTrans + '.</p><p>Has tenido: ' + numFallos + ' fallos.</p></div><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
 			}else if(intento=='ayuda'){
-				var modal = '<div class="modal"><div class="contenido-modal"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal-ayuda contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); reconocerVoz();">Cerrar</button></div></div></div>';
+				var modal = '<div class="modal"><div class="contenido-modal"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal-ayuda contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode);">Cerrar</button></div></div></div>';
 			}
 			if(extraerPagUrlActual() == "contarCasas.html"){
 				$(".mano-tutorial-respuestas-contar-casas").remove();
@@ -1625,66 +1712,70 @@
 				case ("contarCasas.html"):
 				{
 					if(intento){
+						reconocerVoz();
 						var mensModal = "¡MUY BIEN! ¡El siguiente número es el " + ultimoNumero +"!";
 						console.log("NÚMERO DE FALLOS: " + numFallos);
 						pararTemporizador();
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
-						reconocerVoz();
+						responsiveVoice.speak(mensModal, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					else{
+						reconocerVoz();
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
+						responsiveVoice.speak(mensModal, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					break;
 				}
 				case ("contarVerduras.html"):
 				{
 					if(intento){
+						reconocerVoz();
 						var mensModal = "¡MUY BIEN! ¡Hay " + cuantasVerduras[queVerdura] + " " + nombresVerduras[queVerdura] + "!";
 						console.log("NÚMERO DE FALLOS: " + numFallos);
 						pararTemporizador();
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
+						responsiveVoice.speak(mensModal, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					else{
+						reconocerVoz();
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
-						reconocerVoz();
+						responsiveVoice.speak(mensModal, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					break;
 				}
 				case ("sumar.html"):
 				{
 					if(intento){
+						reconocerVoz();
 						var mensModal = "¡MUY BIEN! ¡" + cuantosAnimales + " + " + animalesAMeter + " = " + resultadoSuma + "!";
 						console.log("NÚMERO DE FALLOS: " + numFallos);
 						pararTemporizador();
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
-						reconocerVoz();
+						responsiveVoice.speak(mensModal, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					else{
+						reconocerVoz();
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
+						responsiveVoice.speak(mensModal, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					break;
 				}
 				case ("restar.html"):
 				{
 					if(intento){
+						reconocerVoz();
 						var mensModal = "¡MUY BIEN! ¡" + importe + " - " + resta + " = " + resultadoResta + "!";
 						var mensModalAudio = "¡MUY BIEN! ¡" + importe + " menos " + resta + " = " + resultadoResta + "!";
 						console.log("NÚMERO DE FALLOS: " + numFallos);
@@ -1692,14 +1783,14 @@
 						var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModalAudio, "Spanish Female");
+						responsiveVoice.speak(mensModalAudio, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					else{
+						reconocerVoz();
 						var mensModal = "¡Sigue intentándolo!";
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
-						responsiveVoice.speak(mensModal, "Spanish Female");
-						reconocerVoz();
+						responsiveVoice.speak(mensModal, "Spanish Female",{onend: function() {reconocerVoz();}});
 					}
 					break;
 				}
@@ -1749,6 +1840,7 @@
 					}		
 					buttonRespEscog.remove();
 					colocarFocoRespuestas();
+					console.log("he cerrado el modal");
 				}
 			}
 

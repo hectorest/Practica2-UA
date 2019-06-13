@@ -40,11 +40,12 @@
 	</main>
 </body>
 <script src="http://code.responsivevoice.org/responsivevoice.js?key=T2TUoqOh"></script>
+<script type="text/javascript" src="./farm-school.js"></script>
 <script>
-	var texto_final = "¿Quieres contar casas o verduras?";
-	responsiveVoice.speak(texto_final, "Spanish Female");
-	var pos = -1;
-
+		var texto_final = "¿Quieres contar casas o verduras?";
+		responsiveVoice.speak(texto_final, "Spanish Female");
+		var pos = -1;
+		reconocerVoz();
 		document.addEventListener("keydown", function teclaPulsada(evt)
 		{
 			if(evt.keyCode == 38){
@@ -77,5 +78,4 @@
 			}
 		}, false);
 </script>
-<script type="text/javascript" src="./farm-school.js"></script>
 </html>
