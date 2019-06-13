@@ -732,10 +732,6 @@ body{
 				width: 50%;
 			}
 
-			#contenedorResultadosDerecha>#ponerRespuestas{
-				
-			}
-
 				#contenedorResultadosDerecha>#ponerRespuestas>#respuestas{
 					display: flex;
 					flex-direction: row;
@@ -855,6 +851,15 @@ body{
 				left: -12%;
 			}
 
+			#sumarAnimales>#animalesFuera>figure:focus{
+				outline: none !important;
+				filter: contrast(300%) saturate(120%) brightness(120%) !important;
+			}
+
+			#sumarAnimales>#animalesFuera>figure:not(:focus){
+				filter: contrast(100%) saturate(100%) brightness(100%) !important;
+			}
+
 			#sumarAnimales>div>figure{
 				width: 10%;
 				height: 10%;
@@ -867,7 +872,6 @@ body{
 					width: 100%;
 					height: 100%;
 				}
-
 
 
 		body>main>button{

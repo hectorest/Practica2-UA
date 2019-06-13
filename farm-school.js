@@ -59,6 +59,7 @@
 			var contadorAnimalesAMeter;
 			var resultadoSuma;
 			var queAnimal;
+			var primerAnimal = 0;
 
 		/******************************/
 
@@ -90,7 +91,7 @@
 
 	/*****************************************************************************************************/
 
-	function procesar() {
+	function reconocerVoz() {
 
 		if (recognizing == false) {
 			recognition.start();
@@ -251,6 +252,10 @@
 
 	/****************************************CARGAR RESPUESTAS********************************************/
 
+		function colocarFocoRespuestas(){
+			$('#respuestas>button:first-of-type').focus();
+		}
+
 		function mostrarRespuestas(){
 			$.each(respuestasGenericas, function(index)
 			{
@@ -324,6 +329,9 @@
 
 			//muestro en la pagina las respuestas
 			mostrarRespuestas();
+
+			//pongo el foco a la primera posicion de las respuestas
+			colocarFocoRespuestas();
 
 		}
 
@@ -543,7 +551,7 @@
 
 					responsiveVoice.speak(texto_final1, "Spanish Female");
 					clicks++;
-					procesar();
+					reconocerVoz();
 				}
 				
 			}, false);
@@ -752,7 +760,7 @@
 
 			$('#contenedorResultados').prepend("<p class='preguntas'><span>¿Cuánto dinero tendremos después de realizar la compra?</span></p>");
 			cargarRespuestas(rangoMax);
-			procesar();
+			reconocerVoz();
 			iniciarTemporizador();
 
 			var texto_final = "Vamos a restar. Hemos venido a comprar comida para los animales de la granja. "+texto+"¿Cuánto dinero tendremos después de ralizar la compra?";			
@@ -854,7 +862,7 @@
 				}
 				case (2):
 				{
-					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/patata.png alt='patata''><span>hay?</span>";
+					preguntaVerdura = "<span>¿Cuántas</span><img src='./imagenes/contar-verduras/patata.png' alt='patata''><span>hay?</span>";
 					break;
 				}
 				case (3):
@@ -870,7 +878,7 @@
 			}
 
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaVerdura + "</p>");
-			procesar();
+			reconocerVoz();
 		}
 
 		function prepararJuegoVerduras(){
@@ -949,7 +957,7 @@
 						cuantosAnimales = num;
 					}
 					else{
-						img = "<figure class='imagen-draggable'>";
+						img = "<figure class='imagen-draggable' tabindex='0'>";
 						cuantosAnimalesFuera = num;
 					}
 					img = img + "<img src='./imagenes/sumar/caballo.png' alt='caballo'></figure>";
@@ -964,7 +972,7 @@
 						cuantosAnimales = num;
 					}
 					else{
-						img = "<figure class='imagen-draggable'>";
+						img = "<figure class='imagen-draggable' tabindex='0'>";
 						cuantosAnimalesFuera = num;
 					}
 					img = img + "<img src='./imagenes/sumar/cerdo.png' alt='cerdo'></figure>";
@@ -979,7 +987,7 @@
 						cuantosAnimales = num;
 					}
 					else{
-						img = "<figure class='imagen-draggable'>";
+						img = "<figure class='imagen-draggable' tabindex='0'>";
 						cuantosAnimalesFuera = num;
 					}
 					img = img + "<img src='./imagenes/sumar/gallina.png' alt='gallina'></figure>";
@@ -994,7 +1002,7 @@
 						cuantosAnimales = num;
 					}
 					else{
-						img = "<figure class='imagen-draggable'>";
+						img = "<figure class='imagen-draggable' tabindex='0'>";
 						cuantosAnimalesFuera = num;
 					}
 					img = img + "<img src='./imagenes/sumar/oveja.png' alt='oveja'></figure>";
@@ -1009,7 +1017,7 @@
 						cuantosAnimales = num;
 					}
 					else{
-						img = "<figure class='imagen-draggable'>";
+						img = "<figure class='imagen-draggable' tabindex='0'>";
 						cuantosAnimalesFuera = num;
 					}
 					img = img + "<img src='./imagenes/sumar/vaca.png' alt='vaca'></figure>";
@@ -1084,7 +1092,7 @@
 			}
 
 			$('#contenedorResultados').prepend("<p class='preguntas'>" + preguntaAnimal + "</p>");
-			procesar();
+			reconocerVoz();
 		}
 
 		function decirAnimalesAMeter(animalesAMeter){
@@ -1208,6 +1216,8 @@
 
 			iniciarTemporizador();
 
+			controlJuegoAnimalesMedianteTeclado(); //para controlar la primera parte del juego, unicamente con teclado
+
 			var texto_final = "Vamos a sumar. Se hace de noche y tenemos que meter a algunos animales en el corral para que puedan dormir. En el corral hay " + cuantosAnimales + " " + nombreAnimal + ". Mete " + animalesAMeter + ".";
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
@@ -1215,6 +1225,8 @@
 		}
 
 		function prepararContinuacionJuegoAnimales(){
+
+			$(".imagen-draggable").removeAttr("tabindex"); //elimino el resto de elementos tabulables antes de eliminar su caracteristica drag
 
 			$(".imagen-draggable").draggable("destroy"); //elimino todos los elementos drag de las imagenes
 
@@ -1234,6 +1246,74 @@
 
 			responsiveVoice.speak(texto_final, "Spanish Female");
 
+		}
+
+	/*****************************************************************************************************/
+
+
+	/*****************************JUEGO SUMAR ANIMALES - CONTROLADO CON TECLADO***************************/
+
+		function obtenerMovimientoAnimacionAnimales(indexAnimalFocus){
+			var movimiento = -1;
+			if(indexAnimalFocus >= 0){
+				for(var i = 0; i < 9; i+=3){
+					if(i == indexAnimalFocus){
+						movimiento = "-85%";
+					}
+				}
+				for(var i = 1; i < 9; i+=3){
+					if(i == indexAnimalFocus){
+						movimiento = "-90%";
+					}
+				}
+				for(var i = 2; i < 9; i+=3){
+					if(i == indexAnimalFocus){
+						movimiento = "-110%";
+					}
+				}
+			}
+			return movimiento;
+		}
+
+		function controlJuegoAnimalesMedianteTeclado(){
+			document.addEventListener("keydown", function teclaPulsada(evt){
+				var indexAnimalFocus = -1;
+				if(evt.keyCode == 32){ //si pulsa el espacio se seleccionara el primer elemento de todos
+					console.log("HOLA");
+					console.log(primerAnimal);
+					if($(":focus").not($("#animalesFuera>figure").eq(primerAnimal))){
+						$("#animalesFuera>figure").eq(primerAnimal).focus();
+					}
+				}
+				if(evt.keyCode == 37)
+				{
+					$("#animalesFuera>figure").each(function(index){
+						if($(this).is($(":focus"))){
+							indexAnimalFocus = index;
+							return false; //para salir del bucle foreach
+						}
+					});
+
+					if(indexAnimalFocus != -1){ //para evitar que actualice los animales introducidos si no se ha podido meter ninguno
+						var toLeft = obtenerMovimientoAnimacionAnimales(indexAnimalFocus);
+
+						$(":focus").animate({
+							left: toLeft
+						});
+
+						actualizarDragAndDrop($(":focus"));
+
+						$(":focus").removeAttr("tabindex"); //para asegurarme de que elimino la posibilidad de que este elemento tenga foco despues de esta iteracion
+
+						$("#animalesFuera>figure").each(function(index){ //recorro el array de figures con tal de encontrar el primer elemento draggable de dicho array, una vez he introducido un animal en el corral
+							if($(this).is($("#animalesFuera>figure[tabindex]").eq(0))){
+								primerAnimal = index; //me guardo el indice de dicho primer animal draggable de la lista o array
+								return false; //para salir del bucle foreach
+							}
+						});
+					}
+				}
+			});
 		}
 
 	/*****************************************************************************************************/
@@ -1276,6 +1356,25 @@
 
 	/*********************************EVENTOS DRAGGABLE Y DROPPABLE***************************************/
 
+		function actualizarDragAndDrop(elemento){
+			if(extraerPagUrlActual() == "sumar.html")
+			{	
+				animalesMetidos++;
+				actualizarAnimalesMetidos();
+				contadorAnimalesAMeter--;		
+				if(contadorAnimalesAMeter == 0){
+					$( ".imagen-droppable" ).droppable('destroy');
+					$("#animalesDentro>img").attr("src", './imagenes/sumar/corral-propio-cuadrado-r.png');
+					prepararContinuacionJuegoAnimales();
+				}
+				else{
+					var elem = elemento.draggable[0];
+					$(elem).attr('class','imagen-draggable').draggable('disable'); //desactivo el elemento para que no cambie la cuenta de los que hay que poner de manera erronea
+					$(elem).removeAttr("tabindex"); //para no seguir contando con este elemento a la hora de recorrer la lista producida para el tabulador
+				}
+			}
+		}
+
 		function activarDragAndDrop(){
 			$( ".imagen-draggable" ).draggable({
 				cursor: "pointer",
@@ -1287,18 +1386,7 @@
         			"ui-droppable-hover": "drop-hover-image",
 				},
 				drop: function( event, ui ) {
-					animalesMetidos++;
-					actualizarAnimalesMetidos();
-					contadorAnimalesAMeter--;
-					if(contadorAnimalesAMeter == 0){
-						$( ".imagen-droppable" ).droppable('destroy');
-						$("#animalesDentro>img").attr("src", './imagenes/sumar/corral-propio-cuadrado-r.png');
-						prepararContinuacionJuegoAnimales();
-					}
-					else{
-						var elem = ui.draggable[0];
-						$(elem).attr('class','imagen-draggable').draggable('disable'); //desactivo el elemento para que no cambie la cuenta de los que hay que poner de manera erronea
-					}
+					actualizarDragAndDrop(ui);
 					$( this )
 						.css("filter", "brightness(100%)")
 				},
@@ -1396,7 +1484,7 @@
 
 		function crearMensajeModal(mensaje, intento){
 			if(!intento){
-				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); procesar();">Cerrar</button></div></div></div>';
+				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); reconocerVoz();">Cerrar</button></div></div></div>';
 			}
 			else{
 				var tiempoTrans = cambiarFormato(tiempoTranscurrido);
@@ -1409,6 +1497,7 @@
 				$(".mano-tutorial-respuestas").remove();
 			}
 			$('main').append(modal);
+			$('.botones-modal').focus(); //por si el autofocus falla, le ponemos el foco al boton una vez aparezca el mensaje
 		}
 
 		function mostrarMensajeIntento(intento){
@@ -1427,7 +1516,7 @@
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
-						procesar();
+						reconocerVoz();
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
@@ -1453,7 +1542,7 @@
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
-						procesar();
+						reconocerVoz();
 					}
 					break;
 				}
@@ -1467,7 +1556,7 @@
 						console.log("TIEMPO EN COMPLETAR CON ÉXITO EL JUEGO: " + tiempoTrans);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
-						procesar();
+						reconocerVoz();
 					}
 					else{
 						var mensModal = "¡Sigue intentándolo!";
@@ -1494,7 +1583,7 @@
 						console.log(mensModal);
 						crearMensajeModal(mensModal, intento);
 						responsiveVoice.speak(mensModal, "Spanish Female");
-						procesar();
+						reconocerVoz();
 					}
 					break;
 				}
@@ -1543,6 +1632,7 @@
 						$("#respuestas").append("<div class='mano-tutorial-respuestas'></div>");
 					}		
 					buttonRespEscog.remove();
+					colocarFocoRespuestas();
 				}
 			}
 
