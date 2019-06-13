@@ -53,7 +53,7 @@
 	/*****************************************************************************************************/
 
 	/****************************************RECONOCIMIENTO DE VOZ****************************************/
-	
+
 		var recognition;
 		var recognizing = false;
 		if (!('webkitSpeechRecognition' in window)) {
@@ -491,9 +491,6 @@
 						ctx.stroke();
 						clicks++;
 						numDeCasa++;
-						/*if(clicks<numCasas-1){
-							clicks++;
-						}*/
 					}else{
 						console.log("incorrecto");
 
@@ -506,11 +503,11 @@
 						if(recognizing==true){
 							reconocerVoz();
 						}
-						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va a continuación?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
+						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en el establo?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
 						cargarRespuestas(rangoMax);
 						$(".mano-tutorial-click").remove();
 						$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
-						var texto_final1 = "¿Qué número va a continuación?";
+						var texto_final1 = "¿Qué número va en el establo?";
 						responsiveVoice.speak(texto_final1, "Spanish Female",{onend: function() {reconocerVoz();}});
 						clicks++;
 					}
