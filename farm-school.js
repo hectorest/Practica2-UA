@@ -1,7 +1,59 @@
 
 	/***************************************VARIABLES GLOBALES********************************************/
 
-		/********RECONOCIMIENTO DE VOZ********/
+		/********JUEGO VERDURAS********/
+
+			var nombresVerduras = [];
+			var cuantasVerduras = [];
+			var queVerdura;
+
+		/******************************/
+
+		/********JUEGO ANIMALES********/
+
+			var nombreAnimal = "";
+			var cuantosAnimales;
+			var cuantosAnimalesFuera;
+			var animalesAMeter;
+			var animalesMetidos = 0;
+			var contadorAnimalesAMeter;
+			var resultadoSuma;
+			var queAnimal;
+			var primerAnimal = 0;
+
+		/******************************/
+
+		/********JUEGO CASAS********/
+
+			var ultimoNumero;
+			var arrayPosiciones;
+			var arrayMovs;
+			var numDeCasa;
+
+		/******************************/
+
+		/********JUEGO MONEDAS********/
+
+			var importe, resta, resultadoResta;
+
+		/******************************/
+
+		/**********GENERICAS***********/
+
+			var respuestasGenericas = [];
+			var respuestaEscogida;
+			var buttonRespEscog;
+			var numFallos = 0;
+			var tiempoInicio;
+			var tiempoFin;
+			var tiempoTranscurrido;
+			
+		/******************************/
+
+	/*****************************************************************************************************/
+
+	/****************************************RECONOCIMIENTO DE VOZ****************************************/
+	
 		var recognition;
 		var recognizing = false;
 		if (!('webkitSpeechRecognition' in window)) {
@@ -71,118 +123,70 @@
 
 		}
 
-		/********JUEGO VERDURAS********/
+		function reconocerVoz(){
 
-			var nombresVerduras = [];
-			var cuantasVerduras = [];
-			var queVerdura;
+			if (recognizing == false) {
+				recognition.start();
+				recognizing = true;
+				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro.gif">');
+			} else {
+				recognition.stop();
+				recognizing = false;
+				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
+			}
+		}
 
-		/******************************/
+		function textoAboton(texto){
 
-		/********JUEGO ANIMALES********/
+			var btn = document.createElement("BUTTON");
 
-			var nombreAnimal = "";
-			var cuantosAnimales;
-			var cuantosAnimalesFuera;
-			var animalesAMeter;
-			var animalesMetidos = 0;
-			var contadorAnimalesAMeter;
-			var resultadoSuma;
-			var queAnimal;
-			var primerAnimal = 0;
+			if(texto.indexOf('uno')>-1 || texto.indexOf(1)>-1){
+				btn.value = 1;
+			}else if(texto.indexOf('dos')>-1 || texto.indexOf(2)>-1){
+				btn.value = 2;
+			}else if(texto.indexOf('tres')>-1 || texto.indexOf(3)>-1){
+				btn.value = 3;
+			}else if(texto.indexOf('cuatro')>-1 || texto.indexOf(4)>-1){
+				btn.value = 4;
+			}else if(texto.indexOf('cinco')>-1 || texto.indexOf(5)>-1){
+				btn.value = 5;
+			}else if(texto.indexOf('seis')>-1 || texto.indexOf(6)>-1){
+				btn.value = 6;
+			}else if(texto.indexOf('siete')>-1 || texto.indexOf(7)>-1){
+				btn.value = 7;
+			}else if(texto.indexOf('ocho')>-1 || texto.indexOf(8)>-1){
+				btn.value = 8;
+			}else if(texto.indexOf('nueve')>-1 || texto.indexOf(9)>-1){
+				btn.value = 9;
+			}else if(texto.indexOf('diez')>-1 || texto.indexOf(10)>-1){
+				btn.value = 10;
+			}else if(texto.indexOf('once')>-1 || texto.indexOf(11)>-1){
+				btn.value = 11;
+			}else if(texto.indexOf('doce')>-1 || texto.indexOf(12)>-1){
+				btn.value = 12;
+			}else if(texto.indexOf('trece')>-1 || texto.indexOf(13)>-1){
+				btn.value = 13;
+			}else if(texto.indexOf('catorce')>-1 || texto.indexOf(14)>-1){
+				btn.value = 14;
+			}else if(texto.indexOf('quince')>-1 || texto.indexOf(15)>-1){
+				btn.value = 15;
+			}else if(texto.indexOf('dieciséis')>-1 || texto.indexOf(16)>-1){
+				btn.value = 16;
+			}else if(texto.indexOf('diecisiete')>-1 || texto.indexOf(17)>-1){
+				btn.value = 17;
+			}else if(texto.indexOf('dieciocho')>-1 || texto.indexOf(18)>-1){
+				btn.value = 18;
+			}else if(texto.indexOf('diecinueve')>-1 || texto.indexOf(19)>-1){
+				btn.value = 19;
+			}else if(texto.indexOf('veinte')>-1 || texto.indexOf(20)>-1){
+				btn.value = 20;
+			}
 
-		/******************************/
-
-		/********JUEGO CASAS********/
-
-			var ultimoNumero;
-			var arrayPosiciones;
-			var arrayMovs;
-			var numDeCasa;
-
-		/******************************/
-
-		/********JUEGO MONEDAS********/
-
-			var importe, resta, resultadoResta;
-
-		/******************************/
-
-		/**********GENERICAS***********/
-
-			var respuestasGenericas = [];
-			var respuestaEscogida;
-			var buttonRespEscog;
-			var numFallos = 0;
-			var tiempoInicio;
-			var tiempoFin;
-			var tiempoTranscurrido;
-			
-		/******************************/
+			return btn;
+		}
 
 	/*****************************************************************************************************/
 
-	function reconocerVoz(){
-
-		if (recognizing == false) {
-			recognition.start();
-			recognizing = true;
-			$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro.gif">');
-		} else {
-			recognition.stop();
-			recognizing = false;
-			$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
-		}
-	}
-
-	function textoAboton(texto){
-
-		var btn = document.createElement("BUTTON");
-
-		if(texto.indexOf('uno')>-1 || texto.indexOf(1)>-1){
-			btn.value = 1;
-		}else if(texto.indexOf('dos')>-1 || texto.indexOf(2)>-1){
-			btn.value = 2;
-		}else if(texto.indexOf('tres')>-1 || texto.indexOf(3)>-1){
-			btn.value = 3;
-		}else if(texto.indexOf('cuatro')>-1 || texto.indexOf(4)>-1){
-			btn.value = 4;
-		}else if(texto.indexOf('cinco')>-1 || texto.indexOf(5)>-1){
-			btn.value = 5;
-		}else if(texto.indexOf('seis')>-1 || texto.indexOf(6)>-1){
-			btn.value = 6;
-		}else if(texto.indexOf('siete')>-1 || texto.indexOf(7)>-1){
-			btn.value = 7;
-		}else if(texto.indexOf('ocho')>-1 || texto.indexOf(8)>-1){
-			btn.value = 8;
-		}else if(texto.indexOf('nueve')>-1 || texto.indexOf(9)>-1){
-			btn.value = 9;
-		}else if(texto.indexOf('diez')>-1 || texto.indexOf(10)>-1){
-			btn.value = 10;
-		}else if(texto.indexOf('once')>-1 || texto.indexOf(11)>-1){
-			btn.value = 11;
-		}else if(texto.indexOf('doce')>-1 || texto.indexOf(12)>-1){
-			btn.value = 12;
-		}else if(texto.indexOf('trece')>-1 || texto.indexOf(13)>-1){
-			btn.value = 13;
-		}else if(texto.indexOf('catorce')>-1 || texto.indexOf(14)>-1){
-			btn.value = 14;
-		}else if(texto.indexOf('quince')>-1 || texto.indexOf(15)>-1){
-			btn.value = 15;
-		}else if(texto.indexOf('dieciséis')>-1 || texto.indexOf(16)>-1){
-			btn.value = 16;
-		}else if(texto.indexOf('diecisiete')>-1 || texto.indexOf(17)>-1){
-			btn.value = 17;
-		}else if(texto.indexOf('dieciocho')>-1 || texto.indexOf(18)>-1){
-			btn.value = 18;
-		}else if(texto.indexOf('diecinueve')>-1 || texto.indexOf(19)>-1){
-			btn.value = 19;
-		}else if(texto.indexOf('veinte')>-1 || texto.indexOf(20)>-1){
-			btn.value = 20;
-		}
-
-		return btn;
-	}
 
 	/*****************************BLOQUEAR ORIENTACION PANTALLA - HORIZONTAL******************************/
 
@@ -200,32 +204,6 @@
 			window.onorientationchange = reorient;
 			window.setTimeout(reorient, 0);
 		});
-
-	/*****************************************************************************************************/
-
-
-	/******************************************CARGAR TUTORIAL********************************************/
-
-		/*function obtenerPosicionesIniciales(elem){
-			var posElem = elem.offset();
-			return posElem;
-		}
-
-		function colocarMano(){
-			var elementoReferencia = $("body>main>nav>ul>li:first-of-type");
-			var numHijos = elementoReferencia.parent().children().length - 1;
-			console.log(elementoReferencia);
-			posRef = obtenerPosicionesIniciales(elementoReferencia);
-			var mano = $(".mano-tutorial");
-			posMano = obtenerPosicionesIniciales(mano);
-			console.log(posicionAnchura);
-			mano.css({
-				"top": 0,
-				"left": posicionAnchura
-			});
-		}
-
-		window.setTimeout(colocarMano(), 1);*/
 
 	/*****************************************************************************************************/
 
