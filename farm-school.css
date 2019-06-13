@@ -35,8 +35,11 @@ body{
 			margin-bottom: 2%;
 		}
 
+		.botonera{
+			text-align: center;
+		}
+
 		.botones{
-			display: table;
 			text-decoration: none;
 			color: #ffffff;
 			box-shadow: 0 0.3em 0.3em 0.2em #AB8354;
@@ -48,6 +51,12 @@ body{
 			text-align: center;
 			font-weight: bold;
 			margin: auto;
+			padding: 0.3em;
+		}
+
+		#btn-ayuda{
+			margin-left: 1em;
+
 		}
 
 		.botones:hover{
@@ -61,11 +70,6 @@ body{
 			box-shadow: none;
 			color: #000000;
 		}
-
-			.botones>span{
-				display: table-cell;
-				vertical-align: middle;
-			}
 
 		.botones-modal{
 			display: table;
@@ -129,6 +133,21 @@ body{
 			cursor: pointer;
 		}
 
+		.respuestas>.gif-micro{
+			padding: 0;
+			border-radius: 50px;
+			height: 2.5em;
+			width: 2.5em;
+		}
+
+			.respuestas>.gif-micro>img{
+				height: 2em;
+				width: 2em;
+				align-self: center;
+				margin: 0;
+				padding: 0;
+			}
+
 			.respuestas>button:hover{
 				background-color: #ffffff;
 				color: #000000;
@@ -179,6 +198,20 @@ body{
 			justify-content: space-between;
 		}
 
+		.contenido-modal{
+			margin: auto; 
+			width: 60%;
+			height: 25em;
+			background-color: #C38345;
+			border-radius: 10px;
+			border: 0.3em solid #8E531A;
+			z-index: 50;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
 			.contenido>p{
 				font-weight: bold;
 				color: #000000;
@@ -213,6 +246,11 @@ body{
 			display: flex;
 			flex-direction: column;
 			height: 50%;
+		}
+		.contenedor-cerrar-modal-ayuda{
+			display: flex;
+			flex-direction: column;
+			height: 15%;
 		}
 
 	/*************************************************************************************************************************************/
@@ -744,7 +782,6 @@ body{
 					padding: 1em;
 					margin: 1em;
 				}
-
 
 	#contarVerduras{
 		background-image: url("./imagenes/contar-verduras/huerto3-sin-hojas.png");

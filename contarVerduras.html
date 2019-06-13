@@ -19,7 +19,10 @@
 	<main>
 		<div class="tituloJuego">
 			<h2>Contar Verduras</h2>
-			<a href="index.html" class="botones"><span>Volver al menú principal</span></a>
+			<div class="botonera">
+				<a title="Ir al menú principal (Esc)" href="index.html" class="botones"><span>Volver al menú principal</span></a>
+				<a title="Mostrar ayuda (H)" onclick="mostrarMensajeAyuda()" class="botones" id="btn-ayuda"><span>Ayuda</span></a>	
+			</div>
 		</div>
 		<section id="contarVerduras">
 			<div>
@@ -73,6 +76,9 @@
 			}
 		if(evt.keyCode == 27){
 			window.location="index.html";
+		}
+		if(evt.keyCode == 72){
+			document.getElementById('btn-ayuda').click();
 		}
 	}, false);
 </script>

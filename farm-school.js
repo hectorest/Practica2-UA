@@ -261,6 +261,7 @@
 			{
 				$('#respuestas').append('<button id = "resp'+ (index) +'" value="' + respuestasGenericas[index] + '" onclick="mostrarMensajeIntento(comprobarRespuesta(this));">' + respuestasGenericas[index] + '</button>');
 			});
+			$('#respuestas').append('<button class="gif-micro">' + '<img alt="micrófono escuchando" src="./imagenes/micro.gif">' + '</button>');
 		}
 
 		function generarRespuestas(rango){
@@ -496,6 +497,7 @@
 						var texto_final1 = "¿Qué número va en la siguiente figura?";			
 
 						responsiveVoice.speak(texto_final1, "Spanish Female");
+						reconocerVoz();
 					}
 				}
 
@@ -1486,9 +1488,11 @@
 			if(!intento){
 				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); reconocerVoz();">Cerrar</button></div></div></div>';
 			}
-			else{
+			else if(intento == true){
 				var tiempoTrans = cambiarFormato(tiempoTranscurrido);
 				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '">' + mensaje + '</p><div id="estadisticas"><p>Estadísticas:</p><p>Has tardado: ' + tiempoTrans + '.</p><p>Has tenido: ' + numFallos + ' fallos.</p></div><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode)">Cerrar</button></div></div></div>';
+			}else if(intento=='ayuda'){
+				var modal = '<div class="modal"><div class="contenido-modal"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal-ayuda contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode); reconocerVoz();">Cerrar</button></div></div></div>';
 			}
 			if(extraerPagUrlActual() == "contarCasas.html"){
 				$(".mano-tutorial-respuestas-contar-casas").remove();
@@ -1498,6 +1502,118 @@
 			}
 			$('main').append(modal);
 			$('.botones-modal').focus(); //por si el autofocus falla, le ponemos el foco al boton una vez aparezca el mensaje
+		}
+
+		function mostrarMensajeAyuda(){
+			var pag = extraerPagUrlActual(),
+				mensModal;
+
+			switch (pag)
+			{
+				case ("contarCasas.html"):
+				{
+					mensModal = `<br>
+						Táctil/Ratón:
+						<br>
+						Click en casas por orden para dibujar el camino
+						<br>
+						Click en respuestas para seleccionarla
+						<br>
+						<br>
+						Teclado:
+						<br>
+						Espacio: comenzar ruta con teclado
+						<br>
+						&larr; Avanzar hacia izquierda
+						<br>
+						&rarr; Avanzar hacia derecha
+						<br>
+						&larr; y &rarr; Navegar por respuestas
+						<br>
+						&crarr; Seleccionar respuesta
+						<br>
+						<br> 
+						Voz:
+						<br>
+						En respuestas responder verbalmente
+						<br>
+					`;
+					break;
+				}
+				case ("contarVerduras.html"):
+				{
+					mensModal = `<br>
+						Táctil/Ratón:
+						<br>
+						Click en respuestas para seleccionarla
+						<br>
+						<br>
+						Teclado:
+						<br>
+						&larr; y &rarr; Navegar por respuestas
+						<br>
+						&crarr; Seleccionar respuesta
+						<br>
+						<br> 
+						Voz:
+						<br>
+						En respuestas responder verbalmente
+						<br>
+					`;
+					break;
+				}
+				case("sumar.html"):
+				{	
+					mensModal = `<br>
+						Táctil/Ratón:
+						<br>
+						Arrastrar animal hasta el corral
+						<br>
+						Click en respuestas para seleccionarla
+						<br>
+						<br>
+						Teclado:
+						<br>
+						Espacio: coger animal
+						<br>
+						&larr; introducir animal en el corral
+						<br>
+						&larr; y &rarr; Navegar por respuestas
+						<br>
+						&crarr; Seleccionar respuesta
+						<br>
+						<br> 
+						Voz:
+						<br>
+						En respuestas responder verbalmente
+						<br>
+					`;
+					break;
+				}
+				case("restar.html"):
+				{
+					mensModal = `<br>
+						Táctil/Ratón:
+						<br>
+						Click en respuestas para seleccionarla
+						<br>
+						<br>
+						Teclado:
+						<br>
+						&larr; y &rarr; Navegar por respuestas
+						<br>
+						&crarr; Seleccionar respuesta
+						<br>
+						<br> 
+						Voz:
+						<br>
+						En respuestas responder verbalmente
+						<br>
+					`;
+					break;
+				}
+			}
+			crearMensajeModal(mensModal, 'ayuda');
 		}
 
 		function mostrarMensajeIntento(intento){
