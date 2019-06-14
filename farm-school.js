@@ -76,17 +76,17 @@
 					var texto = event.results[i][0].transcript;
 					console.log(texto);
 					var evento = new KeyboardEvent("keydown");
-					if(extraerPagUrlActual() == "index.html" && texto.indexOf("contar") > -1){
+					if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("contar") > -1){
 						window.location="contar.html";
 					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("casas") > -1){
 						window.location="contarCasas.html";
 					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("verduras") > -1){
 						window.location="contarVerduras.html";
-					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("sumar") > -1){
+					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("sumar") > -1){
 						window.location="sumar.html";
-					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("restar") > -1){
+					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("restar") > -1){
 						window.location="restar.html";
-					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("créditos") > -1){
+					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("créditos") > -1){
 						window.location="creditos.html";
 					}else if(extraerPagUrlActual() == "contarCasas.html" && texto.indexOf("empezar") > -1){
 						Object.defineProperty(evento, "keyCode", {"value" : 32});
@@ -112,7 +112,7 @@
 						responsiveVoice.speak(texto_final, "Spanish Female", {onend: function(){reconocerVoz();}});
 					}else if(texto.indexOf("cerrar") > -1){
 						document.getElementById('botonModal').click();
-					}else if(extraerPagUrlActual() == "index.html" || extraerPagUrlActual() == "contar.html"){
+					}else if(extraerPagUrlActual() == "" || extraerPagUrlActual() == "index.html" || extraerPagUrlActual() == "contar.html"){
 						var texto_final = texto + " no es una opción del menú. Preba a decirlo de otra manera";
 						if(recognizing){
 							reconocerVoz();
@@ -169,7 +169,7 @@
 				}
 				case("sumar.html"):
 				{
-					text = 	"Para meter los animales, arrastralos de uno en uno hasta el corral. Si quieres utilizar el teclado pulsa espacio para seleccionar un animal y flecha izquierda para meterlo. También puedes meterlos diciendo la palabra meto. Para responder la pregunta pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					text = 	"Para meter los animales, arrástralos de uno en uno hasta el corral. Si quieres utilizar el teclado pulsa espacio para seleccionar un animal y flecha izquierda para meterlo. También puedes meterlos diciendo la palabra meto. Para responder la pregunta pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
 					break;
 				}
 				case("restar.html"):
@@ -203,27 +203,27 @@
 				btn.value = 8;
 			}else if(texto.indexOf('nueve')>-1 || ((texto.indexOf('9')>-1 && texto[texto.indexOf('9')-1]!=1) && (texto[texto.indexOf('9')+1]==' ' || texto.indexOf('9')==(texto.length-1)))){
 				btn.value = 9;
-			}else if(texto.indexOf('diez')>-1 || (texto.indexOf('10')>-1 && texto[texto.indexOf('10')+1]==' ') || texto.indexOf('10')==(texto.length-2)){
+			}else if(texto.indexOf('diez')>-1 || (texto.indexOf('10')>-1 && texto[texto.indexOf('10')+2]==' ') || texto.indexOf('10')==(texto.length-2)){
 				btn.value = 10;
-			}else if(texto.indexOf('once')>-1 || (texto.indexOf('11')>-1 && texto[texto.indexOf('11')+1]==' ') || texto.indexOf('11')==(texto.length-2)){
+			}else if(texto.indexOf('once')>-1 || (texto.indexOf('11')>-1 && texto[texto.indexOf('11')+2]==' ') || texto.indexOf('11')==(texto.length-2)){
 				btn.value = 11;
-			}else if(texto.indexOf('doce')>-1 || (texto.indexOf('12')>-1 && texto[texto.indexOf('12')+1]==' ') || texto.indexOf('12')==(texto.length-2)){
+			}else if(texto.indexOf('doce')>-1 || (texto.indexOf('12')>-1 && texto[texto.indexOf('12')+2]==' ') || texto.indexOf('12')==(texto.length-2)){
 				btn.value = 12;
-			}else if(texto.indexOf('trece')>-1 || (texto.indexOf('13')>-1 && texto[texto.indexOf('13')+1]==' ') || texto.indexOf('13')==(texto.length-2)){
+			}else if(texto.indexOf('trece')>-1 || (texto.indexOf('13')>-1 && texto[texto.indexOf('13')+2]==' ') || texto.indexOf('13')==(texto.length-2)){
 				btn.value = 13;
-			}else if(texto.indexOf('catorce')>-1 || (texto.indexOf('14')>-1 && texto[texto.indexOf('14')+1]==' ') || texto.indexOf('14')==(texto.length-2)){
+			}else if(texto.indexOf('catorce')>-1 || (texto.indexOf('14')>-1 && texto[texto.indexOf('14')+2]==' ') || texto.indexOf('14')==(texto.length-2)){
 				btn.value = 14;
-			}else if(texto.indexOf('quince')>-1 || (texto.indexOf('15')>-1 && texto[texto.indexOf('15')+1]==' ') || texto.indexOf('15')==(texto.length-2)){
+			}else if(texto.indexOf('quince')>-1 || (texto.indexOf('15')>-1 && texto[texto.indexOf('15')+2]==' ') || texto.indexOf('15')==(texto.length-2)){
 				btn.value = 15;
-			}else if(texto.indexOf('dieciséis')>-1 || (texto.indexOf('16')>-1 && texto[texto.indexOf('16')+1]==' ') || texto.indexOf('16')==(texto.length-2)){
+			}else if(texto.indexOf('dieciséis')>-1 || (texto.indexOf('16')>-1 && texto[texto.indexOf('16')+2]==' ') || texto.indexOf('16')==(texto.length-2)){
 				btn.value = 16;
-			}else if(texto.indexOf('diecisiete')>-1 || (texto.indexOf('17')>-1 && texto[texto.indexOf('17')+1]==' ') || texto.indexOf('17')==(texto.length-2)){
+			}else if(texto.indexOf('diecisiete')>-1 || (texto.indexOf('17')>-1 && texto[texto.indexOf('17')+2]==' ') || texto.indexOf('17')==(texto.length-2)){
 				btn.value = 17;
-			}else if(texto.indexOf('dieciocho')>-1 || (texto.indexOf('18')>-1 && texto[texto.indexOf('18')+1]==' ') || texto.indexOf('18')==(texto.length-2)){
+			}else if(texto.indexOf('dieciocho')>-1 || (texto.indexOf('18')>-1 && texto[texto.indexOf('18')+2]==' ') || texto.indexOf('18')==(texto.length-2)){
 				btn.value = 18;
-			}else if(texto.indexOf('diecinueve')>-1 || (texto.indexOf('19')>-1 && texto[texto.indexOf('19')+1]==' ') || texto.indexOf('19')==(texto.length-2)){
+			}else if(texto.indexOf('diecinueve')>-1 || (texto.indexOf('19')>-1 && texto[texto.indexOf('19')+2]==' ') || texto.indexOf('19')==(texto.length-2)){
 				btn.value = 19;
-			}else if(texto.indexOf('veinte')>-1 || (texto.indexOf('20')>-1 && texto[texto.indexOf('20')+1]==' ') || texto.indexOf('20')==(texto.length-2)){
+			}else if(texto.indexOf('veinte')>-1 || (texto.indexOf('20')>-1 && texto[texto.indexOf('20')+2]==' ') || texto.indexOf('20')==(texto.length-2)){
 				btn.value = 20;
 			}
 
