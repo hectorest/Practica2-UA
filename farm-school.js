@@ -433,7 +433,7 @@
 				if(currentIndex<casas-1){
 					arrayCasas[currentIndex].src = "./imagenes/contar-casas/casa"+currentIndex+".png";
 				}else{
-					arrayCasas[currentIndex].src = "./imagenes/contar-casas/establoNaN.png";
+					arrayCasas[currentIndex].src = "./imagenes/contar-casas/establoSN.png";
 				}
 
 				arrayCasas[currentIndex].onload = function(e){
@@ -551,7 +551,7 @@
 						if(recognizing==true){
 							reconocerVoz();
 						}
-						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en el establo?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
+						$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va en el establo?</span></p><img src='./imagenes/contar-casas/establoSN.png' alt='establo'>");
 						cargarRespuestas(rangoMax);
 						$(".mano-tutorial-click").remove();
 						$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
@@ -659,7 +659,7 @@
 					if(recognizing==true){
 						reconocerVoz();
 					}
-					$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va a continuación?</span></p><img src='./imagenes/contar-casas/establoNaN.png' alt='establo'>");
+					$('#contenedorResultadosDerecha').prepend("<p class='preguntas'><span>¿Qué número va a continuación?</span></p><img src='./imagenes/contar-casas/establoSN.png' alt='establo'>");
 					cargarRespuestas(rangoMax);
 					$(".mano-tutorial-click").remove();
 					$(".contenedor-mano-tutorial").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");	
