@@ -88,6 +88,9 @@
 						window.location="restar.html";
 					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("créditos") > -1){
 						window.location="creditos.html";
+					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("adiós") > -1){
+						var  texto_final = "Bye bye hasta otro ratito"
+						responsiveVoice.speak(texto_final, "Spanish Female", {onend: function(){window.close()}});
 					}else if(extraerPagUrlActual() == "contarCasas.html" && texto.indexOf("empezar") > -1){
 						Object.defineProperty(evento, "keyCode", {"value" : 32});
 						document.dispatchEvent(evento);
@@ -113,7 +116,7 @@
 					}else if(texto.indexOf("cerrar") > -1){
 						document.getElementById('botonModal').click();
 					}else if(extraerPagUrlActual() == "" || extraerPagUrlActual() == "index.html" || extraerPagUrlActual() == "contar.html"){
-						var texto_final = texto + " no es una opción del menú. Preba a decirlo de otra manera";
+						var texto_final = texto + " no es una opción del menú. Prueba a decirlo de otra manera";
 						if(recognizing){
 							reconocerVoz();
 						}			
@@ -159,12 +162,12 @@
 			{
 				case ("contarCasas.html"):
 				{
-					text = 	"Para llegar al establo, pulsa en en las casas siguiendo el orden correcto. Si quieres utilizar el teclado pulsa espacio para comenzar a controlar con las flechas. También puedes dictar los números, diga empezar para comenzar a contar. Para responder, pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					text = 	"Para llegar al establo, pulsa en las casas siguiendo el orden correcto. Si quieres utilizar el teclado pulsa espacio para comenzar a controlar con las flechas. También puedes dictar los números, diga empezar para comenzar a contar. Para responder, pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
 					break;
 				}
 				case ("contarVerduras.html"):
 				{
-					text = 	"Pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					text = 	"Pulsa sobre la respuesta. Con el teclado utiliza las flechas para desplazarte e intro para contestar. Para juega con voz dicta la respuesta correcta";
 					break;
 				}
 				case("sumar.html"):
@@ -1024,7 +1027,6 @@
 			preguntarCuantasVerdurasXHay(queVerdura);
 
 			cargarRespuestas(rango);
-			reconocerVoz();
 
 			activarDragAndDrop();
 
@@ -1254,6 +1256,14 @@
 
 		function actualizarAnimalesMetidos(){
 			document.getElementById("animalesMetidos").innerHTML = animalesMetidos;
+
+			var texto_final = "Has metido: " + animalesMetidos;
+
+			if(recognizing){
+				reconocerVoz();
+			}		
+
+			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 		}
 
 		function decirCuantosHaMetido(){
