@@ -37,7 +37,50 @@
 		</div>
 
 	</main>
-	<script src="http://code.responsivevoice.org/responsivevoice.js?key=T2TUoqOh"></script>
+	<!--<script src="http://code.responsivevoice.org/responsivevoice.js?key=T2TUoqOh"></script>-->
 	<script src="./farm-school.js"></script>
+	<script>
+		var pos = -1;
+		document.addEventListener("keydown", function teclaPulsada(evt)
+		{
+			if(document.getElementById('respuestas').innerHTML!=''){
+				if(evt.keyCode == 37){
+					pos--;
+					if(pos==0){
+						document.getElementById('resp0').focus();
+					}else if(pos==1){
+						document.getElementById('resp1').focus();
+					}else if(pos==2){
+						document.getElementById('resp2').focus();
+					}else if(pos==3){
+						document.getElementById('resp3').focus();
+					}else if(pos<0){
+						document.getElementById('resp3').focus();
+						pos=3;
+					}
+				}else if(evt.keyCode == 39){
+					pos++;
+					if(pos==0){
+						document.getElementById('resp0').focus();
+					}else if(pos==1){
+						document.getElementById('resp1').focus();
+					}else if(pos==2){
+						document.getElementById('resp2').focus();
+					}else if(pos==3){
+						document.getElementById('resp3').focus();
+					}else if(pos>3){
+						document.getElementById('resp0').focus();
+						pos=0;
+					}
+				}
+			}
+			if(evt.keyCode == 27){
+				window.location="index.html";
+			}
+			if(evt.keyCode == 72){
+				document.getElementById('btn-ayuda').click();
+			}
+		}, false);
+	</script>
 </body>
 </html>
