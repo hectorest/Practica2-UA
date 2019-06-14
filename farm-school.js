@@ -47,6 +47,7 @@
 			var tiempoInicio;
 			var tiempoFin;
 			var tiempoTranscurrido;
+			var respuestasMostradas = false;
 			
 		/******************************/
 
@@ -344,6 +345,9 @@
 
 			//pongo el foco a la primera posicion de las respuestas
 			colocarFocoRespuestas();
+
+			//cambio el estado de la variable de respuestas mostradas a true para que ya aplique la insercion de la mano tutorial para las respuestas
+			respuestasMostradas = true;
 
 		}
 
@@ -1429,6 +1433,7 @@
 				if(contadorAnimalesAMeter == 0){
 					$( ".imagen-droppable" ).droppable('destroy');
 					$("#animalesDentro>img").attr("src", './imagenes/sumar/corral-propio-cuadrado-r.png');
+					$("#animalesDentro>img").attr("alt", 'corral cerrado');
 					prepararContinuacionJuegoAnimales();
 				}
 				else{
@@ -1575,27 +1580,27 @@
 				case ("contarCasas.html"):
 				{
 					mensModal = `<br>
-						Táctil/Ratón:
+						<b>Táctil/Ratón:</b>
 						<br>
 						Click en casas por orden para dibujar el camino
 						<br>
 						Click en respuestas para seleccionarla
 						<br>
 						<br>
-						Teclado:
+						<b>Teclado:</b>
 						<br>
-						Espacio: comenzar ruta con teclado
+						<b>Espacio:</b> comenzar ruta con teclado
 						<br>
-						&larr; Avanzar hacia izquierda
+						<b>&larr;</b> Avanzar hacia izquierda
 						<br>
-						&rarr; Avanzar hacia derecha
+						<b>&rarr;</b> Avanzar hacia derecha
 						<br>
-						&larr; y &rarr; Navegar por respuestas
+						<b>&larr;</b> y <b>&rarr;</b> Navegar por respuestas
 						<br>
-						&crarr; Seleccionar respuesta
+						<b>&crarr;</b> Seleccionar respuesta
 						<br>
 						<br> 
-						Voz:
+						<b>Voz:</b>
 						<br>
 						En respuestas responder verbalmente
 						<br>
@@ -1605,19 +1610,19 @@
 				case ("contarVerduras.html"):
 				{
 					mensModal = `<br>
-						Táctil/Ratón:
+						<b>Táctil/Ratón:</b>
 						<br>
 						Click en respuestas para seleccionarla
 						<br>
 						<br>
-						Teclado:
+						<b>Teclado:</b>
 						<br>
-						&larr; y &rarr; Navegar por respuestas
+						<b>&larr;</b> y <b>&rarr;</b> Navegar por respuestas
 						<br>
-						&crarr; Seleccionar respuesta
+						<b>&crarr;</b> Seleccionar respuesta
 						<br>
 						<br> 
-						Voz:
+						<b>Voz:</b>
 						<br>
 						En respuestas responder verbalmente
 						<br>
@@ -1627,25 +1632,25 @@
 				case("sumar.html"):
 				{	
 					mensModal = `<br>
-						Táctil/Ratón:
+						<b>Táctil/Ratón:</b>
 						<br>
 						Arrastrar animal hasta el corral
 						<br>
 						Click en respuestas para seleccionarla
 						<br>
 						<br>
-						Teclado:
+						<b>Teclado:</b>
 						<br>
 						Espacio: coger animal
 						<br>
-						&larr; introducir animal en el corral
+						<b>&larr;</b> introducir animal en el corral
 						<br>
-						&larr; y &rarr; Navegar por respuestas
+						<b>&larr;</b> y <b>&rarr;</b> Navegar por respuestas
 						<br>
-						&crarr; Seleccionar respuesta
+						<b>&crarr;</b> Seleccionar respuesta
 						<br>
 						<br> 
-						Voz:
+						<b>Voz:</b>
 						<br>
 						En respuestas responder verbalmente
 						<br>
@@ -1655,19 +1660,19 @@
 				case("restar.html"):
 				{
 					mensModal = `<br>
-						Táctil/Ratón:
+						<b>Táctil/Ratón:</b>
 						<br>
 						Click en respuestas para seleccionarla
 						<br>
 						<br>
-						Teclado:
+						<b>Teclado:</b>
 						<br>
-						&larr; y &rarr; Navegar por respuestas
+						<b>&larr;</b> y <b>&rarr;</b> Navegar por respuestas
 						<br>
-						&crarr; Seleccionar respuesta
+						<b>&crarr;</b> Seleccionar respuesta
 						<br>
 						<br> 
-						Voz:
+						<b>Voz:</b>
 						<br>
 						En respuestas responder verbalmente
 						<br>
@@ -1808,10 +1813,14 @@
 				else{
 					mensModal.remove();
 					if(extraerPagUrlActual() == "contarCasas.html"){
-						$("#respuestas").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
+						if(respuestasMostradas){
+							$("#respuestas").append("<div class='mano-tutorial-respuestas-contar-casas'></div>");
+						}
 					}
 					else{
-						$("#respuestas").append("<div class='mano-tutorial-respuestas'></div>");
+						if(respuestasMostradas){
+							$("#respuestas").append("<div class='mano-tutorial-respuestas'></div>");
+						}
 					}		
 					buttonRespEscog.remove();
 					colocarFocoRespuestas();

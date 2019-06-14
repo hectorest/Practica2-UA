@@ -11,7 +11,7 @@
 	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="./logotipo-e-icono/icono/ico/icono-farm-school.ico"/>
 	<link rel="stylesheet" type="text/css" href="farm-school.css">
   	<link rel="stylesheet" href="./jquery-utilizado/plugins-jquery/jquery-ui-1.12.1/jquery-ui.css" />  	
-  	<script type="text/javascript" src="./jquery-utilizado/jquery-3.3.1.min.js"></script>
+  	<script src="./jquery-utilizado/jquery-3.3.1.min.js"></script>
   	<script src="./jquery-utilizado/plugins-jquery/jquery-ui-1.12.1/jquery-ui.js"></script>
   	<script src="./jquery-utilizado/plugins-jquery/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 </head>
@@ -24,11 +24,11 @@
 				<a title="Mostrar ayuda (H)" onclick="mostrarMensajeAyuda()" class="botones" id="btn-ayuda"><span>Ayuda</span></a>	
 			</div>
 		</div>
-		<section id="contarVerduras">
+		<div id="contarVerduras">
 			<div>
 
 			</div>
-		</section>
+		</div>
 		<div id="contenedorResultados">
 			<div id="ponerRespuestas" class="contenedor-mano-tutorial">
 				<div id="respuestas" class="respuestas">
@@ -38,48 +38,48 @@
 			</div>
 		</div>
 	</main>
-<script src="http://code.responsivevoice.org/responsivevoice.js?key=T2TUoqOh"></script>
-<script type="text/javascript" src="./farm-school.js"></script>
-</body>
-<script>
-	var pos = -1;
-	document.addEventListener("keydown", function teclaPulsada(evt)
-	{
-			if(evt.keyCode == 37){
-				pos--;
-				if(pos==0){
-					document.getElementById('resp0').focus();
-				}else if(pos==1){
-					document.getElementById('resp1').focus();
-				}else if(pos==2){
-					document.getElementById('resp2').focus();
-				}else if(pos==3){
-					document.getElementById('resp3').focus();
-				}else if(pos<0){
-					document.getElementById('resp3').focus();
-					pos=3;
+	<script src="http://code.responsivevoice.org/responsivevoice.js?key=T2TUoqOh"></script>
+	<script src="./farm-school.js"></script>
+	<script>
+		var pos = -1;
+		document.addEventListener("keydown", function teclaPulsada(evt)
+		{
+				if(evt.keyCode == 37){
+					pos--;
+					if(pos==0){
+						document.getElementById('resp0').focus();
+					}else if(pos==1){
+						document.getElementById('resp1').focus();
+					}else if(pos==2){
+						document.getElementById('resp2').focus();
+					}else if(pos==3){
+						document.getElementById('resp3').focus();
+					}else if(pos<0){
+						document.getElementById('resp3').focus();
+						pos=3;
+					}
+				}else if(evt.keyCode == 39){
+					pos++;
+					if(pos==0){
+						document.getElementById('resp0').focus();
+					}else if(pos==1){
+						document.getElementById('resp1').focus();
+					}else if(pos==2){
+						document.getElementById('resp2').focus();
+					}else if(pos==3){
+						document.getElementById('resp3').focus();
+					}else if(pos>3){
+						document.getElementById('resp0').focus();
+						pos=0;
+					}
 				}
-			}else if(evt.keyCode == 39){
-				pos++;
-				if(pos==0){
-					document.getElementById('resp0').focus();
-				}else if(pos==1){
-					document.getElementById('resp1').focus();
-				}else if(pos==2){
-					document.getElementById('resp2').focus();
-				}else if(pos==3){
-					document.getElementById('resp3').focus();
-				}else if(pos>3){
-					document.getElementById('resp0').focus();
-					pos=0;
-				}
+			if(evt.keyCode == 27){
+				window.location="index.html";
 			}
-		if(evt.keyCode == 27){
-			window.location="index.html";
-		}
-		if(evt.keyCode == 72){
-			document.getElementById('btn-ayuda').click();
-		}
-	}, false);
-</script>
+			if(evt.keyCode == 72){
+				document.getElementById('btn-ayuda').click();
+			}
+		}, false);
+	</script>
+</body>
 </html>
