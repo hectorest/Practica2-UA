@@ -78,14 +78,16 @@
 					var evento = new KeyboardEvent("keydown");
 					if(extraerPagUrlActual() == "index.html" && texto.indexOf("contar") > -1){
 						window.location="contar.html";
-					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("contar casas") > -1){
+					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("casas") > -1){
 						window.location="contarCasas.html";
-					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("contar verduras") > -1){
+					}else if(extraerPagUrlActual() == "contar.html" && texto.indexOf("verduras") > -1){
 						window.location="contarVerduras.html";
 					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("sumar") > -1){
 						window.location="sumar.html";
 					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("restar") > -1){
 						window.location="restar.html";
+					}else if(extraerPagUrlActual() == "index.html" && texto.indexOf("créditos") > -1){
+						window.location="creditos.html";
 					}else if(extraerPagUrlActual() == "contarCasas.html" && texto.indexOf("empezar") > -1){
 						Object.defineProperty(evento, "keyCode", {"value" : 32});
 						document.dispatchEvent(evento);
@@ -93,16 +95,29 @@
 						Object.defineProperty(evento, "keyCode", {"value" : 112});
 						evento.preventDefault();
 						document.dispatchEvent(evento);
+					}else if(extraerPagUrlActual() == "sumar.html" && texto.indexOf("meto")>-1){
+						Object.defineProperty(evento, "keyCode", {"value" : 32});
+						document.dispatchEvent(evento);
+						var evento1 = new KeyboardEvent("keydown");
+						Object.defineProperty(evento1, "keyCode", {"value" : 37});
+						document.dispatchEvent(evento1);
 					}else if(texto.indexOf("menú") > -1){
 						window.location="index.html";
 					}else if(texto.indexOf("ayuda") > -1){
 						document.getElementById('btn-ayuda').click();
+						if(recognizing){
+							reconocerVoz();
+						}
+						var  texto_final = obtenerAyudaVoz();
+						responsiveVoice.speak(texto_final, "Spanish Female", {onend: function(){reconocerVoz();}});
 					}else if(texto.indexOf("cerrar") > -1){
 						document.getElementById('botonModal').click();
 					}else if(extraerPagUrlActual() == "index.html" || extraerPagUrlActual() == "contar.html"){
-						console.log("ok");
-						var texto_final = texto + " no es una opción del menú";			
-						responsiveVoice.speak(texto_final, "Spanish Female");
+						var texto_final = texto + " no es una opción del menú. Preba a decirlo de otra manera";
+						if(recognizing){
+							reconocerVoz();
+						}			
+						responsiveVoice.speak(texto_final, "Spanish Female", {onend: function(){reconocerVoz();}});
 					}else{
 						mostrarMensajeIntento(comprobarRespuesta(textoAboton(texto)));
 					}
@@ -137,49 +152,78 @@
 			}
 		}
 
+		function obtenerAyudaVoz(){
+			var pag = extraerPagUrlActual(),
+				text;
+			switch (pag)
+			{
+				case ("contarCasas.html"):
+				{
+					text = 	"Para llegar al establo, pulsa en en las casas siguiendo el orden correcto. Si quieres utilizar el teclado pulsa espacio para comenzar a controlar con las flechas. También puedes dictar los números, diga empezar para comenzar a contar. Para responder, pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					break;
+				}
+				case ("contarVerduras.html"):
+				{
+					text = 	"Pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					break;
+				}
+				case("sumar.html"):
+				{
+					text = 	"Para meter los animales, arrastralos de uno en uno hasta el corral. Si quieres utilizar el teclado pulsa espacio para seleccionar un animal y flecha izquierda para meterlo. También puedes meterlos diciendo la palabra meto. Para responder la pregunta pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					break;
+				}
+				case("restar.html"):
+				{
+					text = 	"Pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					break;
+				}
+			}
+			return text;
+		}
+
 		function textoAboton(texto){
 
 			var btn = document.createElement("BUTTON");
 
-			if(texto.indexOf('uno')>-1 || texto.indexOf(1)>-1){
+			if(texto.indexOf('uno')>-1 || ((texto.indexOf('1')>-1 && texto[texto.indexOf('1')-1]!=1) && (texto[texto.indexOf('1')+1]==' ' || texto.indexOf('1')==(texto.length-1)))){
 				btn.value = 1;
-			}else if(texto.indexOf('dos')>-1 || texto.indexOf(2)>-1){
+			}else if(texto.indexOf('cerdos')==-1 && (texto.indexOf('dos')>-1 || ((texto.indexOf('2')>-1 && texto[texto.indexOf('2')-1]!=1) && (texto[texto.indexOf('2')+1]==' ' || texto.indexOf('2')==(texto.length-1))))){
 				btn.value = 2;
-			}else if(texto.indexOf('tres')>-1 || texto.indexOf(3)>-1){
+			}else if(texto.indexOf('tres')>-1 || ((texto.indexOf('3')>-1 && texto[texto.indexOf('3')-1]!=1) && (texto[texto.indexOf('3')+1]==' ' || texto.indexOf('3')==(texto.length-1)))){
 				btn.value = 3;
-			}else if(texto.indexOf('cuatro')>-1 || texto.indexOf(4)>-1){
+			}else if(texto.indexOf('cuatro')>-1 || ((texto.indexOf('4')>-1 && texto[texto.indexOf('4')-1]!=1) && (texto[texto.indexOf('4')+1]==' ' || texto.indexOf('4')==(texto.length-1)))){
 				btn.value = 4;
-			}else if(texto.indexOf('cinco')>-1 || texto.indexOf(5)>-1){
+			}else if(texto.indexOf('cinco')>-1 || ((texto.indexOf('5')>-1 && texto[texto.indexOf('5')-1]!=1) && (texto[texto.indexOf('5')+1]==' ' || texto.indexOf('5')==(texto.length-1)))){
 				btn.value = 5;
-			}else if(texto.indexOf('seis')>-1 || texto.indexOf(6)>-1){
+			}else if(texto.indexOf('seis')>-1 || ((texto.indexOf('6')>-1 && texto[texto.indexOf('6')-1]!=1) && (texto[texto.indexOf('6')+1]==' ' || texto.indexOf('6')==(texto.length-1)))){
 				btn.value = 6;
-			}else if(texto.indexOf('siete')>-1 || texto.indexOf(7)>-1){
+			}else if(texto.indexOf('siete')>-1 || ((texto.indexOf('7')>-1 && texto[texto.indexOf('7')-1]!=1) && (texto[texto.indexOf('7')+1]==' ' || texto.indexOf('7')==(texto.length-1)))){
 				btn.value = 7;
-			}else if(texto.indexOf('ocho')>-1 || texto.indexOf(8)>-1){
+			}else if(texto.indexOf('ocho')>-1 || ((texto.indexOf('8')>-1 && texto[texto.indexOf('8')-1]!=1) && (texto[texto.indexOf('8')+1]==' ' || texto.indexOf('8')==(texto.length-1)))){
 				btn.value = 8;
-			}else if(texto.indexOf('nueve')>-1 || texto.indexOf(9)>-1){
+			}else if(texto.indexOf('nueve')>-1 || ((texto.indexOf('9')>-1 && texto[texto.indexOf('9')-1]!=1) && (texto[texto.indexOf('9')+1]==' ' || texto.indexOf('9')==(texto.length-1)))){
 				btn.value = 9;
-			}else if(texto.indexOf('diez')>-1 || texto.indexOf(10)>-1){
+			}else if(texto.indexOf('diez')>-1 || (texto.indexOf('10')>-1 && texto[texto.indexOf('10')+1]==' ') || texto.indexOf('10')==(texto.length-2)){
 				btn.value = 10;
-			}else if(texto.indexOf('once')>-1 || texto.indexOf(11)>-1){
+			}else if(texto.indexOf('once')>-1 || (texto.indexOf('11')>-1 && texto[texto.indexOf('11')+1]==' ') || texto.indexOf('11')==(texto.length-2)){
 				btn.value = 11;
-			}else if(texto.indexOf('doce')>-1 || texto.indexOf(12)>-1){
+			}else if(texto.indexOf('doce')>-1 || (texto.indexOf('12')>-1 && texto[texto.indexOf('12')+1]==' ') || texto.indexOf('12')==(texto.length-2)){
 				btn.value = 12;
-			}else if(texto.indexOf('trece')>-1 || texto.indexOf(13)>-1){
+			}else if(texto.indexOf('trece')>-1 || (texto.indexOf('13')>-1 && texto[texto.indexOf('13')+1]==' ') || texto.indexOf('13')==(texto.length-2)){
 				btn.value = 13;
-			}else if(texto.indexOf('catorce')>-1 || texto.indexOf(14)>-1){
+			}else if(texto.indexOf('catorce')>-1 || (texto.indexOf('14')>-1 && texto[texto.indexOf('14')+1]==' ') || texto.indexOf('14')==(texto.length-2)){
 				btn.value = 14;
-			}else if(texto.indexOf('quince')>-1 || texto.indexOf(15)>-1){
+			}else if(texto.indexOf('quince')>-1 || (texto.indexOf('15')>-1 && texto[texto.indexOf('15')+1]==' ') || texto.indexOf('15')==(texto.length-2)){
 				btn.value = 15;
-			}else if(texto.indexOf('dieciséis')>-1 || texto.indexOf(16)>-1){
+			}else if(texto.indexOf('dieciséis')>-1 || (texto.indexOf('16')>-1 && texto[texto.indexOf('16')+1]==' ') || texto.indexOf('16')==(texto.length-2)){
 				btn.value = 16;
-			}else if(texto.indexOf('diecisiete')>-1 || texto.indexOf(17)>-1){
+			}else if(texto.indexOf('diecisiete')>-1 || (texto.indexOf('17')>-1 && texto[texto.indexOf('17')+1]==' ') || texto.indexOf('17')==(texto.length-2)){
 				btn.value = 17;
-			}else if(texto.indexOf('dieciocho')>-1 || texto.indexOf(18)>-1){
+			}else if(texto.indexOf('dieciocho')>-1 || (texto.indexOf('18')>-1 && texto[texto.indexOf('18')+1]==' ') || texto.indexOf('18')==(texto.length-2)){
 				btn.value = 18;
-			}else if(texto.indexOf('diecinueve')>-1 || texto.indexOf(19)>-1){
+			}else if(texto.indexOf('diecinueve')>-1 || (texto.indexOf('19')>-1 && texto[texto.indexOf('19')+1]==' ') || texto.indexOf('19')==(texto.length-2)){
 				btn.value = 19;
-			}else if(texto.indexOf('veinte')>-1 || texto.indexOf(20)>-1){
+			}else if(texto.indexOf('veinte')>-1 || (texto.indexOf('20')>-1 && texto[texto.indexOf('20')+1]==' ') || texto.indexOf('20')==(texto.length-2)){
 				btn.value = 20;
 			}
 
@@ -454,7 +498,7 @@
 
 			iniciarTemporizador();
 
-			var texto_final = "Vamos a contar. Nos encontramos en la casa número 0 y debemos llegar al establo, pero antes tenemos que pasar por todas las casas. Sigue el orden de las casas hasta llegar al establo. Si quieres utilizar el teclado pulsa espacio para controlar con las flechas. También puedes dictar los números, diga empezar para comenzar";			
+			var texto_final = "Vamos a contar. Nos encontramos en la casa número 0 y debemos llegar al establo, pero antes tenemos que pasar por todas las casas. Sigue el orden de las casas hasta llegar al establo.";			
 
 			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 
@@ -1001,6 +1045,10 @@
 					break;
 				case 4: texto_final += ".¿Cuántas zanahorias hay?";
 					break;
+			}
+
+			if(recognizing){
+				reconocerVoz();
 			}		
 
 			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
@@ -1435,6 +1483,9 @@
 					$("#animalesDentro>img").attr("src", './imagenes/sumar/corral-propio-cuadrado-r.png');
 					$("#animalesDentro>img").attr("alt", 'corral cerrado');
 					prepararContinuacionJuegoAnimales();
+					if(recognizing){
+						reconocerVoz();
+					}
 				}
 				else{
 					var elem = elemento.draggable[0];
