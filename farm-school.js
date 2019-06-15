@@ -42,7 +42,7 @@
 
 			var respuestasGenericas = [];
 			var respuestaPorVoz;
-			var buttonRespEscog;
+			var buttonRespEscog = null;
 			var respuestaCorrecta = -1;
 			var numFallos = 0;
 			var tiempoInicio;
@@ -191,7 +191,7 @@
 
 			if(texto.indexOf('cero')>-1 || ((texto.indexOf('0')>-1 && texto[texto.indexOf('0')-1]!=1) && (texto[texto.indexOf('0')+1]==' ' || texto.indexOf('0')==(texto.length-1)))){
 				btn.value = 0;
-			}else if(texto.indexOf('uno')>-1 || ((texto.indexOf('1')>-1 && texto[texto.indexOf('1')-1]!=1) && (texto[texto.indexOf('1')+1]==' ' || texto.indexOf('1')==(texto.length-1)))){
+			}else if(texto.indexOf('uno')>-1 || texto.indexOf('una')>-1 || ((texto.indexOf('1')>-1 && texto[texto.indexOf('1')-1]!=1) && (texto[texto.indexOf('1')+1]==' ' || texto.indexOf('1')==(texto.length-1)))){
 				btn.value = 1;
 			}else if(texto.indexOf('cerdos')==-1 && (texto.indexOf('dos')>-1 || ((texto.indexOf('2')>-1 && texto[texto.indexOf('2')-1]!=1) && (texto[texto.indexOf('2')+1]==' ' || texto.indexOf('2')==(texto.length-1))))){
 				btn.value = 2;
@@ -1948,7 +1948,7 @@
 					if(respuestaPorVoz >= 0){
 						eliminarBotonPorVoz();
 					}
-					else{
+					if(buttonRespEscog != null){
 						buttonRespEscog.remove();
 					}
 					colocarFocoRespuestas();
