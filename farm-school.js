@@ -41,8 +41,9 @@
 		/**********GENERICAS***********/
 
 			var respuestasGenericas = [];
-			var respuestaEscogida;
+			var respuestaPorVoz;
 			var buttonRespEscog;
+			var respuestaCorrecta = -1;
 			var numFallos = 0;
 			var tiempoInicio;
 			var tiempoFin;
@@ -167,7 +168,7 @@
 				}
 				case ("contarVerduras.html"):
 				{
-					text = 	"Pulsa sobre la respuesta. Con el teclado utiliza las flechas para desplazarte e intro para contestar. Para juega con voz dicta la respuesta correcta";
+					text = 	"Pulsa sobre la respuesta. Con el teclado utiliza las flechas para desplazarte e intro para contestar. Para jugar con voz, dicta la respuesta correcta";
 					break;
 				}
 				case("sumar.html"):
@@ -188,7 +189,9 @@
 
 			var btn = document.createElement("BUTTON");
 
-			if(texto.indexOf('uno')>-1 || ((texto.indexOf('1')>-1 && texto[texto.indexOf('1')-1]!=1) && (texto[texto.indexOf('1')+1]==' ' || texto.indexOf('1')==(texto.length-1)))){
+			if(texto.indexOf('cero')>-1 || ((texto.indexOf('0')>-1 && texto[texto.indexOf('0')-1]!=1) && (texto[texto.indexOf('0')+1]==' ' || texto.indexOf('0')==(texto.length-1)))){
+				btn.value = 0;
+			}else if(texto.indexOf('uno')>-1 || ((texto.indexOf('1')>-1 && texto[texto.indexOf('1')-1]!=1) && (texto[texto.indexOf('1')+1]==' ' || texto.indexOf('1')==(texto.length-1)))){
 				btn.value = 1;
 			}else if(texto.indexOf('cerdos')==-1 && (texto.indexOf('dos')>-1 || ((texto.indexOf('2')>-1 && texto[texto.indexOf('2')-1]!=1) && (texto[texto.indexOf('2')+1]==' ' || texto.indexOf('2')==(texto.length-1))))){
 				btn.value = 2;
@@ -229,6 +232,12 @@
 			}else if(texto.indexOf('veinte')>-1 || (texto.indexOf('20')>-1 && texto[texto.indexOf('20')+2]==' ') || texto.indexOf('20')==(texto.length-2)){
 				btn.value = 20;
 			}
+			else{
+				btn.value = 1000;
+			}
+
+			//Me guardo el valor de la respuesta dicha mediante voz
+			respuestaPorVoz = btn.value;
 
 			return btn;
 		}
@@ -252,6 +261,42 @@
 			window.onorientationchange = reorient;
 			window.setTimeout(reorient, 0);
 		});
+
+	/*****************************************************************************************************/
+
+
+	/**********************************TABULADOR - CONTROLES FARM SCHOOL**********************************/
+
+		function abrirPestControlesJuego(event, opcionJuego) {
+			
+			//Declaramos todas las variables
+			var i, controlesTablaTab, controlesTabLink;
+
+			//Obtenemos todos los elementos con la clase controlesTablaTab y los ocultamos
+			controlesTablaTab = document.getElementsByClassName("controlesTablaTab");
+			for (i = 0; i < controlesTablaTab.length; i++) {
+				controlesTablaTab[i].style.display = "none";
+			}
+
+			//Obtenemos todos los elementos de la clase controlesTabLink y eliminamos la clase tabActivo de dichos elementos obtenidos
+			controlesTabLink = document.getElementsByClassName("controlesTabLink");
+			for (i = 0; i < controlesTabLink.length; i++) {
+				if(controlesTabLink[i].className != "contar"){
+					if(opcionJuego != "contar-casas" && opcionJuego != "contar-verduras"){
+						controlesTabLink[i].className = controlesTabLink[i].className.replace("tabActivo", "");
+					}
+				}
+				else{
+					controlesTabLink[i].className = controlesTabLink[i].className.replace("tabActivo", "");
+				}
+			}
+
+			//Mostramos el elemento tabulado actual, anyadiendo la clase tabActivo al elemento pasado como parametro
+			console.log(document.getElementById(opcionJuego));
+			document.getElementById(opcionJuego).style.display = "block";
+			event.currentTarget.className += " tabActivo";
+
+		}
 
 	/*****************************************************************************************************/
 
@@ -1546,6 +1591,23 @@
 	/*****************************************************************************************************/
 
 
+	/****************************************ELIMINAR BOTON POR VOZ***************************************/
+
+		function eliminarBotonPorVoz(){
+			var indexDelButton = -1;
+			$("#respuestas>button").each(function(index){
+				if($(this).attr("value") == respuestaPorVoz){
+					indexDelButton = index;
+				}
+			});
+			if(indexDelButton >= 0){
+				$("#respuestas>button").eq(indexDelButton).remove();
+			}
+		}
+
+	/*****************************************************************************************************/
+
+
 	/*****************************************COMPROBAR RESPUESTA*****************************************/
 
 		function comprobarRespuesta(botonRespuesta){
@@ -1882,11 +1944,17 @@
 						if(respuestasMostradas){
 							$("#respuestas").append("<div class='mano-tutorial-respuestas'></div>");
 						}
-					}		
-					buttonRespEscog.remove();
+					}	
+					if(respuestaPorVoz >= 0){
+						eliminarBotonPorVoz();
+					}
+					else{
+						buttonRespEscog.remove();
+					}
 					colocarFocoRespuestas();
 					console.log("he cerrado el modal");
 				}
 			}
 
 	/*****************************************************************************************************/
+	

@@ -261,13 +261,13 @@ body{
 	
 	@keyframes mano{
 		from{
-				top: 0%;
+				top: -0%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 15%;
+				top: 12%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -304,15 +304,30 @@ body{
 			}
 	}
 
-	@keyframes mano-creditos{
+	@keyframes mano-controles{
 		from{
-				top: 75%;
+				top: -130%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 80%;
+				top: -30%;
+				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+	}
+
+	@keyframes mano-creditos{
+		from{
+				top: 73%;
+				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		to{
+				top: 78%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -321,13 +336,13 @@ body{
 
 	@keyframes mano-contar{
 		from{
-				top: 10%;
+				top: 0%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 35%;
+				top: 25%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -463,6 +478,19 @@ body{
 		animation-iteration-count: infinite;
 	}
 
+	.mano-tutorial-controles{
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		transform: rotate(70deg);
+		z-index: 50;
+		left: 30%;
+		top: 0%;
+		animation-name: mano-controles;
+		animation-duration: 1.5s;
+		animation-iteration-count: infinite;
+	}
+
 	.mano-tutorial-creditos{
 		position: absolute;
 		width: 60px;
@@ -482,7 +510,7 @@ body{
 		height: 60px;
 		transform: rotate(70deg);
 		z-index: 10;
-		left: 50%;
+		left: 55%;
 		top: 10%;
 		animation-name: mano-contar;
 		animation-duration: 1.5s;
@@ -612,7 +640,7 @@ body{
 		position: relative;
 		text-align: center;
 		top: 0px;
-		font-size: 25px;
+		font-size: 0.8em;
 	}
 		body>main>nav>h2{
 			margin-top: 3%;
@@ -758,6 +786,7 @@ body{
 			.tabla>tbody>tr>th{
 				border: 0.3em solid #8A6300;
 			}
+
 
 	/*JUEGOS*/
 	
@@ -945,6 +974,148 @@ body{
 			margin-bottom: 2em !important;
 		}
 
+
+	/*TABULADOR - PAGINA CONTROLES DE FARM SCHOOL*/
+
+		#controles{
+			padding: 0.2em;
+		}
+
+			#controles>#titulo{
+				display: flex;
+				justify-content: space-around;
+				margin: 0;
+				padding: 0.5em;
+				font-size: 0.7em;
+			}
+
+				#controles>#titulo>h3{
+					margin: 0;
+				}
+
+				#controles>#titulo>a{
+					margin: 0 !important;
+					height: 2em !important;
+				}
+
+		/*Le ponemos estilo a los elementos tab*/
+		.tab{
+			overflow: hidden;
+			border: 0.1em solid #8A6300;
+			background-color: #917453;
+			margin: 0;
+			margin-top: 0.5em;
+			margin-left: 0.5em;
+			margin-right: 0.5em;
+		}
+
+		/*Le ponemos estilos a los botones que desplegaran las diferentes tablas de controles*/
+		.tab button{
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 1em 1em;
+			transition: 0.3s;
+			color: #ffffff;
+		}
+
+		/*Le cambiamos el color al boton del tabulador, una vez el raton pasa encima de el, o el foco esta sobre el*/
+		.tab button:hover{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		.tab button:focus{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		/*Creamos una clase que cambie el boton que este mostrando actualmente el contenido*/
+		.tab button.tabActivo{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		/*Le ponemos estilo a la tabla que se mostrara al verse el contenido de un determinado elemento del tab*/
+		.controlesTablaTab{
+			display: none;
+			padding: 0.8em;
+			border: 0.1em solid #8A6300;
+			border-top: none;
+			font-size: 0.45em;
+			margin: 0;
+			margin-left: 1.1em;
+			margin-right: 1.1em;
+		}
+
+			.controlesTablaTab>tbody{
+				margin: auto;
+			}
+
+				.controlesTablaTab>tbody>tr:nth-child(even){
+					background-color: #DEC78D;
+					
+				}
+
+				.controlesTablaTab>tbody>tr:first-of-type{
+					vertical-align: middle;
+					font-weight: bold;
+					background-color: #D1A271;
+				}
+
+					.controlesTablaTab>tbody>tr:first-of-type>td>span{
+						vertical-align: middle;
+					}
+
+						.controlesTablaTab>tbody>tr:first-of-type>td>span>img{
+							height: 60%;
+						}
+
+
+		.controlesTablaTabContar{
+			padding: 1em;
+			border: 0.1em solid #8A6300;
+			border-top: none;
+			font-size: 1em;
+			margin: 0;
+			margin: 0.8em;
+		}
+
+			.controlesTablaTabContar>tbody{
+				margin: auto;
+			}
+
+				.controlesTablaTabContar>tbody>tr:nth-child(even){
+					background-color: #DEC78D;
+					
+				}
+
+				.controlesTablaTabContar>tbody>tr:first-of-type{
+					vertical-align: middle;
+					font-weight: bold;
+					background-color: #D1A271;
+				}
+
+					.controlesTablaTabContar>tbody>tr:first-of-type>td>span{
+						vertical-align: middle;
+					}
+
+						.controlesTablaTabContar>tbody>tr:first-of-type>td>span>img{
+							height: 60%;
+						}
+
+
+	/*********************************************/
+
+	/******************CREDITOS*******************/
+
+		#creditos>div:last-of-type{
+			margin-bottom: 1.2em;
+		}
+
+	/*********************************************/
 
 	/*FOOTER*/
 

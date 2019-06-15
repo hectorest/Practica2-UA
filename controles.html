@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Farm School/Controles</title>
+	<meta name="author" content="Héctor Esteve Yagüe y Francisco Javier García Fernández" /> 
+	<meta name="keywords" content="HTML5, web, UA, práctica 2, usabilidad, accesibilidad, niños, aprender, granja"/> 
+	<meta name="description" content="Formulario de la práctica 1 de UA" />
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="shortcut icon" type="image/x-icon" href="./logotipo-e-icono/icono/ico/icono-farm-school.ico"/>
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="./logotipo-e-icono/icono/ico/icono-farm-school.ico"/>
+	<link rel="stylesheet" type="text/css" href="farm-school.css">
+  	<link rel="stylesheet" href="./jquery-utilizado/plugins-jquery/jquery-ui-1.12.1/jquery-ui.css" />  	
+  	<script src="./jquery-utilizado/jquery-3.3.1.min.js"></script>
+  	<script src="./jquery-utilizado/plugins-jquery/jquery-ui-1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+	<main>
+		<header>
+			<a title="Ir al menú principal (Esc)" href="index.html"><img src="./logotipo-e-icono/logotipo/logotipo-farm-school.png" alt="Logotipo de Farm School"></a>
+		</header>
+		<section id="controles">
+			<div id="titulo">
+				<h3>Controles:</h3>
+				<a title="Ir al menú principal (Esc)" href="index.html" class="botones"><span>Volver al menú principal</span></a>
+			</div>
+
+			<!--Links del tab-->
+			<div class="contenedor-mano-tutorial">
+				<div class="mano-tutorial-controles"></div>
+				<div class="tab">
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'menu')">Menú</button>
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'contar')">Contar</button>
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'sumar')">Sumar</button>
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'restar')">Restar</button>
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'controlesTabla')">Controles</button>
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'creditos')">Créditos</button>
+				</div>
+			</div>
+
+			<!--Tablas de los controles-->
+			<table id="menu" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+				<caption>Menu:</caption>
+				<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+				<tr><td>Click del ratón</td><td>Ir a la opción clicada</td><td>-</td><td>-</td></tr>
+				<tr><td>Flecha Arriba</td><td>-</td><td>Ir a la opción superior</td><td>-</td></tr>
+				<tr><td>Flecha Abajo</td><td>-</td><td>Ir a la opción inferior</td><td>-</td></tr>
+				<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+				<tr><td>Enter</td><td>-</td><td>Entrar en la opción seleccionada</td><td>-</td></tr>
+				<tr><td>...Contar...</td><td>-</td><td>-</td><td>Ir al menu de contar</td></tr>
+				<tr><td>...Sumar...</td><td>-</td><td>-</td><td>Ir a sumar</td></tr>
+				<tr><td>...Restar...</td><td>-</td><td>-</td><td>Ir a restar</td></tr>
+				<tr><td>...Controles...</td><td>-</td><td>-</td><td>Ir a los controles</td></tr>
+				<tr><td>...Créditos...</td><td>-</td><td>-</td><td>Ir a los créditos</td></tr>
+			</table>
+
+			<div id="contar" class="controlesTablaTab">
+				<div class="tab">
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'contar-casas')">Contar Casas</button>
+					<button class="controlesTabLink" onclick="abrirPestControlesJuego(event, 'contar-verduras')">Contar Verduras</button>
+				</div>
+				<table class="tabla controlesTablaTabContar" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+					<caption>Contar:</caption>
+					<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+					<tr><td>Click del ratón</td><td>Ir a la opción clicada</td><td>-</td><td>-</td></tr>
+					<tr><td>Flecha Arriba</td><td>-</td><td>Ir a la opción superior</td><td>-</td></tr>
+					<tr><td>Flecha Abajo</td><td>-</td><td>Ir a la opción inferior</td><td>-</td></tr>
+					<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+					<tr><td>Enter</td><td>-</td><td>Entrar en la opción seleccionada</td><td>-</td></tr>
+					<tr><td>...Casas...</td><td>-</td><td>-</td><td>Ir a contar casas</td></tr>
+					<tr><td>...Verduras...</td><td>-</td><td>-</td><td>Ir a contar verduras</td></tr>
+				</table>
+			</div>
+
+			<table id="contar-casas" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+				<caption>Contar Casas:</caption>
+				<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+				<tr><td>Click del ratón</td><td>Clicar sobre casa para hacer recorrido / clicar sobre respuesta (recorrido finalizado)</td><td>-</td><td>-</td></tr>
+				<tr><td>Flecha Izquierda</td><td>-</td><td>Ir a la izquierda mientras se hace el recorrido (solo con espacio pulsado) / ir a la respuesta de la izquierda (recorrido completado)</td><td>-</td></tr>
+				<tr><td>Flecha Derecha</td><td>-</td><td>Ir a la derecha mientras se hace el recorrido (solo con espacio pulsado) / ir a la respuesta de la derecha (recorrido completado)</td><td>-</td></tr>
+				<tr><td>Espacio</td><td>-</td><td>Empezar recorrido con teclado</td><td>-</td></tr>
+				<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+				<tr><td>Enter</td><td>-</td><td>Comprobar respuesta seleccionada</td><td>-</td></tr>
+				<tr><td>...Empezar...</td><td>-</td><td>-</td><td>Empezar recorrido</td></tr>
+				<tr><td>...Números...</td><td>-</td><td>-</td><td>Para hacer el recorrido (1, 2, ...)</td></tr>
+				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha (una vez se ha acabado el recorrido y se ha pulsado sobre el micrófono)</td></tr>
+			</table>
+
+			<table id="contar-verduras" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+				<caption>Contar Verduras:</caption>
+				<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+				<tr><td>Click del ratón</td><td>Clicar sobre respuesta</td><td>-</td><td>-</td></tr>
+				<tr><td>Flecha Izquierda</td><td>-</td><td>Ir a la respuesta de la izquierda</td><td>-</td></tr>
+				<tr><td>Flecha Derecha</td><td>-</td><td>Ir a la respuesta de la derecha</td><td>-</td></tr>
+				<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+				<tr><td>Enter</td><td>-</td><td>Comprobar respuesta seleccionada</td><td>-</td></tr>
+				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha  (una vez se ha pulsado el micrófono)</td></tr>
+			</table>
+
+			<table id="sumar" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+				<caption>Sumar:</caption>
+				<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+				<tr><td>Click del ratón y mover</td><td>Seleccionar un animal y moverlo al corral</td><td>-</td><td>-</td></tr>
+				<tr><td>Click del ratón</td><td>Comprobar respuesta (una vez se han metido todos los animales)</td><td>-</td><td>-</td></tr>
+				<tr><td>Espacio</td><td>-</td><td>Seleccionar el primer animal que se puede meter</td><td>-</td></tr>
+				<tr><td>Flecha Izquierda</td><td>-</td><td>Meter animal en el corral / ir a la respuesta de la izquierda (animales ya metidos en el corral)</td><td>-</td></tr>
+				<tr><td>Flecha Derecha</td><td>-</td><td>Ir a la respuesta de la derecha</td><td>-</td></tr>
+				<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+				<tr><td>Enter</td><td>-</td><td>Comprobar respuesta seleccionada (animales ya metidos)</td><td>-</td></tr>
+				<tr><td>...Meter...</td><td>-</td><td>-</td><td>Para meter animales en el corral</td></tr>
+				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha (una vez se han metido todos los animales y se ha pulsado sobre el micrófono)</td></tr>
+			</table>
+
+			<table id="restar" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+				<caption>Restar:</caption>
+				<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+				<tr><td>Click del ratón</td><td>Clicar sobre respuesta</td><td>-</td><td>-</td></tr>
+				<tr><td>Flecha Izquierda</td><td>-</td><td>Ir a la respuesta de la izquierda</td><td>-</td></tr>
+				<tr><td>Flecha Derecha</td><td>-</td><td>Ir a la respuesta de la derecha</td><td>-</td></tr>
+				<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+				<tr><td>Enter</td><td>-</td><td>Comprobar respuesta seleccionada</td><td>-</td></tr>
+				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha (una vez se ha pulsado el micrófono)</td></tr>
+			</table>
+
+			<table id="controlesTabla" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+				<caption>Controles:</caption>
+				<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+				<tr><td>Click del ratón</td><td>Ir a la opción clickada</td><td>-</td><td>-</td></tr>
+				<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+				<tr><td>Enter</td><td>-</td><td>Entrar en la opción seleccionada</td><td>-</td></tr>
+			</table>
+
+			<table id="creditos" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
+				<caption>Créditos:</caption>
+				<tr><td>Control o Palabra Clave</td><td>Teclado y Ratón (<span><img src="./iconos/teclado-y-raton.png"></span>)</td><td>Teclado (<span><img src="./iconos/teclado.png"></span>)</td><td>Voz: (<span><img src="./iconos/voz.png"></span>)</td></tr>
+				<tr><td>Click del ratón</td><td>Ir a la opción clickada</td><td>-</td><td>-</td></tr>
+				<tr><td>Tabulador</td><td>-</td><td>Para ir seleccionando las distintas opciones del juego</td><td>-</td></tr>
+				<tr><td>Enter</td><td>-</td><td>Entrar en la opción seleccionada</td><td>-</td></tr>
+			</table>
+		</section>
+		<footer>
+			<p><strong><a title="Ver créditos" href="#">&copy;Héctor Esteve Yagüe y Francisco Javier García Fernández</a></strong></p>
+		</footer>
+	</main>
+	<script src="./farm-school.js"></script>
+	<script src="voz.js"></script>
+	<script>
+		var texto_final = "Estos son los controles del juego. Si quieres verlos, pulsa sobre los botones correspondientes a las distintas partes del juego. Si quieres practicar, pulsa sobre el botón volver al menú principal o sobre la imagen con el nombre Farm School.";
+		responsiveVoice.speak(texto_final, "Spanish Female");
+	</script>
+	<script>
+		document.addEventListener("keydown", function teclaPulsada(evt)
+		{
+			if(evt.keyCode == 27){
+				window.location="index.html";
+			}
+		}, false);
+	</script>
+</body>
+</html>
