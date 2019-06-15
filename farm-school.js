@@ -140,7 +140,7 @@
 			recognition.onend = function() {
 				recognizing = false;
 				console.log("terminó de escuchar, llegó a su fin");
-				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
+				$('.gif-micro').html('<img alt="micrófono apagado" src="./imagenes/micro/micro-off.png">');
 			}
 
 		}
@@ -150,11 +150,11 @@
 			if (recognizing == false) {
 				recognition.start();
 				recognizing = true;
-				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro.gif">');
+				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro/micro.gif">');
 			} else {
 				recognition.stop();
 				recognizing = false;
-				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
+				$('.gif-micro').html('<img alt="micrófono apagado" src="./imagenes/micro/micro-off.png">');
 			}
 		}
 
@@ -367,7 +367,7 @@
 			{
 				$('#respuestas').append('<button id = "resp'+ (index) +'" value="' + respuestasGenericas[index] + '" onclick="mostrarMensajeIntento(comprobarRespuesta(this));">' + respuestasGenericas[index] + '</button>');
 			});
-			$('#respuestas').append('<button class="gif-micro" onclick="reconocerVoz();">' + '<img alt="micrófono escuchando" src="./imagenes/micro-off.png">' + '</button>');
+			$('#respuestas').append('<button class="gif-micro" onclick="reconocerVoz();">' + '<img alt="micrófono apagado" src="./imagenes/micro/micro-off.png">' + '</button>');
 		}
 
 		function generarRespuestas(rango){
