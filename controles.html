@@ -87,6 +87,7 @@
 				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha (una vez se ha acabado el recorrido y se ha pulsado sobre el micrófono)</td></tr>
 				<tr><td>...Menú...</td><td>-</td><td>-</td><td>Volver al menú principal (solo si se ha pulsado el micrófono)</td></tr>
 				<tr><td>...Ayuda...</td><td>-</td><td>-</td><td>Para abrir la ayuda del juego (solo si se ha pulsado el micrófono)</td></tr>
+				<tr><td>...Cerrar...</td><td>-</td><td>-</td><td>Para cerrar un mensaje modal (solo si se ha pulsado el micrófono y se ha abierto un mensaje modal)</td></tr>
 			</table>
 
 			<table id="contar-verduras" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
@@ -100,6 +101,7 @@
 				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha  (una vez se ha pulsado el micrófono)</td></tr>
 				<tr><td>...Menú...</td><td>-</td><td>-</td><td>Volver al menú principal (solo si se ha pulsado el micrófono)</td></tr>
 				<tr><td>...Ayuda...</td><td>-</td><td>-</td><td>Para abrir la ayuda del juego (solo si se ha pulsado el micrófono)</td></tr>
+				<tr><td>...Cerrar...</td><td>-</td><td>-</td><td>Para cerrar un mensaje modal (solo si se ha pulsado el micrófono y se ha abierto un mensaje modal)</td></tr>
 			</table>
 
 			<table id="sumar" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
@@ -116,6 +118,7 @@
 				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha (una vez se han metido todos los animales y se ha pulsado sobre el micrófono)</td></tr>
 				<tr><td>...Menú...</td><td>-</td><td>-</td><td>Volver al menú principal (solo si se ha pulsado el micrófono)</td></tr>
 				<tr><td>...Ayuda...</td><td>-</td><td>-</td><td>Para abrir la ayuda del juego (solo si se ha pulsado el micrófono)</td></tr>
+				<tr><td>...Cerrar...</td><td>-</td><td>-</td><td>Para cerrar un mensaje modal (solo si se ha pulsado el micrófono y se ha abierto un mensaje modal)</td></tr>
 			</table>
 
 			<table id="restar" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
@@ -129,6 +132,7 @@
 				<tr><td>...Respuesta...</td><td>-</td><td>-</td><td>Para comprobar la respuesta dicha (una vez se ha pulsado el micrófono)</td></tr>
 				<tr><td>...Menú...</td><td>-</td><td>-</td><td>Volver al menú principal (solo si se ha pulsado el micrófono)</td></tr>
 				<tr><td>...Ayuda...</td><td>-</td><td>-</td><td>Para abrir la ayuda del juego (solo si se ha pulsado el micrófono)</td></tr>
+				<tr><td>...Cerrar...</td><td>-</td><td>-</td><td>Para cerrar un mensaje modal (solo si se ha pulsado el micrófono y se ha abierto un mensaje modal)</td></tr>
 			</table>
 
 			<table id="controlesTabla" class="tabla controlesTablaTab" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
@@ -158,6 +162,7 @@
 	<script>
 		var texto_final = "Estos son los controles del juego. Si quieres verlos, pulsa sobre los botones correspondientes a las distintas partes del juego. Si quieres practicar, pulsa sobre el botón volver al menú principal o sobre la imagen con el nombre Farm School.";
 		responsiveVoice.speak(texto_final, "Spanish Female");
+		reconocerVoz();
 	</script>
 	<script>
 		document.addEventListener("keydown", function teclaPulsada(evt)

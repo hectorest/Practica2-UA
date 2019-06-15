@@ -89,6 +89,8 @@
 						window.location="restar.html";
 					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("créditos") > -1){
 						window.location="creditos.html";
+					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("controles") > -1){
+						window.location="controles.html";
 					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("adiós") > -1){
 						var  texto_final = "Bye bye hasta otro ratito"
 						responsiveVoice.speak(texto_final, "Spanish Female", {onend: function(){window.close()}});

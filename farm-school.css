@@ -1041,7 +1041,7 @@ body{
 		/*Le ponemos estilo a la tabla que se mostrara al verse el contenido de un determinado elemento del tab*/
 		.controlesTablaTab{
 			display: none;
-			padding: 0.8em;
+			padding: 0.6em;
 			border: 0.1em solid #8A6300;
 			border-top: none;
 			font-size: 0.4em;
