@@ -837,7 +837,7 @@ body{
 				}
 
 				#contenedorResultadosDerecha>#ponerRespuestas>#respuestas>button{
-					padding: 1em;
+					padding: 5%;
 					margin: 1em;
 				}
 
@@ -985,7 +985,6 @@ body{
 				display: flex;
 				justify-content: space-around;
 				margin: 0;
-				padding: 0.5em;
 				font-size: 0.7em;
 			}
 
@@ -1041,7 +1040,7 @@ body{
 		/*Le ponemos estilo a la tabla que se mostrara al verse el contenido de un determinado elemento del tab*/
 		.controlesTablaTab{
 			display: none;
-			padding: 0.6em;
+			padding: 0.5em;
 			border: 0.1em solid #8A6300;
 			border-top: none;
 			font-size: 0.4em;
@@ -1154,8 +1153,186 @@ body{
 
 	@media all and (min-width: 1500px){
 
+		body>main>header>a>img{
+			width: 12em;
+			height: 10em;
+		}
+
+		body>main>nav>h2{
+			font-size: 3em;
+		}
+
+			body>main>nav>ul>li{
+				font-size: 2em;
+			}
+
+		.botonera{
+			margin-bottom: 3em;
+		}
+
+			.botonera>a{
+				font-size: 2em;
+			}
+
+		.tituloJuego>h2{
+			font-size: 2em;
+		}
+
 		#contenedorResultadosDerecha>img{
 			width: 25%;
+		}
+
+		.controlesTablaTab{
+			font-size: 0.9em;
+			margin-left: 0.5em;
+			margin-right: 0.5em;
+		}
+
+		#controles>#titulo{
+			font-size: 1em;
+			padding: 0.5em;
+		}
+
+		.tab button{
+			font-size: 1em;
+		}
+
+		.respuestas>.gif-micro{
+			width: 4em;
+			height: 4em;
+		}
+
+			.respuestas>.gif-micro>img{
+				width: 3em;
+				height: 3em;
+			}
+
+		.modal{
+			font-size: 2em;
+		}
+
+			.modal>.contenido>p{
+				font-size: 1.2em;
+			}
+
+			.modal>.contenido>#estadisticas>p{
+				font-size: 1.2em;
+			}
+
+		.botones-modal{
+			font-size: 0.7em;
+			margin-top: 5em;
+		}
+			
+
+		/*ANIMACIONES*/
+
+		@keyframes mano-drag{
+			from{
+					top: 40%;
+					left: 55%;
+					background-image: url("./imagenes/tutorial/animaciones/arrastrar/tutorial-mano-arrastrar-rellena.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			to{
+					top: 40%;
+					left: 25%;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					width: 5em;
+					height: 5em;
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+		}
+
+		@keyframes mano-click{
+			0%{
+					top: 85%;
+					left: 15%;
+					width: 5em;
+					height: 5em;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			30%{
+					top: 85%;
+					left: 15%;
+					width: 5em;
+					height: 5em;
+					background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			70%{
+					top: 75%;
+					left: 25%;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					width: 5em;
+					height: 5em;
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			100%{
+					top: 75%;
+					left: 25%;
+					background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+					width: 5em;
+					height: 5em;
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+		}
+
+		.mano-tutorial{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-modal{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-ayuda{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-controles{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-creditos{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-contar{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-respuestas{
+			width: 5em;
+			height: 5em;
+		}
+
+		.mano-tutorial-respuestas-contar-casas{
+			width: 5em;
+			height: 5em;
+		}
+
+		.mano-tutorial-drag{
+			width: 5em;
+			height: 8em;
+		}
+
+		.mano-tutorial-click{
+			width: 5em;
+			height: 5em;
 		}
 
 	}
