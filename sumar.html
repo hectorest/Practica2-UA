@@ -47,32 +47,88 @@
 			if(document.getElementById('respuestas').innerHTML!=''){
 				if(evt.keyCode == 37){
 					pos--;
+					if(pos==3){
+						if(document.getElementById('resp3')!=='undefined' && document.getElementById('resp3')!==null){
+							document.getElementById('resp').focus();
+						}else{
+							pos--;
+						}
+					}
+					if(pos==2){
+						if(document.getElementById('resp2')!=='undefined' && document.getElementById('resp2')!==null){
+							document.getElementById('resp2').focus();
+						}else{
+							pos--;
+						}
+					}if(pos==1){
+						if(document.getElementById('resp1')!=='undefined' && document.getElementById('resp1')!==null){
+							document.getElementById('resp1').focus();
+						}else{
+							pos--;
+						}
+					}
+					
 					if(pos==0){
-						document.getElementById('resp0').focus();
-					}else if(pos==1){
-						document.getElementById('resp1').focus();
-					}else if(pos==2){
-						document.getElementById('resp2').focus();
-					}else if(pos==3){
-						document.getElementById('resp3').focus();
-					}else if(pos<0){
-						document.getElementById('resp3').focus();
+						if(document.getElementById('resp0')!=='undefined' && document.getElementById('resp0')!==null){
+							document.getElementById('resp0').focus();
+						}else{
+							pos--;
+						}
+					}					
+					if(pos<0){
+						$("#respuestas>button" ).each(function(i) {
+							id = 'resp'+i;
+						 	if(document.getElementById(id)!=='undefined' && document.getElementById(id)!==null){
+								console.log(id);
+								document.getElementById(id).focus();
+						  	}
+						});
 						pos=3;
 					}
+					console.log(pos);
 				}else if(evt.keyCode == 39){
 					pos++;
 					if(pos==0){
-						document.getElementById('resp0').focus();
-					}else if(pos==1){
-						document.getElementById('resp1').focus();
-					}else if(pos==2){
-						document.getElementById('resp2').focus();
-					}else if(pos==3){
-						document.getElementById('resp3').focus();
-					}else if(pos>3){
-						document.getElementById('resp0').focus();
-						pos=0;
+						if(document.getElementById('resp0')!=='undefined' && document.getElementById('resp0')!==null){
+							document.getElementById('resp0').focus();
+						}else{
+							pos++;
+						}
 					}
+					if(pos==1){
+						if(document.getElementById('resp1')!=='undefined' && document.getElementById('resp1')!==null){
+							document.getElementById('resp1').focus();
+						}else{
+							console.log('borro el uno');
+							pos++;
+						}
+					}
+					if(pos==2){
+						if(document.getElementById('resp2')!=='undefined' && document.getElementById('resp2')!==null){
+							document.getElementById('resp2').focus();
+						}else{
+							pos++;
+						}
+					}
+					if(pos==3){
+						if(document.getElementById('resp3')!=='undefined' && document.getElementById('resp3')!==null){
+							document.getElementById('resp3').focus();
+						}else{
+							pos++;
+						}
+					}
+					if(pos>3){
+						$("#respuestas>button" ).each(function(i) {
+							id = 'resp'+i;
+						 	if(document.getElementById(id)!=='undefined' && document.getElementById(id)!==null){
+								console.log(id);
+								document.getElementById(id).focus();
+								return false;
+						  	}
+						});
+						pos=0
+					}
+					console.log(pos);
 				}
 			}
 			if(evt.keyCode == 27){

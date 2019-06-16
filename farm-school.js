@@ -1677,6 +1677,7 @@
 	/************************************MOSTRAR MENSAJE MODAL INTENTO************************************/
 
 		function crearMensajeModal(mensaje, intento){
+			pos=0;
 			if(!intento){
 				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode);">Cerrar</button></div></div></div>';
 			}
