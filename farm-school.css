@@ -610,8 +610,8 @@ body{
 
 				body>main>header>a>img{
 
-					width: 200px;
-					height: 150px;
+					width: 180px;
+					height: 130px;
 
 				}
 
@@ -715,6 +715,10 @@ body{
 					body>main>nav>label>span{
 						display: inline-block;
 					}
+
+		body>main>#contar-volver-index{
+			margin-bottom: 1.5em;
+		}
 
 
 	/*TABLAS*/
@@ -1167,7 +1171,8 @@ body{
 			}
 
 		.botonera{
-			margin-bottom: 3em;
+			margin-bottom: 3em !important;
+			font-size: 0.5em !important;
 		}
 
 			.botonera>a{
@@ -1183,9 +1188,9 @@ body{
 		}
 
 		.controlesTablaTab{
-			font-size: 0.9em;
-			margin-left: 0.5em;
-			margin-right: 0.5em;
+			font-size: 0.85em;
+			margin-left: 0.6em;
+			margin-right: 0.6em;
 		}
 
 		#controles>#titulo{
@@ -1221,7 +1226,10 @@ body{
 
 		.botones-modal{
 			font-size: 0.7em;
-			margin-top: 5em;
+		}
+
+		#creditos{
+			font-size: 2em;
 		}
 			
 
@@ -1285,6 +1293,21 @@ body{
 				}
 		}
 
+		@keyframes mano-creditos{
+			from{
+					top: 73%;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			to{
+					top: 80%;
+					background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+		}
+
 		.mano-tutorial{
 			width: 3em;
 			height: 3em;
@@ -1301,8 +1324,8 @@ body{
 		}
 
 		.mano-tutorial-controles{
-			width: 3em;
-			height: 3em;
+			width: 4em;
+			height: 4em;
 		}
 
 		.mano-tutorial-creditos{
