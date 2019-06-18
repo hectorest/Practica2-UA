@@ -19,7 +19,7 @@
 		<header>
 			<a title="Ir al menú principal (Esc)" href="index.html"><img src="./logotipo-e-icono/logotipo/logotipo-farm-school.png" alt="Logotipo de Farm School"></a>
 		</header>
-		<section>
+		<section id="creditos">
 			<h3>Datos de los creadores:</h3>
 			<div id="contTablasCred">
 				<table class="tabla" title="Puedes hacer scroll lateral en la tabla si no cabe en tu pantalla para poder ver todos los datos que contiene">
@@ -48,10 +48,12 @@
 			<p><strong><a title="Ver créditos" href="#">&copy;Héctor Esteve Yagüe y Francisco Javier García Fernández</a></strong></p>
 		</footer>
 	</main>
+	<script src="./farm-school.js"></script>
 	<script src="voz.js"></script>
 	<script>
 		var texto_final = "Estos son los créditos del juego. Si quieres practicar, pulsa sobre el botón volver al menú principal o sobre la imagen con el nombre Farm School.";	
 		responsiveVoice.speak(texto_final, "Spanish Female");
+		reconocerVoz();
 	</script>
 	<script>
 		document.addEventListener("keydown", function teclaPulsada(evt)

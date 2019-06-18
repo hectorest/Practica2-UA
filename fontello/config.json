@@ -11,6 +11,12 @@
       "css": "address-book-o",
       "code": 62138,
       "src": "fontawesome"
+    },
+    {
+      "uid": "0133387f2069a1b3168942b84d81dd3a",
+      "css": "gamepad",
+      "code": 61723,
+      "src": "fontawesome"
     }
   ]
 }

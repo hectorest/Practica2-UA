@@ -261,13 +261,13 @@ body{
 	
 	@keyframes mano{
 		from{
-				top: 0%;
+				top: -0%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 15%;
+				top: 12%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -304,15 +304,30 @@ body{
 			}
 	}
 
-	@keyframes mano-creditos{
+	@keyframes mano-controles{
 		from{
-				top: 75%;
+				top: -130%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 80%;
+				top: -30%;
+				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+	}
+
+	@keyframes mano-creditos{
+		from{
+				top: 73%;
+				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		to{
+				top: 78%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -321,13 +336,13 @@ body{
 
 	@keyframes mano-contar{
 		from{
-				top: 10%;
+				top: 0%;
 				background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 		to{
-				top: 35%;
+				top: 25%;
 				background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -463,6 +478,19 @@ body{
 		animation-iteration-count: infinite;
 	}
 
+	.mano-tutorial-controles{
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		transform: rotate(70deg);
+		z-index: 50;
+		left: 30%;
+		top: 0%;
+		animation-name: mano-controles;
+		animation-duration: 1.5s;
+		animation-iteration-count: infinite;
+	}
+
 	.mano-tutorial-creditos{
 		position: absolute;
 		width: 60px;
@@ -482,7 +510,7 @@ body{
 		height: 60px;
 		transform: rotate(70deg);
 		z-index: 10;
-		left: 50%;
+		left: 55%;
 		top: 10%;
 		animation-name: mano-contar;
 		animation-duration: 1.5s;
@@ -582,8 +610,8 @@ body{
 
 				body>main>header>a>img{
 
-					width: 200px;
-					height: 150px;
+					width: 180px;
+					height: 130px;
 
 				}
 
@@ -612,7 +640,7 @@ body{
 		position: relative;
 		text-align: center;
 		top: 0px;
-		font-size: 25px;
+		font-size: 0.8em;
 	}
 		body>main>nav>h2{
 			margin-top: 3%;
@@ -688,6 +716,10 @@ body{
 						display: inline-block;
 					}
 
+		body>main>#contar-volver-index{
+			margin-bottom: 1.5em;
+		}
+
 
 	/*TABLAS*/
 
@@ -759,6 +791,7 @@ body{
 				border: 0.3em solid #8A6300;
 			}
 
+
 	/*JUEGOS*/
 	
 	body>main>#contarCasas{
@@ -808,7 +841,7 @@ body{
 				}
 
 				#contenedorResultadosDerecha>#ponerRespuestas>#respuestas>button{
-					padding: 1em;
+					padding: 5%;
 					margin: 1em;
 				}
 
@@ -946,6 +979,147 @@ body{
 		}
 
 
+	/*TABULADOR - PAGINA CONTROLES DE FARM SCHOOL*/
+
+		#controles{
+			padding: 0.2em;
+		}
+
+			#controles>#titulo{
+				display: flex;
+				justify-content: space-around;
+				margin: 0;
+				font-size: 0.7em;
+			}
+
+				#controles>#titulo>h3{
+					margin: 0;
+				}
+
+				#controles>#titulo>a{
+					margin: 0 !important;
+					height: 2em !important;
+				}
+
+		/*Le ponemos estilo a los elementos tab*/
+		.tab{
+			overflow: hidden;
+			border: 0.1em solid #8A6300;
+			background-color: #917453;
+			margin: 0;
+			margin-top: 0.5em;
+			margin-left: 0.5em;
+			margin-right: 0.5em;
+		}
+
+		/*Le ponemos estilos a los botones que desplegaran las diferentes tablas de controles*/
+		.tab button{
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 1em 1em;
+			transition: 0.3s;
+			color: #ffffff;
+		}
+
+		/*Le cambiamos el color al boton del tabulador, una vez el raton pasa encima de el, o el foco esta sobre el*/
+		.tab button:hover{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		.tab button:focus{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		/*Creamos una clase que cambie el boton que este mostrando actualmente el contenido*/
+		.tab button.tabActivo{
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		/*Le ponemos estilo a la tabla que se mostrara al verse el contenido de un determinado elemento del tab*/
+		.controlesTablaTab{
+			display: none;
+			padding: 0.5em;
+			border: 0.1em solid #8A6300;
+			border-top: none;
+			font-size: 0.4em;
+			margin: 0;
+			margin-left: 1.25em;
+			margin-right: 1.25em;
+		}
+
+			.controlesTablaTab>tbody{
+				margin: auto;
+			}
+
+				.controlesTablaTab>tbody>tr:nth-child(even){
+					background-color: #DEC78D;
+					
+				}
+
+				.controlesTablaTab>tbody>tr:first-of-type{
+					vertical-align: middle;
+					font-weight: bold;
+					background-color: #D1A271;
+				}
+
+					.controlesTablaTab>tbody>tr:first-of-type>td>span{
+						vertical-align: middle;
+					}
+
+						.controlesTablaTab>tbody>tr:first-of-type>td>span>img{
+							height: 60%;
+						}
+
+
+		.controlesTablaTabContar{
+			padding: 1em;
+			border: 0.1em solid #8A6300;
+			border-top: none;
+			font-size: 1em;
+			margin: 0;
+			margin: 0.8em;
+		}
+
+			.controlesTablaTabContar>tbody{
+				margin: auto;
+			}
+
+				.controlesTablaTabContar>tbody>tr:nth-child(even){
+					background-color: #DEC78D;
+					
+				}
+
+				.controlesTablaTabContar>tbody>tr:first-of-type{
+					vertical-align: middle;
+					font-weight: bold;
+					background-color: #D1A271;
+				}
+
+					.controlesTablaTabContar>tbody>tr:first-of-type>td>span{
+						vertical-align: middle;
+					}
+
+						.controlesTablaTabContar>tbody>tr:first-of-type>td>span>img{
+							height: 60%;
+						}
+
+
+	/*********************************************/
+
+	/******************CREDITOS*******************/
+
+		#creditos>div:last-of-type{
+			margin-bottom: 1.2em;
+		}
+
+	/*********************************************/
+
 	/*FOOTER*/
 
 	body>main>footer{
@@ -983,8 +1157,205 @@ body{
 
 	@media all and (min-width: 1500px){
 
+		body>main>header>a>img{
+			width: 12em;
+			height: 10em;
+		}
+
+		body>main>nav>h2{
+			font-size: 3em;
+		}
+
+			body>main>nav>ul>li{
+				font-size: 2em;
+			}
+
+		.botonera{
+			margin-bottom: 3em !important;
+			font-size: 0.5em !important;
+		}
+
+			.botonera>a{
+				font-size: 2em;
+			}
+
+		.tituloJuego>h2{
+			font-size: 2em;
+		}
+
 		#contenedorResultadosDerecha>img{
 			width: 25%;
+		}
+
+		.controlesTablaTab{
+			font-size: 0.85em;
+			margin-left: 0.6em;
+			margin-right: 0.6em;
+		}
+
+		#controles>#titulo{
+			font-size: 1em;
+			padding: 0.5em;
+		}
+
+		.tab button{
+			font-size: 1em;
+		}
+
+		.respuestas>.gif-micro{
+			width: 4em;
+			height: 4em;
+		}
+
+			.respuestas>.gif-micro>img{
+				width: 3em;
+				height: 3em;
+			}
+
+		.modal{
+			font-size: 2em;
+		}
+
+			.modal>.contenido>p{
+				font-size: 1.2em;
+			}
+
+			.modal>.contenido>#estadisticas>p{
+				font-size: 1.2em;
+			}
+
+		.botones-modal{
+			font-size: 0.7em;
+		}
+
+		#creditos{
+			font-size: 2em;
+		}
+			
+
+		/*ANIMACIONES*/
+
+		@keyframes mano-drag{
+			from{
+					top: 40%;
+					left: 55%;
+					background-image: url("./imagenes/tutorial/animaciones/arrastrar/tutorial-mano-arrastrar-rellena.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			to{
+					top: 40%;
+					left: 25%;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					width: 5em;
+					height: 5em;
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+		}
+
+		@keyframes mano-click{
+			0%{
+					top: 85%;
+					left: 15%;
+					width: 5em;
+					height: 5em;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			30%{
+					top: 85%;
+					left: 15%;
+					width: 5em;
+					height: 5em;
+					background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			70%{
+					top: 75%;
+					left: 25%;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					width: 5em;
+					height: 5em;
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			100%{
+					top: 75%;
+					left: 25%;
+					background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+					width: 5em;
+					height: 5em;
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+		}
+
+		@keyframes mano-creditos{
+			from{
+					top: 73%;
+					background-image: url("./imagenes/tutorial/animaciones/mano/tutorial-mano-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+			to{
+					top: 80%;
+					background-image: url("./imagenes/tutorial/animaciones/tocar/tutorial-mano-toque-hacia-abajo.png");
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+		}
+
+		.mano-tutorial{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-modal{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-ayuda{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-controles{
+			width: 4em;
+			height: 4em;
+		}
+
+		.mano-tutorial-creditos{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-contar{
+			width: 3em;
+			height: 3em;
+		}
+
+		.mano-tutorial-respuestas{
+			width: 5em;
+			height: 5em;
+		}
+
+		.mano-tutorial-respuestas-contar-casas{
+			width: 5em;
+			height: 5em;
+		}
+
+		.mano-tutorial-drag{
+			width: 5em;
+			height: 8em;
+		}
+
+		.mano-tutorial-click{
+			width: 5em;
+			height: 5em;
 		}
 
 	}

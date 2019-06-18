@@ -34,6 +34,9 @@
 					<a title="Entrar a juego de restar" id="btn-restar" href="restar.html">Restar (-)</a>
 				</li>
 				<li>
+					<a title="Ver controles" id="btn-controles" href="controles.html">Controles (<span class="icon-gamepad"></span>)</a>
+				</li>
+				<li>
 					<a title="Ver créditos" id="btn-cred" href="creditos.html">Créditos (<span class="icon-address-book-o"></span>)</a>
 				</li>
 			</ul>
@@ -44,10 +47,9 @@
 	</main>
 	<script src="voz.js"></script>
 	<script src="./farm-school.js"></script>
-	<script>
-		//var texto_final = "Bienvenido a Farm Escul. ¿Qué quieres practicar? ¿Quieres contar, sumar o restar?";	
+	<script>	
 		setTimeout(function(){ 
-			var texto_final = 'Bienvenido a Farm Escul. ¿Qué quieres practicar? ¿Quieres contar, sumar o restar?'; 
+			var texto_final = 'Bienvenido a Farm School. ¿Qué quieres realizar? ¿Quieres contar, sumar, restar, ver los controles del juego, o sus créditos?';
 			responsiveVoice.speak(texto_final, 'Spanish Female', {onend: function() {
             reconocerVoz();
         }});
@@ -64,6 +66,8 @@
 				}else if(pos==2){
 					document.getElementById('btn-restar').focus();
 				}else if(pos==3){
+					document.getElementById('btn-controles').focus();
+				}else if(pos==4){
 					document.getElementById('btn-cred').focus();
 				}else if(pos<0){
 					document.getElementById('btn-cred').focus();
@@ -78,8 +82,10 @@
 				}else if(pos==2){
 					document.getElementById('btn-restar').focus();
 				}else if(pos==3){
+					document.getElementById('btn-controles').focus();
+				}else if(pos==4){
 					document.getElementById('btn-cred').focus();
-				}else if(pos>3){
+				}else if(pos>4){
 					document.getElementById('btn-cont').focus();
 					pos=0;
 				}

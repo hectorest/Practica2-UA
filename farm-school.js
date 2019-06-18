@@ -41,8 +41,9 @@
 		/**********GENERICAS***********/
 
 			var respuestasGenericas = [];
-			var respuestaEscogida;
-			var buttonRespEscog;
+			var respuestaPorVoz;
+			var buttonRespEscog = null;
+			var respuestaCorrecta = -1;
 			var numFallos = 0;
 			var tiempoInicio;
 			var tiempoFin;
@@ -88,6 +89,11 @@
 						window.location="restar.html";
 					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("créditos") > -1){
 						window.location="creditos.html";
+					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("controles") > -1){
+						window.location="controles.html";
+					}else if((extraerPagUrlActual() == "index.html"||extraerPagUrlActual() == "") && texto.indexOf("adiós") > -1){
+						var  texto_final = "Bye bye hasta otro ratito"
+						responsiveVoice.speak(texto_final, "Spanish Female", {onend: function(){window.close()}});
 					}else if(extraerPagUrlActual() == "contarCasas.html" && texto.indexOf("empezar") > -1){
 						Object.defineProperty(evento, "keyCode", {"value" : 32});
 						document.dispatchEvent(evento);
@@ -113,7 +119,7 @@
 					}else if(texto.indexOf("cerrar") > -1){
 						document.getElementById('botonModal').click();
 					}else if(extraerPagUrlActual() == "" || extraerPagUrlActual() == "index.html" || extraerPagUrlActual() == "contar.html"){
-						var texto_final = texto + " no es una opción del menú. Preba a decirlo de otra manera";
+						var texto_final = texto + " no es una opción del menú. Prueba a decirlo de otra manera";
 						if(recognizing){
 							reconocerVoz();
 						}			
@@ -134,7 +140,7 @@
 			recognition.onend = function() {
 				recognizing = false;
 				console.log("terminó de escuchar, llegó a su fin");
-				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
+				$('.gif-micro').html('<img alt="micrófono apagado" src="./imagenes/micro/micro-off.png">');
 			}
 
 		}
@@ -144,11 +150,11 @@
 			if (recognizing == false) {
 				recognition.start();
 				recognizing = true;
-				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro.gif">');
+				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro/micro.gif">');
 			} else {
 				recognition.stop();
 				recognizing = false;
-				$('.gif-micro').html('<img alt="micrófono escuchando" src="./imagenes/micro-off.png">');
+				$('.gif-micro').html('<img alt="micrófono apagado" src="./imagenes/micro/micro-off.png">');
 			}
 		}
 
@@ -159,12 +165,12 @@
 			{
 				case ("contarCasas.html"):
 				{
-					text = 	"Para llegar al establo, pulsa en en las casas siguiendo el orden correcto. Si quieres utilizar el teclado pulsa espacio para comenzar a controlar con las flechas. También puedes dictar los números, diga empezar para comenzar a contar. Para responder, pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					text = 	"Para llegar al establo, pulsa en las casas siguiendo el orden correcto. Si quieres utilizar el teclado pulsa espacio para comenzar a controlar con las flechas. También puedes dictar los números, diga empezar para comenzar a contar. Para responder, pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
 					break;
 				}
 				case ("contarVerduras.html"):
 				{
-					text = 	"Pulsa sobre la respuesta, utiliza las flechas para desplazarte e intro para contestar o dicta la respuesta correcta";
+					text = 	"Pulsa sobre la respuesta. Con el teclado utiliza las flechas para desplazarte e intro para contestar. Para jugar con voz, dicta la respuesta correcta";
 					break;
 				}
 				case("sumar.html"):
@@ -185,7 +191,9 @@
 
 			var btn = document.createElement("BUTTON");
 
-			if(texto.indexOf('uno')>-1 || ((texto.indexOf('1')>-1 && texto[texto.indexOf('1')-1]!=1) && (texto[texto.indexOf('1')+1]==' ' || texto.indexOf('1')==(texto.length-1)))){
+			if(texto.indexOf('cero')>-1 || ((texto.indexOf('0')>-1 && texto[texto.indexOf('0')-1]!=1) && (texto[texto.indexOf('0')+1]==' ' || texto.indexOf('0')==(texto.length-1)))){
+				btn.value = 0;
+			}else if(texto.indexOf('uno')>-1 || texto.indexOf('una')>-1 || ((texto.indexOf('1')>-1 && texto[texto.indexOf('1')-1]!=1) && (texto[texto.indexOf('1')+1]==' ' || texto.indexOf('1')==(texto.length-1)))){
 				btn.value = 1;
 			}else if(texto.indexOf('cerdos')==-1 && (texto.indexOf('dos')>-1 || ((texto.indexOf('2')>-1 && texto[texto.indexOf('2')-1]!=1) && (texto[texto.indexOf('2')+1]==' ' || texto.indexOf('2')==(texto.length-1))))){
 				btn.value = 2;
@@ -226,6 +234,12 @@
 			}else if(texto.indexOf('veinte')>-1 || (texto.indexOf('20')>-1 && texto[texto.indexOf('20')+2]==' ') || texto.indexOf('20')==(texto.length-2)){
 				btn.value = 20;
 			}
+			else{
+				btn.value = 1000;
+			}
+
+			//Me guardo el valor de la respuesta dicha mediante voz
+			respuestaPorVoz = btn.value;
 
 			return btn;
 		}
@@ -249,6 +263,42 @@
 			window.onorientationchange = reorient;
 			window.setTimeout(reorient, 0);
 		});
+
+	/*****************************************************************************************************/
+
+
+	/**********************************TABULADOR - CONTROLES FARM SCHOOL**********************************/
+
+		function abrirPestControlesJuego(event, opcionJuego) {
+			
+			//Declaramos todas las variables
+			var i, controlesTablaTab, controlesTabLink;
+
+			//Obtenemos todos los elementos con la clase controlesTablaTab y los ocultamos
+			controlesTablaTab = document.getElementsByClassName("controlesTablaTab");
+			for (i = 0; i < controlesTablaTab.length; i++) {
+				controlesTablaTab[i].style.display = "none";
+			}
+
+			//Obtenemos todos los elementos de la clase controlesTabLink y eliminamos la clase tabActivo de dichos elementos obtenidos
+			controlesTabLink = document.getElementsByClassName("controlesTabLink");
+			for (i = 0; i < controlesTabLink.length; i++) {
+				if(controlesTabLink[i].className != "contar"){
+					if(opcionJuego != "contar-casas" && opcionJuego != "contar-verduras"){
+						controlesTabLink[i].className = controlesTabLink[i].className.replace("tabActivo", "");
+					}
+				}
+				else{
+					controlesTabLink[i].className = controlesTabLink[i].className.replace("tabActivo", "");
+				}
+			}
+
+			//Mostramos el elemento tabulado actual, anyadiendo la clase tabActivo al elemento pasado como parametro
+			console.log(document.getElementById(opcionJuego));
+			document.getElementById(opcionJuego).style.display = "block";
+			event.currentTarget.className += " tabActivo";
+
+		}
 
 	/*****************************************************************************************************/
 
@@ -317,7 +367,7 @@
 			{
 				$('#respuestas').append('<button id = "resp'+ (index) +'" value="' + respuestasGenericas[index] + '" onclick="mostrarMensajeIntento(comprobarRespuesta(this));">' + respuestasGenericas[index] + '</button>');
 			});
-			$('#respuestas').append('<button class="gif-micro" onclick="reconocerVoz();">' + '<img alt="micrófono escuchando" src="./imagenes/micro-off.png">' + '</button>');
+			$('#respuestas').append('<button class="gif-micro" onclick="reconocerVoz();">' + '<img alt="micrófono apagado" src="./imagenes/micro/micro-off.png">' + '</button>');
 		}
 
 		function generarRespuestas(rango){
@@ -1024,7 +1074,6 @@
 			preguntarCuantasVerdurasXHay(queVerdura);
 
 			cargarRespuestas(rango);
-			reconocerVoz();
 
 			activarDragAndDrop();
 
@@ -1254,6 +1303,14 @@
 
 		function actualizarAnimalesMetidos(){
 			document.getElementById("animalesMetidos").innerHTML = animalesMetidos;
+
+			var texto_final = "Has metido: " + animalesMetidos;
+
+			if(recognizing){
+				reconocerVoz();
+			}		
+
+			responsiveVoice.speak(texto_final, "Spanish Female",{onend: function() {reconocerVoz();}});
 		}
 
 		function decirCuantosHaMetido(){
@@ -1536,6 +1593,23 @@
 	/*****************************************************************************************************/
 
 
+	/****************************************ELIMINAR BOTON POR VOZ***************************************/
+
+		function eliminarBotonPorVoz(){
+			var indexDelButton = -1;
+			$("#respuestas>button").each(function(index){
+				if($(this).attr("value") == respuestaPorVoz){
+					indexDelButton = index;
+				}
+			});
+			if(indexDelButton >= 0){
+				$("#respuestas>button").eq(indexDelButton).remove();
+			}
+		}
+
+	/*****************************************************************************************************/
+
+
 	/*****************************************COMPROBAR RESPUESTA*****************************************/
 
 		function comprobarRespuesta(botonRespuesta){
@@ -1603,6 +1677,7 @@
 	/************************************MOSTRAR MENSAJE MODAL INTENTO************************************/
 
 		function crearMensajeModal(mensaje, intento){
+			pos=0;
 			if(!intento){
 				var modal = '<div class="modal"><div class="contenido"><p value="' + intento + '" style="margin: auto;">' + mensaje + '</p><div class="contenedor-cerrar-modal contenedor-mano-tutorial"><div class="mano-tutorial-modal"></div><button type="button" class="botones-modal" id="botonModal" autofocus onclick="cerrarMensModal(this.parentNode.parentNode.firstChild, this.parentNode.parentNode.parentNode);">Cerrar</button></div></div></div>';
 			}
@@ -1872,11 +1947,17 @@
 						if(respuestasMostradas){
 							$("#respuestas").append("<div class='mano-tutorial-respuestas'></div>");
 						}
-					}		
-					buttonRespEscog.remove();
+					}	
+					if(respuestaPorVoz >= 0){
+						eliminarBotonPorVoz();
+					}
+					if(buttonRespEscog != null){
+						buttonRespEscog.remove();
+					}
 					colocarFocoRespuestas();
 					console.log("he cerrado el modal");
 				}
 			}
 
 	/*****************************************************************************************************/
+	
